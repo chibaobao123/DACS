@@ -65,5 +65,15 @@
 		}
 	}
 
+	if (isset($_POST['action']) && $_POST['action']  == 'del') 
+	{
+		$ma_kh = $_POST['ma_kh'];
+		$rs = mysqli_query($db, "DELETE FROM khach_hang WHERE id='$ma_kh'");
+		$rs = mysqli_query($db, "DELETE FROM dat_san WHERE ma_kh='$ma_kh'");
+		if ($rs) {
+				echo "Xóa thành công!!!";
+			}
+	}
+	
 	die;
 ?>

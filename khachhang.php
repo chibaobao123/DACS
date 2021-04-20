@@ -1,16 +1,35 @@
 <title>Khách Hàng</title>
+<script src="https://kit.fontawesome.com/93ec6d166b.js" crossorigin="anonymous"></script>
 <?php
 	include("session.php");
 	include("header.php");
 ?>
 <style>
 body {
-	background-color: #00bcd4;
+	background-color: #00bcd4;	
+	
+}
+.addCusBar input[type=text] {
+	height:25px;
+    border: 1px solid #ccc;  
+}
+.addCusBar .btn-search {
+	float: right;
+	font-size: 22px;
+	margin-left: 10px;
 }
 #tblKhachHang table{width:50%;}
 #tblKhachHang table td{vertical-align:top;}
 </style>
-Tên: <input type='text' id='ten-moi' /> Số điện thoại: <input id='sdt-moi' type='text' /> <button id='btn-add'>Thêm</button>
+<div class="addCusBar">
+	Tên: <input type='text' id='ten-moi' /> 
+	Số điện thoại: <input id='sdt-moi' type='text' /> 
+	<button id='btn-add'>Thêm</button>  
+	<button class='btn-search'><i class="fas fa-search"></i></button>
+	<input style='float: right; width:250px; height: 30px;' type="text" placeholder="Tìm kiếm...." value="search"/>
+</div>
+
+
 <br />
 <br />
 <div id='tblKhachHang'></div>
@@ -30,7 +49,7 @@ Tên: <input type='text' id='ten-moi' /> Số điện thoại: <input id='sdt-mo
 				success: function(json) {
 					var data = $.parseJSON(json);
 					var html = "";
-					html += "<table class='mytable' style='width: 100%;text-align: center;'>";
+					html += "<table class='mytable' style='width: 100%;text-align: center;background-color:white;'>";
 					html += "<thead><tr><th>#</th><th>Tên KH</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
 					for (var i = 0; i < data.length; i++) {
 						html += "<tr>";
@@ -41,6 +60,14 @@ Tên: <input type='text' id='ten-moi' /> Số điện thoại: <input id='sdt-mo
 					}
 					html += "</table>";
 					$("#tblKhachHang").html(html);
+					
+					$(".btn-del").click(function(){
+						var ma_kh = $(this).attr("ma_kh");
+						var xac_nhan = confirm("Bạn có chắc muốn xóa không?");
+							if (xac_nhan) {
+								xoaKh(ma_kh);
+							}
+					});
 
 					$(".btn-edit").click(function() {
 						$(this).attr("disabled", "disabled");
@@ -84,6 +111,22 @@ Tên: <input type='text' id='ten-moi' /> Số điện thoại: <input id='sdt-mo
 					thongbaoloi("Khong the lay danh sach khach hang!!!");
 				}
 			});
+		}
+
+		function xoaKh(ma_kh){
+			$.ajax({
+			url: "/quanlysanbong/api/dskhachhang.php",
+			type: "POST",
+			cache: false,
+			data: {
+				action: "del",
+				ma_kh: ma_kh,
+			},
+			success: function(msg) {
+				thongbaotot(msg);
+				tailaitrang();
+			}
+		});
 		}
 
 		function suaKhachHang(ma_kh, ten_moi, sdt_moi) {
