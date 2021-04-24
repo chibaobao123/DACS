@@ -26,13 +26,21 @@ body {
 	Số điện thoại: <input id='sdt-moi' type='text' /> 
 	<button id='btn-add'>Thêm</button>  
 	<button class='btn-search'><i class="fas fa-search"></i></button>
-	<input style='float: right; width:250px; height: 30px;' type="text" placeholder="Tìm kiếm...." value="search"/>
+	<input style='float: right; width:250px; height: 30px;' type="text" placeholder="Tìm kiếm...." name="val_search" value=""/>
 </div>
 
 
 <br />
 <br />
-<div id='tblKhachHang'></div>
+<div id='holdSearch' style="display:none">
+	<h1>Kết quả tìm kiếm</h1>
+	<div id='searchPlace'></div>
+</div>
+
+<div id='hold'>
+	<h1>Danh sách khách hàng</h1>
+	<div id='tblKhachHang'></div>
+</div>
 
 <script>
 	$(document).ready(function() {
@@ -44,23 +52,27 @@ body {
 				type: "GET",
 				cache: false,
 				data: {
-					action: "view"
+					action: "view",
 				},
 				success: function(json) {
-					var data = $.parseJSON(json);
-					var html = "";
+					let data = $.parseJSON(json);
+					let html = "";
 					html += "<table class='mytable' style='width: 100%;text-align: center;background-color:white;'>";
-					html += "<thead><tr><th>#</th><th>Tên KH</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
-					for (var i = 0; i < data.length; i++) {
+					html += "<thead><tr><th>ID</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
+					for (let i = 0; i < data.length; i++) {
 						html += "<tr>";
-						html += "<td>" + (i + 1) + "</td><td>" + data[i].ten + "</td><td>" + data[i].sdt + 
+						html += "<td>" + data[i].id + "</td><td>" + data[i].ten + "</td><td>" + data[i].sdt + 
 						"</td><td><center><button class='btn-edit' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'>Sửa</button></center></td>"+
 						"</td><td><center><button class='btn-del' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'>Xóa</button></center></td>";
 						html += "</tr>";
 					}
 					html += "</table>";
 					$("#tblKhachHang").html(html);
-					
+					$(".btn-search").click(function(){
+						var val_search = $(this).attr("val_search");
+						$("#holdSearch").css("display","block");
+						searchCus(val_search);
+					})
 					$(".btn-del").click(function(){
 						var ma_kh = $(this).attr("ma_kh");
 						var xac_nhan = confirm("Bạn có chắc muốn xóa không?");
@@ -112,7 +124,34 @@ body {
 				}
 			});
 		}
+		function searchCus(val_search) {
+			$.ajax({
+				url: "/quanlysanbong/api/dskhachhang.php",
+				type: "GET",
+				cache: false,
+				data: {
+					action: "search",
+					val_search: val_search,
+				},
+				success: function (json) {
+					let data = $.parseJSON(json);
+					let html = "";
+					html += "<table class='searchPlace' style='width: 100%;text-align: center;background-color:white;'>";
+					html += "<thead><tr><th>ID</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
+					for (let i = 0; i < data.length; i++) {
+						html += "<tr>";
+						html += "<td>" + data[i].id + "</td><td>" + data[i].ten + "</td><td>" + data[i].sdt + 
+						"</td><td><center><button class='btn-edit' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'>Sửa</button></center></td>"+
+						"</td><td><center><button class='btn-del' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'>Xóa</button></center></td>";
+						html += "</tr>";
+					}
+					html += "</table>";
+					$(".searchPlace").html(html);
+				}
+				
+			})
 
+		}
 		function xoaKh(ma_kh){
 			$.ajax({
 			url: "/quanlysanbong/api/dskhachhang.php",

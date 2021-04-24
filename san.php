@@ -26,7 +26,7 @@ $(document).ready(function() {
 		success: function(json) {
 			var html = "";
 			var data = $.parseJSON(json);
-			html += "<table class='mytable' style='background-color: white;'>";
+			html += "<table class='mytable' style='background-color: white;width: 70%;text-align: center;'>";
 			html += "<thead><tr><th>#</th><th>Tên sân bóng</th><th>Đổi tên</th><th>Xóa</th></tr></thead>";
 			for (var i = 0; i < data.length; i++) {
 				html += "<tr>";

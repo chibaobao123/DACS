@@ -3,8 +3,19 @@
 	include("header.php");
 ?>
 <title>Tài khoản</title>
+<style>
+body {
+	background-color: #00bcd4;	
+	
+}
+.myTable{
+	position: absolute;
+	top: 250;
+    left: 550;	
+}
+</style>
 <br />
-<table class='mytable'>
+<table class='mytable' style="background-color:white;">
 	<thead>
 		<tr>
 			<th colspan='2'>Quản lý tài khoản <span style='color:red;' id='tendangnhap'><?php echo $_SESSION['login_user'];?></span></th>
