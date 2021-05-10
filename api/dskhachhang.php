@@ -12,6 +12,7 @@
 			$r['sdt'] = $row['2'];
 			array_push($json_response, $r);
 		}
+		
 		echo json_encode($json_response);
 	}
 
@@ -74,6 +75,6 @@
 				echo "Xóa thành công!!!";
 			}
 	}
-
+	
 	die;
 ?>

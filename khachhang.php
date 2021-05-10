@@ -9,36 +9,37 @@ body {
 	background-color: #00bcd4;	
 	
 }
+#formSearch{
+	float: right;
+}
+#formSearch .btn-search {
+	height: 30px;
+}
 .addCusBar input[type=text] {
 	height:25px;
     border: 1px solid #ccc;  
 }
-.addCusBar .btn-search {
-	float: right;
-	font-size: 22px;
-	margin-left: 10px;
-}
+
 #tblKhachHang table{width:50%;}
 #tblKhachHang table td{vertical-align:top;}
 </style>
 <div class="addCusBar">
 	Tên: <input type='text' id='ten-moi' /> 
 	Số điện thoại: <input id='sdt-moi' type='text' /> 
-	<button id='btn-add'>Thêm</button>  
-	<button class='btn-search'><i class="fas fa-search"></i></button>
-	<input style='float: right; width:250px; height: 30px;' type="text" placeholder="Tìm kiếm...." name="val_search" value=""/>
+	<button id='btn-add'>Thêm</button> 
+	<div class="searchBar" style="float:right">
+		<input style=' width:250px; height: 30px;' type="text" placeholder="Tìm kiếm...." name="val_search" value=""/>
+		<button id='btn-search'  name='submit' value= 'Tìm kiếm' style='height: 32px; width: 70px'><i class="fas fa-search"></i></button>
+	</div>
+	
 </div>
 
 
 <br />
 <br />
-<div id='holdSearch' style="display:none">
-	<h1>Kết quả tìm kiếm</h1>
-	<div id='searchPlace'></div>
-</div>
 
 <div id='hold'>
-	<h1>Danh sách khách hàng</h1>
+	
 	<div id='tblKhachHang'></div>
 </div>
 
@@ -57,22 +58,18 @@ body {
 				success: function(json) {
 					let data = $.parseJSON(json);
 					let html = "";
+					html += "<h1>Danh sách khách hàng</h1>"
 					html += "<table class='mytable' style='width: 100%;text-align: center;background-color:white;'>";
-					html += "<thead><tr><th>ID</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
+					html += "<thead><tr><th>STT</th><th>ID</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
 					for (let i = 0; i < data.length; i++) {
 						html += "<tr>";
-						html += "<td>" + data[i].id + "</td><td>" + data[i].ten + "</td><td>" + data[i].sdt + 
+						html += "<td>"+(i+1)+"</td><td>" + data[i].id + "</td><td>" + data[i].ten + "</td><td>" + data[i].sdt + 
 						"</td><td><center><button class='btn-edit' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'>Sửa</button></center></td>"+
 						"</td><td><center><button class='btn-del' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'>Xóa</button></center></td>";
 						html += "</tr>";
 					}
 					html += "</table>";
 					$("#tblKhachHang").html(html);
-					$(".btn-search").click(function(){
-						var val_search = $(this).attr("val_search");
-						$("#holdSearch").css("display","block");
-						searchCus(val_search);
-					})
 					$(".btn-del").click(function(){
 						var ma_kh = $(this).attr("ma_kh");
 						var xac_nhan = confirm("Bạn có chắc muốn xóa không?");
@@ -80,6 +77,7 @@ body {
 								xoaKh(ma_kh);
 							}
 					});
+					
 
 					$(".btn-edit").click(function() {
 						$(this).attr("disabled", "disabled");
@@ -124,34 +122,63 @@ body {
 				}
 			});
 		}
-		function searchCus(val_search) {
-			$.ajax({
-				url: "/quanlysanbong/api/dskhachhang.php",
-				type: "GET",
-				cache: false,
-				data: {
-					action: "search",
-					val_search: val_search,
-				},
-				success: function (json) {
-					let data = $.parseJSON(json);
-					let html = "";
-					html += "<table class='searchPlace' style='width: 100%;text-align: center;background-color:white;'>";
-					html += "<thead><tr><th>ID</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
-					for (let i = 0; i < data.length; i++) {
-						html += "<tr>";
-						html += "<td>" + data[i].id + "</td><td>" + data[i].ten + "</td><td>" + data[i].sdt + 
-						"</td><td><center><button class='btn-edit' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'>Sửa</button></center></td>"+
-						"</td><td><center><button class='btn-del' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'>Xóa</button></center></td>";
-						html += "</tr>";
-					}
-					html += "</table>";
-					$(".searchPlace").html(html);
-				}
-				
-			})
+		
+		$("#btn-search").on('click', function(){
+			var val_search = $('input[name="val_search"]').val();
 
+			console.log(val_search);
+
+			$.ajax({
+				type:'get',
+				url:'./api/search.php?search='+val_search,
+				data: {search:val_search},
+				dataType: "json",
+				success: function(response) {
+					console.log('SUCCESS');
+					console.table(response);
+					
+					// var obj = JSON.parse(response);
+					let html = searchTableItem(response);
+
+					$("#tblKhachHang").html(html);
+					$("#holdSearch").css("display","block");
+
+				},
+				error: function(result) {
+					console.log('ERROR');
+					console.log(result);
+					
+
+				}
+			});
+		});
+
+
+		function searchTableItem(data){
+			if(data == ''){
+				var val_search = $('input[name="val_search"]').val();
+				let html="";
+				html += "<h1>Kết quả tìm kiếm</h1>";
+				html += "<div>Không có kết quả nào trùng khớp với" + val_search + "</div>";
+			}else{
+				let html = "";
+				html += "<h1>Kết quả tìm kiếm</h1>";
+				html += "<table class='mytable' style='width: 100%;text-align: center;background-color:white;'>";
+				html += "<thead><tr><th>STT</th><th>ID</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
+				$.each( data, function( key, value ) {
+					html += "<tr>";
+					html += "<td>"+(key+1)+"</td><td>" + value.id + "</td><td>" + value.ten + "</td><td>" + value.sdt + 
+					"</td><td><center><button class='btn-edit' ma_kh='" + value.id +"' order='" + (key + 1) + "'>Sửa</button></center></td>"+
+					"</td><td><center><button class='btn-del' ma_kh='" + value.id +"' order='" + (key + 1) + "'>Xóa</button></center></td>";
+					html += "</tr>";
+				})
+				html += "</table>";
+
+				return html;
+			}
+			
 		}
+
 		function xoaKh(ma_kh){
 			$.ajax({
 			url: "/quanlysanbong/api/dskhachhang.php",
@@ -218,7 +245,7 @@ body {
 				}
 			});
 		}
-
+		
 		$("#btn-add").click(function() {
 			var ten_moi = $("#ten-moi").val();
 			var sdt_moi = $("#sdt-moi").val();
