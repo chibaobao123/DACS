@@ -9,9 +9,10 @@ body {
 	
 }
 .myTable{
+	width: 50%;
 	position: absolute;
 	top: 250;
-    left: 550;	
+    left: 250;	
 }
 </style>
 <br />

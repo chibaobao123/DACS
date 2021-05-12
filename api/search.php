@@ -12,7 +12,7 @@
     die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM khach_hang WHERE ten LIKE '%$params%'";
+    $sql = "SELECT * FROM khach_hang WHERE ten LIKE '%$params%'OR sdt LIKE '%$params%'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

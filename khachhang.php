@@ -60,10 +60,10 @@ body {
 					let html = "";
 					html += "<h1>Danh sách khách hàng</h1>"
 					html += "<table class='mytable' style='width: 100%;text-align: center;background-color:white;'>";
-					html += "<thead><tr><th>STT</th><th>ID</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
+					html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
 					for (let i = 0; i < data.length; i++) {
 						html += "<tr>";
-						html += "<td>"+(i+1)+"</td><td>" + data[i].id + "</td><td>" + data[i].ten + "</td><td>" + data[i].sdt + 
+						html += "<td>"+(i+1)+"</td><td>" + data[i].ten + "</td><td>" + data[i].sdt + 
 						"</td><td><center><button class='btn-edit' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'>Sửa</button></center></td>"+
 						"</td><td><center><button class='btn-del' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'>Xóa</button></center></td>";
 						html += "</tr>";
@@ -155,19 +155,14 @@ body {
 
 
 		function searchTableItem(data){
-			if(data == ''){
-				var val_search = $('input[name="val_search"]').val();
-				let html="";
-				html += "<h1>Kết quả tìm kiếm</h1>";
-				html += "<div>Không có kết quả nào trùng khớp với" + val_search + "</div>";
-			}else{
+			
 				let html = "";
 				html += "<h1>Kết quả tìm kiếm</h1>";
 				html += "<table class='mytable' style='width: 100%;text-align: center;background-color:white;'>";
-				html += "<thead><tr><th>STT</th><th>ID</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
+				html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
 				$.each( data, function( key, value ) {
 					html += "<tr>";
-					html += "<td>"+(key+1)+"</td><td>" + value.id + "</td><td>" + value.ten + "</td><td>" + value.sdt + 
+					html += "<td>"+(key+1)+"</td><td>" + value.ten + "</td><td>" + value.sdt + 
 					"</td><td><center><button class='btn-edit' ma_kh='" + value.id +"' order='" + (key + 1) + "'>Sửa</button></center></td>"+
 					"</td><td><center><button class='btn-del' ma_kh='" + value.id +"' order='" + (key + 1) + "'>Xóa</button></center></td>";
 					html += "</tr>";
@@ -175,7 +170,6 @@ body {
 				html += "</table>";
 
 				return html;
-			}
 			
 		}
 

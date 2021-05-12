@@ -4,25 +4,32 @@
 	include("session.php");
 	include("header.php");
 ?>
-<b>CHỌN NGÀY: </b>
-<input type="text" id="datepicker"/><br/>
+<!-- <b>CHỌN NGÀY: </b>
+<input type="text" class="datsan_ngaydat"/><br/>
 <br />
+<br />
+<br /> -->
+
+
 <b>DANH SÁCH ĐẶT SÂN NGÀY <span id='tieudeds'></span></b><br />
 <br />
-<div id='ds_datsan'></div><br />
+
+<div id='ds_datsan' style="background-color:white;"></div><br />
 <br />
+
 <b>TÌNH TRẠNG ĐẶT SÂN NGÀY <span id='tieudetime'></span></b><br />
 <br />
 
-<div id="time_table"></div> <br />
+<div id="time_table" style="background-color:white;"></div> <br />
 
 
 <style>
 	body{
 		background-color: #00bcd4;
 	}
+
 #formDatSan {
-position:absolute;margin:auto;top:0;right:0;bottom:0;left:0;width:450px;height:450px;z-index:100;background:#eee;padding:15px;border:0px solid #000;box-shadow:5px 5px 20px #000;display:none;border-radius:10px;background-color: #05f553;
+position:absolute;margin:auto;top:0;right:0;bottom:0;left:0;width:450px;height:550px;z-index:100;background:#eee;padding:15px;border:0px solid #000;box-shadow:5px 5px 20px #000;display:none;border-radius:10px;background-color: #05f553;
 }
 #formDatSan td{vertical-align:center;padding-top:5px;}
 
@@ -67,8 +74,12 @@ position:absolute;margin:auto;top:0;right:0;bottom:0;left:0;width:450px;height:4
 		</td>
 	</tr>
 	<tr>
-		<td>Ngày đặt:</td>
-		<td><b><span id='datsan_ngaydat'></span></b></td>
+		<td>
+			<b>CHỌN NGÀY: </b>
+		</td>
+		<td>
+			<input type="text" class="datsan_ngaydat"/><br/>
+		
 	</tr>
 	<tr>
 		<td>Bắt đầu:</td>
@@ -138,7 +149,7 @@ position:absolute;margin:auto;top:0;right:0;bottom:0;left:0;width:450px;height:4
 	</tr>
 	<tr>
 		<td>Đơn giá (/phút):</td>
-		<td><input type='text' id='datsan_dongia' size='5' value='3000'/>đ</td>
+		<td><p type='text' id='datsan_dongia' size='5' value='3000'>3000đ</p></td>
 	</tr>
 	<tr>
 		<td>Tổng tiền:</td>
@@ -159,7 +170,7 @@ $(document).ready(function() {
 	
 	xemDsDatSan(getToday());
 
-	$("#datepicker").daterangepicker({
+	$(".datsan_ngaydat").daterangepicker({
 		singleDatePicker: true,
 		showDropdowns: true,
 		minYear: 2019,
@@ -198,17 +209,17 @@ $(document).ready(function() {
 		// insert into database
 		var ma_kh = $("#datsan_kh").val();
 		var ma_san = $("#datsan_tensan").attr("ma_san");
-		var ngay_dat = $("#datsan_ngaydat").text();
+		var ngay_dat = $(".datsan_ngaydat").text();
 		var bat_dau_gio = $("#datsan_batdau_gio").val();
 		var bat_dau_phut = $("#datsan_batdau_phut").val();
 		var ket_thuc_gio = $("#datsan_ketthuc_gio").val();
 		var ket_thuc_phut = $("#datsan_ketthuc_phut").val();
 		var bat_dau = ngay_dat + " " + bat_dau_gio + ":" + bat_dau_phut + ":" + "00";
 		var ket_thuc = ngay_dat + " " + ket_thuc_gio + ":" + ket_thuc_phut + ":" + "00";
-		if ($("#datsan_dongia").val().trim() == "") {
+		if ($("#datsan_dongia").attr("value").trim() == "") {
 			$("#datsan_dongia").val("0");
 		}
-		var don_gia = $("#datsan_dongia").val();
+		var don_gia = $("#datsan_dongia").attr("value");
 		if (parseInt(don_gia) < 3000) {
 			thongbaoloi("Đơn giá không được nhỏ hơn 3000đ/phút!!!");
 			return;
