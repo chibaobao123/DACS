@@ -11,30 +11,78 @@
 <br /> -->
 
 
-<b>DANH SÁCH ĐẶT SÂN NGÀY <span id='tieudeds'></span></b><br />
+<b>DANH SÁCH ĐẶT SÂN NGÀY <span id='tieudeds'></span></b>
+<br />
 <br />
 
-<div id='ds_datsan' style="background-color:white;"></div><br />
+<div id='ds_datsan' style="background-color:white;"></div>
+<br />
 <br />
 
-<b>TÌNH TRẠNG ĐẶT SÂN NGÀY <span id='tieudetime'></span></b><br />
-<br />
+<b>TÌNH TRẠNG ĐẶT SÂN NGÀY <span id='tieudetime'></span></b><br /><br />
 
 <div id="time_table" style="background-color:white;"></div> <br />
 
+<div id='' style="display: flex;flex-direction: row;justify-content:flex-start">
+	<img src='./picture/sodosanbong.png' style="width: 750px;height: 350px;"/>
+	<div style="margin-left:30px;">
+		<h2 style="padding:0;margin:0;"> Thông tin sân bóng:</h2>
+		<div style="margin-left:30px; text-align:center; padding: 5px 0 10px 0;	">
+			<p><i>sân A:</i> Sân bóng đá cỏ nhân tạo <b>7</b> người.(40m x 70m)</p>
+			<p><i>sân B:</i> Sân bóng đá cỏ nhân tạo <b>7</b> người.(40m x 70m)</p>
+			<p><i>sân C:</i> Sân bóng đá cỏ nhân tạo <b>5</b> người.(24m x 40m)</p>
+			<p><i>sân D:</i> Sân bóng đá cỏ nhân tạo <b>5</b> người.(24m x 40m)</p>
+			<p><i>sân E:</i> Sân bóng đá cỏ nhân tạo <b>7</b> người.(40m x 70m)</p>
+			<p><i>sân F:</i> Sân bóng đá cỏ nhân tạo <b>5</b> người.(24m x 40m)</p>
+			<p><i>sân G:</i> Sân bóng đá cỏ nhân tạo <b>7</b> người.(40m x 70m)</p>
+			<p><i>sân H:</i> Sân bóng đá cỏ nhân tạo <b>5</b> người.(24m x 40m)</p>
+			<p><i>sân I:</i> Sân bóng đá cỏ nhân tạo <b>11</b> người.(75m x 110m)</p>
+		</div>
+		
+	</div>
+</div>
+
 
 <style>
-	body{
-		background-color: #00bcd4;
-	}
+body{
+	background-color: #00bcd4;
+}
 
 #formDatSan {
-position:absolute;margin:auto;top:0;right:0;bottom:0;left:0;width:450px;height:550px;z-index:100;background:#eee;padding:15px;border:0px solid #000;box-shadow:5px 5px 20px #000;display:none;border-radius:10px;background-color: #05f553;
+	position:absolute;
+	margin:auto;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	width:450px;
+	height:550px;
+	z-index:100;
+	background:#eee;
+	padding:15px;
+	border:0px solid #000;
+	box-shadow:5px 5px 20px #000;
+	display:none;
+	border-radius:10px;
+	background-color: #05f553;
 }
-#formDatSan td{vertical-align:center;padding-top:5px;}
+#formDatSan td{
+	vertical-align:center;
+	padding-top:5px;
+}
 
-#grayscreen{width:100%;height:100%;background:#333;opacity:0.7;z-index:99;display:none;position:absolute;left:0;top:0;}
-#datsan_themkhach{display:block;}
+#grayscreen{
+	width:100%;
+	height:200%;
+	background:#333;
+	opacity:0.7;z-index:99;
+	display:none;
+	position:absolute;
+	left:0;
+	top:0;}
+#datsan_themkhach{
+	display:block;
+}
 </style>
 
 

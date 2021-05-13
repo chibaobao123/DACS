@@ -19,7 +19,7 @@
 	}
 </style>
 <div class="menuHeader">
-	<a class='nav' href='index.php' id='navHome'>Trang chủ</a> | <a class='nav' href='khachhang.php' id='navKH'>Khách hàng</a> | <a class='nav' id='navDT' href='doanhthu.php'>Doanh thu</a> | <a class='nav' href='san.php' id='navSB'>Sân Bóng</a> | <span class='nav' style='padding-left :20px'> Xin chào </span> <a href='taikhoan.php'><b><?php echo $_SESSION['login_user']; ?></b></a> (<a style='color:red;' href='logout.php'>Logout</a>)
+	<a class='nav' href='index.php' id='navHome'>Trang chủ</a> | <a class='nav' href='khachhang.php' id='navKH'>Khách hàng</a> | <a class='nav' id='navDT' href='doanhthu.php'>Doanh thu</a> | <a class='nav' href='san.php' id='navSB'>Sân Bóng</a> | <span class='nav' style='padding-left :20px'> Xin chào </span> <a href='taikhoan.php'><b><?php echo $_SESSION['login_user']; ?></b></a> (<a style='color:red;' href='logout.php'>Đăng xuất</a>)
 </div>
 <br />
 <br />
