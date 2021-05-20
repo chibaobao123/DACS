@@ -15,7 +15,9 @@
 <script src="lib/common.js"></script>
 <style>
 	body{
-		background-color: #00bcd4;
+		background-image: url("./picture/bg-login.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
 	}
 	#loginForm{
 		position: absolute;
@@ -33,9 +35,11 @@
 		display: inline-block;
 		
 	}
+	
 	#loginForm form input{
 		width:100%;
 		height:40px;
+		margin: 10px 0;
 	}
 	
 	.loginBtn{
@@ -50,11 +54,20 @@
 
 <div id="loginForm">
 	<form>
-		<h2>QUẢN LÝ SÂN BÓNG ĐÁ</h2>
-		<label for="ten"><span style="font-size:25px"><b>Username:</b></span></label>
-			<input type="text" id="ten" name="ten" placeholder="Nhập tên tài khoản"/>
-		<label for="matkhau"><span style="font-size:25px"><b>Password:</b></span></label>
-			<input type="password" id="matkhau" name="matkhau" placeholder="Nhập mật khẩu"/>	
+		<h2 style="text-align:center;">QUẢN LÝ SÂN BÓNG ĐÁ</h2>
+		<label for="ten" >
+			<span style="font-size:25px; ">
+				<b>Tài khoản:</b>
+			</span>
+		</label>
+		<input type="text" id="ten" name="ten" placeholder="Nhập tên tài khoản"/>
+
+		<label for="matkhau">
+			<span style="font-size:25px;">
+				<b>Mật khẩu:</b>
+			</span>
+		</label>
+		<input type="password" id="matkhau" name="matkhau" placeholder="Nhập mật khẩu"/>	
 	</form>
 	<div class="loginBtn">
 		<input id='btnLogin' type="button" value="Đăng nhập" >

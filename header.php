@@ -12,30 +12,59 @@
 <script src="lib/chosen/chosen.jquery.js"></script>
 <script src="lib/common.js"></script>
 <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+<script src="https://kit.fontawesome.com/93ec6d166b.js" crossorigin="anonymous"></script>
 <style>
 	.menuHeader a {
-		padding-left: 20px;
-		padding-right: 20px;
+		padding-left: 30px;
+		padding-right: 30px;
 	}
+
+	.menuHeader .taiKhoan .lk-logout a{
+		color:#b0003a;
+		text-decoration: none;
+	}
+	.menuHeader .taiKhoan .nav {
+		color:black;
+		text-decoration: none;
+	}
+	 .menuHeader .taiKhoan .lk-logout nav:hover {
+		background-color: #e91e63;
+		color: white;
+	 }
+	 .menuHeader .taiKhoan .lk-logout{
+		background-color:#c5c1c1;
+	 }
+	 .menuHeader .taiKhoan .lk-logout:hover {
+		background-color: #e91e63;
+
+	 }
 </style>
-<div class="menuHeader">
-	<a class='nav' href='index.php' id='navHome'>Trang chủ</a> | <a class='nav' href='khachhang.php' id='navKH'>Khách hàng</a> | <a class='nav' id='navDT' href='doanhthu.php'>Doanh thu</a> | <a class='nav' href='san.php' id='navSB'>Sân Bóng</a> | <span class='nav' style='padding-left :20px'> Xin chào </span> <a href='taikhoan.php'><b><?php echo $_SESSION['login_user']; ?></b></a> (<a style='color:red;' href='logout.php'>Đăng xuất</a>)
+<div class="menuHeader" >
+	<a class='navHeader nav' href='index.php' id='navHome'><i class="fas fa-home" style="margin-right:10px"></i> Trang chủ</a> | 
+	<a class='navHeader nav' href='khachhang.php' id='navKH'><i class="fas fa-address-book"style="margin-right:10px" ></i> Khách hàng</a> | 
+	<a class='navHeader nav' id='navDT' href='doanhthu.php'><i class="fas fa-cash-register" style="margin-right:10px"></i>Doanh thu</a> |
+	<a class='navHeader nav' href='san.php' id='navSB'> <i class="fas fa-map" style="margin-right:10px"></i>Sân Bóng</a> 
+	<div class='taiKhoan' style="float:right;">
+		<a class='nav'  href='taikhoan.php'><i class="fas fa-user" style="margin-right:10px"></i><?php echo $_SESSION['login_user']; ?></a>
+		<div class='lk-logout' style="float:right; border:1px solid black; border-radius:5px;padding: 2px"><a  href='logout.php'>Đăng xuất</a></div>
+	</div>
+	
 </div>
 <br />
 <br />
 <script>
 $(document).ready(function() {
 	if (window.location.pathname == "/quanlysanbong/index.php") {
-		$("#navHome").css("color", "red");
+		$("#navHome").css("color", "#d81b60");
 	}
 	if (window.location.pathname == "/quanlysanbong/khachhang.php") {
-		$("#navKH").css("color", "red");
+		$("#navKH").css("color", "#d81b60");
 	}
 	if (window.location.pathname == "/quanlysanbong/doanhthu.php") {
-		$("#navDT").css("color", "red");
+		$("#navDT").css("color", "#d81b60");
 	}
 	if (window.location.pathname == "/quanlysanbong/san.php") {
-		$("#navSB").css("color", "red");
+		$("#navSB").css("color", "#d81b60");
 	}
 });
 </script>

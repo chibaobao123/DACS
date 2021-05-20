@@ -6,7 +6,7 @@
 ?>
 <style>
 body {
-	background-color: #00bcd4;	
+	background-color: #d1dcde;	
 	
 }
 #formSearch{
@@ -24,8 +24,8 @@ body {
 #tblKhachHang table td{vertical-align:top;}
 </style>
 <div class="addCusBar">
-	Tên: <input type='text' id='ten-moi' /> 
-	Số điện thoại: <input id='sdt-moi' type='text' /> 
+	Tên: <input type='text' id='ten-moi' placeholder="Họ và tên"/> 
+	Số điện thoại: <input id='sdt-moi' type='text' placeholder="Số điện thoại "/> 
 	<button id='btn-add'>Thêm</button> 
 	<div class="searchBar" style="float:right">
 		<input style=' width:250px; height: 30px;' type="text" placeholder="Tìm kiếm...." name="val_search" value=""/>
@@ -60,12 +60,12 @@ body {
 					let html = "";
 					html += "<h1>Danh sách khách hàng</h1>"
 					html += "<table class='mytable' style='width: 100%;text-align: center;background-color:white;'>";
-					html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
+					html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Công cụ</th></tr></thead>";
 					for (let i = 0; i < data.length; i++) {
 						html += "<tr>";
 						html += "<td>"+(i+1)+"</td><td>" + data[i].ten + "</td><td>" + data[i].sdt + 
-						"</td><td><center><button class='btn-edit' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'>Sửa</button></center></td>"+
-						"</td><td><center><button class='btn-del' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'>Xóa</button></center></td>";
+						"</td><td><center><button class='btn-edit' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+
+						"<button class='btn-del' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-trash-alt'></i></button></center></td>";
 						html += "</tr>";
 					}
 					html += "</table>";

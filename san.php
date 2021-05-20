@@ -5,7 +5,7 @@
 ?>
 <style type="text/css">
 	body {
-		background-color: #00bcd4;
+		background-color: #d1dcde;
 	}
 	
 </style>

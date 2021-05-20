@@ -4,14 +4,17 @@
 	include("session.php");
 	include("header.php");
 ?>
-<!-- <b>CHỌN NGÀY: </b>
-<input type="text" class="datsan_ngaydat"/><br/>
-<br />
-<br />
-<br /> -->
 
 
-<b>DANH SÁCH ĐẶT SÂN NGÀY <span id='tieudeds'></span></b>
+
+<div>
+	<b>DANH SÁCH ĐẶT SÂN NGÀY <span id='tieudeds'></span></b>
+	<!-- <div style="display: flex;flex-direction: row;justify-content:flex-end; ">
+		<b style="margin:5px 5px 0 0;">CHỌN NGÀY: </b>
+		<input  type="text" class="datsan_ngaydat"/>
+	</div> -->
+</div>
+	
 <br />
 <br />
 
@@ -45,7 +48,7 @@
 
 <style>
 body{
-	background-color: #00bcd4;
+	background-color: #d1dcde;
 }
 
 #formDatSan {
@@ -64,7 +67,7 @@ body{
 	box-shadow:5px 5px 20px #000;
 	display:none;
 	border-radius:10px;
-	background-color: #05f553;
+	background-color: #e1f5fe;
 }
 #formDatSan td{
 	vertical-align:center;

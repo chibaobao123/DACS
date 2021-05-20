@@ -5,13 +5,13 @@
 <title>Tài khoản</title>
 <style>
 body {
-	background-color: #00bcd4;	
+	background-color: #d1dcde;	
 	
 }
 .myTable{
 	width: 50%;
 	position: absolute;
-	top: 250;
+	top: 150;
     left: 250;	
 }
 </style>
@@ -19,7 +19,9 @@ body {
 <table class='mytable' style="background-color:white;">
 	<thead>
 		<tr>
-			<th colspan='2'>Quản lý tài khoản <span style='color:red;' id='tendangnhap'><?php echo $_SESSION['login_user'];?></span></th>
+			<th colspan='2'>Quản lý tài khoản: 
+				<span style='color:#e91e63;font-size: 25px;' id='tendangnhap'><?php echo $_SESSION['login_user'];?></span>
+			</th>
 		</tr>
 	</thead>
 	<tr>
