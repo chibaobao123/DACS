@@ -14,6 +14,18 @@
 <link rel="shortcut icon" type="image/png" href="favicon.png"/>
 <script src="https://kit.fontawesome.com/93ec6d166b.js" crossorigin="anonymous"></script>
 <style>
+	.menuHeader {
+		position: fixed;
+		top: -1px;
+		width: 99%;
+		background-color: #d1dcde;
+		padding: 10px 0 10px 0;
+		border-bottom: 1px solid #656666;
+		border-right: 1px solid #656666;
+		border-left: 1px solid #656666;
+		border-radius: 5px;
+	}
+
 	.menuHeader a {
 		padding-left: 30px;
 		padding-right: 30px;
@@ -39,12 +51,12 @@
 
 	 }
 </style>
-<div class="menuHeader" >
-	<a class='navHeader nav' href='index.php' id='navHome'><i class="fas fa-home" style="margin-right:10px"></i> Trang chủ</a> | 
-	<a class='navHeader nav' href='khachhang.php' id='navKH'><i class="fas fa-address-book"style="margin-right:10px" ></i> Khách hàng</a> | 
-	<a class='navHeader nav' id='navDT' href='doanhthu.php'><i class="fas fa-cash-register" style="margin-right:10px"></i>Doanh thu</a> |
+<div class="menuHeader">
+	<a class='navHeader nav' href='index.php' id='navHome' style="margin-left:10px;"><i class="fas fa-home" style="margin-right:10px"></i> Trang chủ</a> 
+	<a class='navHeader nav' href='khachhang.php' id='navKH'><i class="fas fa-address-book"style="margin-right:10px" ></i> Khách hàng</a>  
+	<a class='navHeader nav' id='navDT' href='doanhthu.php'><i class="fas fa-cash-register" style="margin-right:10px"></i>Doanh thu</a> 
 	<a class='navHeader nav' href='san.php' id='navSB'> <i class="fas fa-map" style="margin-right:10px"></i>Sân Bóng</a> 
-	<div class='taiKhoan' style="float:right;">
+	<div class='taiKhoan' style="float:right;    margin-right: 10px;s">
 		<a class='nav'  href='taikhoan.php'><i class="fas fa-user" style="margin-right:10px"></i><?php echo $_SESSION['login_user']; ?></a>
 		<div class='lk-logout' style="float:right; border:1px solid black; border-radius:5px;padding: 2px"><a  href='logout.php'>Đăng xuất</a></div>
 	</div>

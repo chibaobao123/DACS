@@ -7,7 +7,7 @@
 
 
 
-<div>
+<div style="margin-top:75px;">
 	<b>DANH SÁCH ĐẶT SÂN NGÀY <span id='tieudeds'></span></b>
 	<!-- <div style="display: flex;flex-direction: row;justify-content:flex-end; ">
 		<b style="margin:5px 5px 0 0;">CHỌN NGÀY: </b>
@@ -51,6 +51,8 @@ body{
 	background-color: #d1dcde;
 }
 
+
+
 #formDatSan {
 	position:absolute;
 	margin:auto;
@@ -76,7 +78,7 @@ body{
 
 #grayscreen{
 	width:100%;
-	height:200%;
+	height:500%;
 	background:#333;
 	opacity:0.7;z-index:99;
 	display:none;

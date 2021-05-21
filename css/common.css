@@ -1,4 +1,4 @@
-body, button, select, input {font-family:Arial;font-size:15px;box-shadow: none;	}
+body, button, select, input {font-family:Arial;font-size:15px;	}
 
 input[type='submit'], button {cursor:pointer!important;font-weight:bold;}
 button:hover{background:#ccc;}
