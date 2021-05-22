@@ -4,17 +4,20 @@
 	include("session.php");
 	include("header.php");
 ?>
-
-
-
-<div style="margin-top:75px;">
-	<b>DANH SÁCH ĐẶT SÂN NGÀY <span id='tieudeds'></span></b>
-	<!-- <div style="display: flex;flex-direction: row;justify-content:flex-end; ">
-		<b style="margin:5px 5px 0 0;">CHỌN NGÀY: </b>
-		<input  type="text" class="datsan_ngaydat"/>
-	</div> -->
+<div class="datePicker" style="margin:45px 0 20px 0;display:flex; ">
+	<h3 style="margin-right:10px;"> Ngày được chọn:</h3>
+	<input  type="text" class="datsan_ngaydat" style="text-align:center;align-self:center;"/>
 </div>
-	
+
+<div >
+	<b>DANH SÁCH ĐẶT SÂN NGÀY <span id='tieudeds'></span></b>	
+</div>
+<div style="display:none">
+	<div class="note" style="display:flex">
+		<input type="text" class="input-note" name="input-note" placeholder="Nội dung"/>
+		<button class="btn btn-send-note"><i class="fas fa-share"></i></button>
+	</div>
+</div>	
 <br />
 <br />
 
@@ -51,7 +54,26 @@ body{
 	background-color: #d1dcde;
 }
 
-
+.input-note{
+	border: 1px solid #515556;
+	border-radius: 20px 0 0 20px;
+	border-right:none;
+	margin:0;
+}
+.input-note:focus-visible{
+	outline: none;
+}
+.btn-send-note{
+	border: 1px solid #515556;
+	border-radius: 0 20px 20px 0;
+	border-left:none;
+	background-color: white;
+	
+}
+.btn-send-note:hover{
+	background-color: white;
+	color: #7cd2e2;
+}
 
 #formDatSan {
 	position:absolute;
@@ -131,7 +153,7 @@ body{
 			<b>CHỌN NGÀY: </b>
 		</td>
 		<td>
-			<input type="text" class="datsan_ngaydat"/><br/>
+			<!-- <input type="text" class="datsan_ngaydat"/><br/> -->
 		
 	</tr>
 	<tr>

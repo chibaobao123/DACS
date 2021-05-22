@@ -9,7 +9,10 @@
 	}
 	
 </style>
-Tên sân: <input type='text' id='ten_san'/> <button id='btnThem'>Thêm sân bóng</button><br />
+<div class="sanBong" style="margin:45px 0 20px 0;">
+	Tên sân: <input type='text' id='ten_san'/> <button id='btnThem'>Thêm sân bóng</button>
+</div>
+<br />
 <br />
 <div id='listsanbong'></div>
 <script>
@@ -26,14 +29,14 @@ $(document).ready(function() {
 		success: function(json) {
 			var html = "";
 			var data = $.parseJSON(json);
-			html += "<table class='mytable' style='background-color: white;width: 70%;text-align: center;'>";
-			html += "<thead><tr><th>#</th><th>Tên sân bóng</th><th>Đổi tên</th><th>Xóa</th></tr></thead>";
+			html += "<table class='mytable' style='background-color: white;width: 50%;text-align: center;'>";
+			html += "<thead><tr><th>#</th><th>Tên sân bóng</th><th>Chỉnh sửa</th></tr></thead>";
 			for (var i = 0; i < data.length; i++) {
 				html += "<tr>";
 				html += "<td>" + (i + 1) + "</td>";
 				html += "<td>" + data[i].ten_san + "</td>";
-				html += "<td><button class='btnDoiten' ma_san='" + data[i].ma_san + "' order='" + (i + 1) + "'>Đổi tên</button></td>";
-				html += "<td><button class='btnXoa' ma_san='" + data[i].ma_san + "' order='" + (i + 1) + "'>Xóa</button></td>";
+				html += "<td><button class='btnDoiten' ma_san='" + data[i].ma_san + "' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>";
+				html += "<button class='btnXoa' ma_san='" + data[i].ma_san + "' order='" + (i + 1) + "'><i class='fas fa-trash-alt'></i></button></td>";
 				html += "</tr>";
 			}
 			html += "</table>";

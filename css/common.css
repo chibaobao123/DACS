@@ -1,5 +1,4 @@
-body, button, select, input {font-family:Arial;font-size:15px;	}
-
+body, button, select {font-family:Arial;font-size:15px;	}
 input[type='submit'], button {cursor:pointer!important;font-weight:bold;}
 button:hover{background:#ccc;}
 .mytable {border-spacing:0;width:100%;}
@@ -10,6 +9,6 @@ button:hover{background:#ccc;}
 .mytable tr:nth-child(2n + 1) {background:#eee;}
 .mytable button{margin:0 5px;padding:0 20px;}
 .navHeader{text-decoration:none;color:#000;font-weight:bold;}
-.navHeader:hover{color:#f06292;border: 1px solid black;background-color:#d0d0d1;border-radius: 5px;padding-top:5px;padding-bottom:5px;}
+.navHeader:hover{color:#f06292;border: 1px solid black;background-color:#d0d0d1;border-radius: 5px;padding-top:5px;padding-bottom:10px;}
 .disabled{opacity:.5;pointer-events: none;}
 .thongbao{color:red;font-style:italic;font-weight:bold;}

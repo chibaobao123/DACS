@@ -20,10 +20,11 @@ body {
     border: 1px solid #ccc;  
 }
 
+#tblKhachHang{margin-top:0;}
 #tblKhachHang table{width:50%;}
 #tblKhachHang table td{vertical-align:top;}
 </style>
-<div class="addCusBar">
+<div class="addCusBar" style="margin:45px 0 0px 0;">
 	Tên: <input type='text' id='ten-moi' placeholder="Họ và tên"/> 
 	Số điện thoại: <input id='sdt-moi' type='text' placeholder="Số điện thoại "/> 
 	<button id='btn-add'>Thêm</button> 
@@ -33,10 +34,6 @@ body {
 	</div>
 	
 </div>
-
-
-<br />
-<br />
 
 <div id='hold'>
 	
@@ -59,7 +56,7 @@ body {
 					let data = $.parseJSON(json);
 					let html = "";
 					html += "<h1>Danh sách khách hàng</h1>"
-					html += "<table class='mytable' style='width: 100%;text-align: center;background-color:white;'>";
+					html += "<table class='mytable' style='width: 70%;text-align: center;background-color:white;'>";
 					html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Công cụ</th></tr></thead>";
 					for (let i = 0; i < data.length; i++) {
 						html += "<tr>";

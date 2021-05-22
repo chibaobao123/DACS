@@ -20,10 +20,11 @@
 		width: 99%;
 		background-color: #d1dcde;
 		padding: 10px 0 10px 0;
-		border-bottom: 1px solid #656666;
+		border-bottom: 3px solid #656666;
 		border-right: 1px solid #656666;
 		border-left: 1px solid #656666;
 		border-radius: 5px;
+		box-shadow: 5px 5px 8px #888888;
 	}
 
 	.menuHeader a {
