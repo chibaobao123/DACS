@@ -22,7 +22,8 @@ $(document).ready(function() {
 	
 	$('#datepicker').daterangepicker({
 	
-	}, function(start, end, label) {
+	}, 
+	function(start, end, label) {
 		g_bat_dau = start.format("YYYY-MM-DD");
 		g_ket_thuc = end.format("YYYY-MM-DD");
 		$("#tieude").html("<b>Doanh thu từ ngày " + g_bat_dau + " đến " + g_ket_thuc + "</b>");

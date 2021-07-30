@@ -3,12 +3,13 @@
 	
 	if (isset($_POST['action'])) {
 		if ($_POST['action'] == 'view') {
-			$sql = "SELECT * FROM san_bong ORDER BY ten";
+			$sql = "SELECT * FROM san_bong ORDER BY ten , gia";
 			$rs = mysqli_query($db, $sql);
 			$json_response = array();
 			while($row = mysqli_fetch_row($rs)) {
 				$r['ma_san'] = $row['0'];
 				$r['ten_san'] = $row['1'];
+				$r['gia'] = $row['2'];
 				array_push($json_response, $r);
 			}
 			echo json_encode($json_response);
@@ -30,13 +31,16 @@
 		if ($_POST['action'] == 'edit') {
 			$ma_san = $_POST['ma_san'];
 			$ten_moi = trim($_POST['ten_moi']);
-			
+			$gia_moi = trim($_POST['gia_moi']);
+				
 			$rs = mysqli_query($db, "SELECT * FROM san_bong WHERE LOWER(ten)=LOWER('$ten_moi')");
 			$count = mysqli_num_rows($rs);
 			if ($count > 0) {
 				echo "Đã tồn tại sân '<b>".$ten_moi."</b>'!!!";
 			} else {
 				$sql = "UPDATE san_bong SET ten='$ten_moi' WHERE id='$ma_san'";
+				$sql = "UPDATE san_bong SET gia='$gia_moi' WHERE id='$ma_san'";
+				
 				$rs = mysqli_query($db, $sql);
 				if ($rs) {
 					echo "Đổi tên sân thành công!!!";

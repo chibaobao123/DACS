@@ -12,12 +12,7 @@
 <div >
 	<b>DANH SÁCH ĐẶT SÂN NGÀY <span id='tieudeds'></span></b>	
 </div>
-<div style="display:none">
-	<div class="note" style="display:flex">
-		<input type="text" class="input-note" name="input-note" placeholder="Nội dung"/>
-		<button class="btn btn-send-note"><i class="fas fa-share"></i></button>
-	</div>
-</div>	
+	
 <br />
 <br />
 
@@ -153,7 +148,7 @@ body{
 			<b>CHỌN NGÀY: </b>
 		</td>
 		<td>
-			<!-- <input type="text" class="datsan_ngaydat"/><br/> -->
+			<span class='ngayDat'></span><br/>
 		
 	</tr>
 	<tr>
@@ -253,6 +248,10 @@ $(document).ready(function() {
 	}, function(start, end, label) {
 		xemDsDatSan(start.format("YYYY-MM-DD"));
 	});
+
+	var ngay = $(".datsan_ngaydat").val().split("/");
+	var ngayDat = ngay[1] + "-" + ngay[0] + "-" + ngay[2];
+	$(".ngayDat").text(ngayDat)
 	
 	function taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia) {
 		$.ajax({
