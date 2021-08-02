@@ -35,9 +35,7 @@
 				
 			$rs = mysqli_query($db, "SELECT * FROM san_bong WHERE LOWER(ten)=LOWER('$ten_moi')");
 			$count = mysqli_num_rows($rs);
-			if ($count > 0) {
-				echo "Đã tồn tại sân '<b>".$ten_moi."</b>'!!!";
-			} else {
+			
 				$sql = "UPDATE san_bong SET ten='$ten_moi' WHERE id='$ma_san'";
 				$sql = "UPDATE san_bong SET gia='$gia_moi' WHERE id='$ma_san'";
 				
@@ -45,7 +43,7 @@
 				if ($rs) {
 					echo "Đổi tên sân thành công!!!";
 				}
-			}
+			
 		}
 		if ($_POST['action'] == 'del') {
 			$ma_san = $_POST['ma_san'];

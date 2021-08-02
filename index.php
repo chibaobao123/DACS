@@ -219,7 +219,7 @@ body{
 	</tr>
 	<tr>
 		<td>Đơn giá (/phút):</td>
-		<td><p type='text' id='datsan_dongia' size='5' value='3000'>3000đ</p></td>
+		<td><span type='text' id='datsan_dongia' size='5'></span>đ</td>
 	</tr>
 	<tr>
 		<td>Tổng tiền:</td>
@@ -283,6 +283,7 @@ $(document).ready(function() {
 		// insert into database
 		var ma_kh = $("#datsan_kh").val();
 		var ma_san = $("#datsan_tensan").attr("ma_san");
+		var don_gia =parseInt($("#datsan_dongia").text());
 		var ngay_dat = $(".datsan_ngaydat").text();
 		var bat_dau_gio = $("#datsan_batdau_gio").val();
 		var bat_dau_phut = $("#datsan_batdau_phut").val();
@@ -290,10 +291,9 @@ $(document).ready(function() {
 		var ket_thuc_phut = $("#datsan_ketthuc_phut").val();
 		var bat_dau = ngay_dat + " " + bat_dau_gio + ":" + bat_dau_phut + ":" + "00";
 		var ket_thuc = ngay_dat + " " + ket_thuc_gio + ":" + ket_thuc_phut + ":" + "00";
-		if ($("#datsan_dongia").attr("value").trim() == "") {
+		if (don_gia == "") {
 			$("#datsan_dongia").val("0");
 		}
-		var don_gia = $("#datsan_dongia").attr("value");
 		if (parseInt(don_gia) < 3000) {
 			thongbaoloi("Đơn giá không được nhỏ hơn 3000đ/phút!!!");
 			return;
@@ -349,6 +349,6 @@ $(document).ready(function() {
 			alert("Khong the them khach hang moi!!!");
 		}
 	});
-}
+	}
 });
 </script>

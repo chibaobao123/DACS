@@ -77,13 +77,14 @@ $(document).ready(function() {
 					if (e.keyCode == 13) {	// ENTER
 						var ten_moi = $("#ten-" + order).val();
 						var gia_moi = $("#gia-" + order).val();
-						if (ten_moi != ten_value && kiemtratensan(ten_moi)) {
+						
 							$(ten).html(ten_moi);
 							$(gia).html(gia_moi);
 							suaSan(ma_san, ten_moi, gia_moi);
 							$(ten).find(".thongbao").remove();
+							$(gia).find(".thongbao").remove();
 							$($(".btnDoiten")[order - 1]).removeAttr("disabled");
-						}
+						
 					}
 				});
 
