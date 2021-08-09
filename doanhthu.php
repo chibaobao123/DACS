@@ -9,14 +9,17 @@
 	background-color: #d1dcde;
 }
 </style>
-<div class="datePicker" style="margin:45px 0 20px 0;display: flex;">
+<div class="datePicker" style="margin:5px 0 20px 0;display: flex;">
 	<h2 style="margin-right:10px;">Chọn khoảng thời gian :</h2>
 	<input type="text" id="datepicker" style="text-align:center;align-self:center;height:30px;"/><br/>
 </div>
 <br />
 <span id='tieude'></span><br />
 <br />
-<div id='ds_datsan'></div><br />
+<div class='ds_datsan'></div><br />
+<?php
+        include("footer.php");
+    ?>
 <script>
 $(document).ready(function() {
 	

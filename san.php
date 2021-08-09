@@ -9,12 +9,15 @@
 	}
 	
 </style>
-<div class="sanBong" style="margin:45px 0 20px 0;">
+<div class="sanBong" style="margin:0px 0 20px 0;">
 	Tên sân: <input type='text' id='ten_san'/> <button id='btnThem'>Thêm sân bóng</button>
 </div>
 <br />
 <br />
 <div id='listsanbong'></div>
+<?php
+        include("footer.php");
+    ?>
 <script>
 $(document).ready(function() {
 	

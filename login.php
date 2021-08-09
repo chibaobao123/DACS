@@ -2,8 +2,17 @@
 	session_start();
 	
 	if (isset($_SESSION['login_user'])) {
-		header("location:index.php");
-		die();
+		// Ngược lại nếu đã đăng nhập
+		$admin_number = $_SESSION['admin_number'];
+		// Kiểm tra quyền của người đó có phải là admin hay không
+		if ($admin_number == "1") {
+			// Nếu không phải admin thì xuất thông báo
+			header("location:index.php");
+			die();
+		 } else {
+			header("location:./forUser/userPage.php");
+			die();
+		}
 	}
 ?>
 <title>Đăng nhập</title>
@@ -98,10 +107,12 @@ $(document).ready(function() {
 				password: p
 			},
 			success: function(msg) {
-				if (msg == "Đăng nhập thành công") {
+				console.log(msg)
+				if (msg == "1") {
 					location.href = 'index.php';
+					console.log(msg);
 				} else {
-					thongbaoloi(msg);
+					location.href = './forUser/userPage.php';
 				}
 				
 			}

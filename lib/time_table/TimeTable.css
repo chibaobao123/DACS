@@ -12,6 +12,7 @@ ff:root{
     --font-size: 13px;
     white-space: nowrap;
     width: 100%;
+    
 }
 .TimeTable--bootstrap{
     position: relative;

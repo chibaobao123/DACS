@@ -12,9 +12,6 @@ body {
 #formSearch{
 	float: right;
 }
-#formSearch .btn-search {
-	height: 30px;
-}
 .addCusBar input[type=text] {
 	height:25px;
     border: 1px solid #ccc;  
@@ -24,13 +21,13 @@ body {
 #tblKhachHang table{width:50%;}
 #tblKhachHang table td{vertical-align:top;}
 </style>
-<div class="addCusBar" style="margin:45px 0 0px 0;">
+<div class="addCusBar" style="margin:0px 0 25px 0;">
 	Tên: <input type='text' id='ten-moi' placeholder="Họ và tên"/> 
 	Số điện thoại: <input id='sdt-moi' type='text' placeholder="Số điện thoại "/> 
-	<button id='btn-add'>Thêm</button> 
+	<button id='btn-add' class="btn btn-light border border-dark text-center p-0 mb-1" style='height: 25px; width: 70px'>Thêm</button> 
 	<div class="searchBar" style="float:right">
 		<input style=' width:250px; height: 30px;' type="text" placeholder="Tìm kiếm...." name="val_search" value=""/>
-		<button id='btn-search'  name='submit' value= 'Tìm kiếm' style='height: 32px; width: 70px'><i class="fas fa-search"></i></button>
+		<button id='btn-search' class="btn btn-light border border-dark mb-1"  name='submit' value= 'Tìm kiếm' style='height: 30px; width: 70px'><i class="fas fa-search"></i></button>
 	</div>
 	
 </div>
@@ -40,6 +37,9 @@ body {
 	<div id='tblKhachHang'></div>
 </div>
 
+<?php
+        include("footer.php");
+    ?>
 <script>
 	$(document).ready(function() {
 		
@@ -61,8 +61,8 @@ body {
 					for (let i = 0; i < data.length; i++) {
 						html += "<tr>";
 						html += "<td>"+(i+1)+"</td><td>" + data[i].ten + "</td><td>" + data[i].sdt + 
-						"</td><td><center><button class='btn-edit' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+
-						"<button class='btn-del' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-trash-alt'></i></button></center></td>";
+						"</td><td><center><button class='btn-edit btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+
+						"<button class='btn-del btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-trash-alt'></i></button></center></td>";
 						html += "</tr>";
 					}
 					html += "</table>";

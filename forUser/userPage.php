@@ -1,10 +1,102 @@
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title>QUẢN LÝ SÂN BÓNG</title>
-<?php
-	include("session.php");
-	include("header.php");
-?>
-<section class="datSan">
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Trang chủ cho người dùng</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/time_table/TimeTable.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/date_picker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/toast/jquery.toast.min.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/chosen/chosen.css" />
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    <?php
+	    include("../session.php");
+    ?>
+    <style>
+        body{
+            background-color: #d1dcde;
+        }
+
+        .input-note{
+            border: 1px solid #515556;
+            border-radius: 20px 0 0 20px;
+            border-right:none;
+            margin:0;
+        }
+        .input-note:focus-visible{
+            outline: none;
+        }
+        .btn-send-note{
+            border: 1px solid #515556;
+            border-radius: 0 20px 20px 0;
+            border-left:none;
+            background-color: white;
+            
+        }
+        .btn-send-note:hover{
+            background-color: white;
+            color: #7cd2e2;
+        }
+
+        #formDatSan {
+            position:absolute;
+            margin:auto;
+            top:0;
+            right:0;
+            bottom:0;
+            left:0;
+            width:450px;
+            height:550px;
+            z-index:100;
+            background:#eee;
+            padding:15px;
+            border:0px solid #000;
+            box-shadow:5px 5px 20px #000;
+            display:none;
+            border-radius:10px;
+            background-color: #e1f5fe;
+        }
+        #formDatSan td{
+            vertical-align:center;
+            padding-top:5px;
+        }
+
+        #grayscreen {
+            width:100%;
+            height:500%;
+            background:#333;
+            opacity:0.7;z-index:99;
+            display:none;
+            position:absolute;
+            left:0;
+            top:0;
+        }
+        #datsan_themkhach {
+            display:block;
+        }
+        
+    </style>
+  </head>
+  <body>
+
+    <header>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="./userPage.php">
+            <i class="fas fa-home" style="margin-right:10px; font-size:35px;"></i>
+            </a>
+            <form class="form-inline my-2 my-lg-0">
+				<a class='nav-link text-light'  href='taiKhoanUser.php'><i class="fas fa-user" style="margin-right:10px"></i><?php echo $_SESSION['login_user']; ?></a>
+				<button class="btn btn-danger p-0"><a class="nav-link text-dark p-1"  href='logout.php'>Đăng xuất</a></button>
+			</form>
+        </nav>
+    </header>
+
+    <section class="datSan">
         <div class="datePicker" style="margin:45px 0 20px 0;display: flex;">
             <h2 style="margin-right:10px;">Ngày được chọn:</h2>
             <input type="text" class="datsan_ngaydat" style="text-align:center;align-self:center;height:30px;"/><br/>
@@ -24,94 +116,9 @@
         <b>TÌNH TRẠNG ĐẶT SÂN NGÀY <span class='tieudetime'></span></b><br /><br />
 
         <div class="time_table" style="background-color:white;"></div> <br />
-</section>
+    </section>
 
-<div id='' style="display: flex;flex-direction: row;justify-content:flex-start">
-	<img src='./picture/sodosanbong.png' style="width: 750px;height: 350px;"/>
-	<div style="margin-left:30px;">
-		<h2 style="padding:0;margin:0;"> Thông tin sân bóng:</h2>
-		<div style="margin-left:30px; text-align:center; padding: 5px 0 10px 0;	">
-			<p><i>sân A:</i> Sân bóng đá cỏ nhân tạo <b>7</b> người.(40m x 70m)</p>
-			<p><i>sân B:</i> Sân bóng đá cỏ nhân tạo <b>7</b> người.(40m x 70m)</p>
-			<p><i>sân C:</i> Sân bóng đá cỏ nhân tạo <b>5</b> người.(24m x 40m)</p>
-			<p><i>sân D:</i> Sân bóng đá cỏ nhân tạo <b>5</b> người.(24m x 40m)</p>
-			<p><i>sân E:</i> Sân bóng đá cỏ nhân tạo <b>7</b> người.(40m x 70m)</p>
-			<p><i>sân F:</i> Sân bóng đá cỏ nhân tạo <b>5</b> người.(24m x 40m)</p>
-			<p><i>sân G:</i> Sân bóng đá cỏ nhân tạo <b>7</b> người.(40m x 70m)</p>
-			<p><i>sân H:</i> Sân bóng đá cỏ nhân tạo <b>5</b> người.(24m x 40m)</p>
-			<p><i>sân I:</i> Sân bóng đá cỏ nhân tạo <b>11</b> người.(75m x 110m)</p>
-		</div>
-		
-	</div>
-</div>
-
-
-<style>
-body{
-	background-color: #d1dcde;
-}
-
-.input-note{
-	border: 1px solid #515556;
-	border-radius: 20px 0 0 20px;
-	border-right:none;
-	margin:0;
-}
-.input-note:focus-visible{
-	outline: none;
-}
-.btn-send-note{
-	border: 1px solid #515556;
-	border-radius: 0 20px 20px 0;
-	border-left:none;
-	background-color: white;
-	
-}
-.btn-send-note:hover{
-	background-color: white;
-	color: #7cd2e2;
-}
-
-#formDatSan {
-	position:absolute;
-	margin:auto;
-	top:0;
-	right:0;
-	bottom:0;
-	left:0;
-	width:450px;
-	height:550px;
-	z-index:100;
-	background:#eee;
-	padding:15px;
-	border:0px solid #000;
-	box-shadow:5px 5px 20px #000;
-	display:none;
-	border-radius:10px;
-	background-color: #e1f5fe;
-}
-#formDatSan td{
-	vertical-align:center;
-	padding-top:5px;
-}
-
-#grayscreen{
-	width:100%;
-	height:500%;
-	background:#333;
-	opacity:0.7;z-index:99;
-	display:none;
-	position:absolute;
-	left:0;
-	top:0;}
-#datsan_themkhach{
-	display:block;
-}
-</style>
-
-
-
-<section class="formDatSan">
+    <section class="formDatSan">
         <div id='grayscreen'></div>
         <div id='formDatSan'>
             <b style='font-size: 18px;'>ĐẶT SÂN</b><br />
@@ -238,11 +245,24 @@ body{
             </table>
         </div>
     </section>
-
+    
     <?php
         include("footer.php");
     ?>
-	<script>
+
+    <!-- Optional JavaScript -->
+    <script src="../lib/jquery-3.4.1.js"></script>
+    <script src="../lib/time_table/createjs.min.js"></script>
+    <script src="../lib/time_table/TimeTable.js"></script>
+    <script src="../lib/date_picker/moment.min.js"></script>
+    <script src="../lib/date_picker/daterangepicker.min.js"></script>
+    <script src="../lib/toast/jquery.toast.min.js"></script>
+    <script src="../lib/chosen/chosen.jquery.js"></script>
+    <script src="../lib/common.js"></script>
+    <script src="https://kit.fontawesome.com/93ec6d166b.js" crossorigin="anonymous"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    <script>
         $(document).ready(function() {
             
             xemDsDatSan(getToday());
@@ -259,7 +279,7 @@ body{
             
             function taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia) {
                 $.ajax({
-                    url: "/quanlysanbong/api/taodatsan.php",
+                    url: "/quanlysanbong/api/taoDatSanForUser.php",
                     type: "POST",
                     cache: false,
                     data: {
@@ -352,3 +372,5 @@ body{
             }
         });
     </script>
+  </body>
+</html>

@@ -1,6 +1,5 @@
 <?php
-	include("session.php");
-	include("header.php");
+	include("../session.php");
 ?>
 <title>Tài khoản</title>
 <!-- Required meta tags -->
@@ -9,17 +8,30 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="./css/common.css" />
-    <link rel="stylesheet" type="text/css" href="./lib/time_table/TimeTable.css" />
-    <link rel="stylesheet" type="text/css" href="./lib/date_picker/daterangepicker.css" />
-    <link rel="stylesheet" type="text/css" href="./lib/toast/jquery.toast.min.css" />
-    <link rel="stylesheet" type="text/css" href="./lib/chosen/chosen.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/time_table/TimeTable.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/date_picker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/toast/jquery.toast.min.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/chosen/chosen.css" />
     <link rel="shortcut icon" type="image/png" href="favicon.png"/>
 <style>
 body {
 	background-color: #d1dcde;	
+	
 }
+
 </style>
+<header>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="./userPage.php">
+            <i class="fas fa-home" style="margin-right:10px; font-size:35px;"></i>
+            </a>
+            <form class="form-inline my-2 my-lg-0">
+				<a class='nav-link text-light'  href='taikhoan.php'><i class="fas fa-user" style="margin-right:10px"></i><?php echo $_SESSION['login_user']; ?></a>
+				<button class="btn btn-danger p-0"><a class="nav-link text-dark p-1"  href='logout.php'>Đăng xuất</a></button>
+			</form>
+        </nav>
+    </header>
 <br />
 <section class="changePassword conteainer-fluid p-5 m-5">
     <div class="container">
@@ -47,20 +59,20 @@ body {
     </div>
 </section>
 
-<section class="footer">
+<section class="footer mt-5 mb-0 pb-0">
     <?php
         include("footer.php");
     ?>
 </section>
 <!-- Optional JavaScript -->
-<script src="./lib/jquery-3.4.1.js"></script>
-    <script src="./lib/time_table/createjs.min.js"></script>
-    <script src="./lib/time_table/TimeTable.js"></script>
-    <script src="./lib/date_picker/moment.min.js"></script>
-    <script src="./lib/date_picker/daterangepicker.min.js"></script>
-    <script src="./lib/toast/jquery.toast.min.js"></script>
-    <script src="./lib/chosen/chosen.jquery.js"></script>
-    <script src="./lib/common.js"></script>
+	<script src="../lib/jquery-3.4.1.js"></script>
+    <script src="../lib/time_table/createjs.min.js"></script>
+    <script src="../lib/time_table/TimeTable.js"></script>
+    <script src="../lib/date_picker/moment.min.js"></script>
+    <script src="../lib/date_picker/daterangepicker.min.js"></script>
+    <script src="../lib/toast/jquery.toast.min.js"></script>
+    <script src="../lib/chosen/chosen.jquery.js"></script>
+    <script src="../lib/common.js"></script>
     <script src="https://kit.fontawesome.com/93ec6d166b.js" crossorigin="anonymous"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script>
@@ -111,7 +123,7 @@ $(document).ready(function() {
 			success: function(msg) {
 				//alert(msg);
 				if (msg.includes("thành công")) {
-					location.href = 'logout.php';
+					location.href ='../logout.php';
 				}
 			}
 		});

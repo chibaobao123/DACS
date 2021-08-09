@@ -12,8 +12,18 @@
 			$count = mysqli_num_rows($rs);
 			
 			if ($count == 1) {
-				$_SESSION['login_user'] = $username;
-				echo "Đăng nhập thành công";
+				$row = "SELECT admin_number FROM tai_khoan WHERE username='$username'";
+				$result = $db->query($row);
+				$rss = mysqli_fetch_assoc($result);
+				if ($rss['admin_number'] == 0){
+					$_SESSION['admin_number'] = $rss['admin_number'];
+					$_SESSION['login_user'] = $username;
+					echo "0";
+				} else {
+					$_SESSION['admin_number'] = $rss['admin_number'];
+					$_SESSION['login_user'] = $username;
+					echo '1';
+				}
 			} else {
 				echo "Tên đăng nhập hoặc mật khẩu không đúng!";
 			}
