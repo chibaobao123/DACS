@@ -111,8 +111,10 @@ $(document).ready(function() {
 				if (msg == "1") {
 					location.href = 'index.php';
 					console.log(msg);
-				} else {
+				} else if (msg == "0") {
 					location.href = './forUser/userPage.php';
+				} else {
+					thongbaoloi(msg);
 				}
 				
 			}
