@@ -9,10 +9,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
-    <link rel="stylesheet" type="text/css" href="../lib/time_table/TimeTable.css" />
-    <link rel="stylesheet" type="text/css" href="../lib/date_picker/daterangepicker.css" />
-    <link rel="stylesheet" type="text/css" href="../lib/toast/jquery.toast.min.css" />
-    <link rel="stylesheet" type="text/css" href="../lib/chosen/chosen.css" />
+    <link rel="stylesheet" type="text/css" href="../libForUser/time_table/TimeTable.css" />
+    <link rel="stylesheet" type="text/css" href="../libForUser/date_picker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="../libForUser/toast/jquery.toast.min.css" />
+    <link rel="stylesheet" type="text/css" href="../libForUser/chosen/chosen.css" />
     <link rel="shortcut icon" type="image/png" href="favicon.png"/>
     <?php
 	    include("../session.php");
@@ -251,14 +251,14 @@
     ?>
 
     <!-- Optional JavaScript -->
-    <script src="../lib/jquery-3.4.1.js"></script>
-    <script src="../lib/time_table/createjs.min.js"></script>
-    <script src="../lib/time_table/TimeTable.js"></script>
-    <script src="../lib/date_picker/moment.min.js"></script>
-    <script src="../lib/date_picker/daterangepicker.min.js"></script>
-    <script src="../lib/toast/jquery.toast.min.js"></script>
-    <script src="../lib/chosen/chosen.jquery.js"></script>
-    <script src="../lib/common.js"></script>
+    <script src="../libForUser/jquery-3.4.1.js"></script>
+    <script src="../libForUser/time_table/createjs.min.js"></script>
+    <script src="../libForUser/time_table/TimeTable.js"></script>
+    <script src="../libForUser/date_picker/moment.min.js"></script>
+    <script src="../libForUser/date_picker/daterangepicker.min.js"></script>
+    <script src="../libForUser/toast/jquery.toast.min.js"></script>
+    <script src="../libForUser/chosen/chosen.jquery.js"></script>
+    <script src="../libForUser/common.js"></script>
     <script src="https://kit.fontawesome.com/93ec6d166b.js" crossorigin="anonymous"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     

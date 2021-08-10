@@ -233,16 +233,16 @@ function xemDoanhThu(start, end) {
 function veTableDatSan(data) {
 	var html = "";
 	html += "<table class='mytable' style='width:100%; text-align: center;'>";
-	html += "<thead><tr><th>#</th><th>Tên KH</th><th>SĐT</th><th>Sân</th><th>Bắt đầu</th><th>Kết thúc</th><th>Phút</th><th>Đơn giá (/phút)</th><th>Tiền</th><th>Đã thanh toán</th><th>Thanh toán</th><th>Xóa</th><th>Yêu cầu hủy đặt sân</th></tr></thead>";
+	html += "<thead><tr><th>#</th><th>Tên KH</th><th>SĐT</th><th>Sân</th><th>Bắt đầu</th><th>Kết thúc</th><th>Phút</th><th>Đơn giá (/phút)</th><th>Tiền</th><th>Đã thanh toán</th><th>Hủy đặt sân</th></tr></thead>";
 	var tong_tien = 0;
 	var da_thanh_toan = 0;
 	var chua_thanh_toan = 0;
 	for (var i = 0; i < data.length; i++) {
 		var thanh_toan = data[i].da_thanh_toan;
 		if (thanh_toan == "1") {
-			var status = "<img src='images/passed.png' />";
+			var status = "<img src='../images/passed.png' />";
 		} else {
-			var status = "<img src='images/failed.png' />";
+			var status = "<img src='../images/failed.png' />";
 		}
 		html += "<tr>";
 		html += "<td>" + (i + 1) + "</td>";
@@ -272,53 +272,35 @@ function veTableDatSan(data) {
 			html += "<td style='font-weight:bold;color:red;'>" + formatMoney(money) + "đ</td>";
 		}
 		html += "<td><center>" + status + "</center></td>";
-		if (thanh_toan == "0") {
-			html += "<td><center><button class='btnThanhToan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-check text-success'></i></button></center></td>";
-		} else {
-			html += "<td><center><button disabled class='btnThanhToan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-check text-success'></i></button></center></td>";
-		}
+		
 		
 		html += "<td><center><button class='btnXoaDatSan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-times text-danger'></i></button></center></td>";
-		html += "<td><center><span>" + data[i].note + "</span></center></td>";
 		html += "</tr>";
 	}
-	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Đã thanh toán</b></td><td style='font-weight:bold;color:green;'>" + formatMoney(da_thanh_toan) + "đ</td><td></td><td></td><td></td><td></td></tr>";
-	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Chưa thanh toán</b></td><td style='font-weight:bold;color:red;'>" + formatMoney(chua_thanh_toan) + "đ</td><td></td><td></td><td></td><td></td></tr>";
-	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Tổng tiền</b></td><td style='font-weight:bold;color:blue;'>" + formatMoney(tong_tien) + "đ</td><td></td><td></td><td></td><td></td></tr>";
+	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Đã thanh toán</b></td><td style='font-weight:bold;color:green;'>" + formatMoney(da_thanh_toan) + "đ</td><td></td><td></td></tr>";
+	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Chưa thanh toán</b></td><td style='font-weight:bold;color:red;'>" + formatMoney(chua_thanh_toan) + "đ</td><td></td><td></td></tr>";
+	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Tổng tiền</b></td><td style='font-weight:bold;color:blue;'>" + formatMoney(tong_tien) + "đ</td><td></td><td></td></tr>";
 	html += "</table>";
 	$(".ds_datsan").html(html);
 	
-	$(".btnThanhToan").click(function() {
-		var xac_nhan = confirm("Thanh toán đặt sân?");
-		if (xac_nhan) {
-			var datsan_id = $(this).attr("datsan_id");
-			thanhToanDatSan(datsan_id);
-		}
-	});
 	
 	$(".btnXoaDatSan").click(function() {
-		var xac_nhan = confirm("Bạn có thật sự muốn xóa đặt sân?");
-		if (xac_nhan) {
-			xoaDatSan($(this).attr("datsan_id"));
-		}
-		
+		var noteCancle = "Khách hàng yêu cầu hủy đặt sân";
+		xoaDatSan($(this).attr("datsan_id"), noteCancle);
 	});
 }
 
-function xoaDatSan(datsan_id) {
+function xoaDatSan(datsan_id, noteCancle) {
 	$.ajax({
-		url: "/quanlysanbong/api/xoadatsan.php",
+		url: "/quanlysanbong/api/xoaDatSanForUser.php",
 		type: "POST",
 		cache: false,
 		data: {
-			datsan_id : datsan_id
+			datsan_id : datsan_id,
+			noteCancle : noteCancle
 		},
 		success: function(msg) {
-			if (g_bat_dau == "" && g_ket_thuc == "") {
-				xemDsDatSan(getCurrentFormattedDate());
-			} else {
-				xemDoanhThu(g_bat_dau, g_ket_thuc);
-			}
+			alert("Yêu cầu hủy đặt sân của bạn đang chờ xác nhận")
 		},
 		error: function() {
 			alert("Khong the xoa dat san!!!");
