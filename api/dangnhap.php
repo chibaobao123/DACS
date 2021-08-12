@@ -16,11 +16,11 @@
 				$result = $db->query($row);
 				$rss = mysqli_fetch_assoc($result);
 				if ($rss['admin_number'] == 0){
-					$_SESSION['admin_number'] = $rss['admin_number'];
+					$_SESSION['admin_number'] = 0;
 					$_SESSION['login_user'] = $username;
 					echo "0";
 				} else {
-					$_SESSION['admin_number'] = $rss['admin_number'];
+					$_SESSION['admin_number'] = 1;
 					$_SESSION['login_user'] = $username;
 					echo '1';
 				}

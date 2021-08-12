@@ -23,7 +23,7 @@
 			echo "Đặt sân thành công!!!";
 		} else {
 			echo "Đặt sân thất bại!!!".$sql_insert;
-		}
+		} 
 	}
 
 	die;

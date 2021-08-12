@@ -295,6 +295,7 @@
                         } else {
                             thongbaotot(msg);
                         }
+                        console.log(msg);
                         xemDsDatSan(getCurrentFormattedDate());
                     },
                     error: function() {
