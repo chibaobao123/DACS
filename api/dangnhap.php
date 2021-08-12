@@ -12,15 +12,17 @@
 			$count = mysqli_num_rows($rs);
 			
 			if ($count == 1) {
-				$row = "SELECT admin_number FROM tai_khoan WHERE username='$username'";
+				$row = "SELECT admin_number, sdt FROM tai_khoan WHERE username='$username'";
 				$result = $db->query($row);
 				$rss = mysqli_fetch_assoc($result);
 				if ($rss['admin_number'] == 0){
 					$_SESSION['admin_number'] = 0;
+					$_SESSION['sdt_user'] = $rss['sdt'];
 					$_SESSION['login_user'] = $username;
 					echo "0";
 				} else {
 					$_SESSION['admin_number'] = 1;
+					$_SESSION['sdt_user'] = $rss['sdt'];
 					$_SESSION['login_user'] = $username;
 					echo '1';
 				}
