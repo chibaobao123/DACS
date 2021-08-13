@@ -257,7 +257,7 @@ body{
             });
             
             
-            function taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia) {
+            function taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san) {
                 $.ajax({
                     url: "/quanlysanbong/api/taodatsan.php",
                     type: "POST",
@@ -267,7 +267,8 @@ body{
                         ma_san : ma_san,
                         bat_dau : bat_dau,
                         ket_thuc : ket_thuc,
-                        don_gia : don_gia
+                        don_gia : don_gia,
+                        ten_san : ten_san,
                     },
                     success: function(msg) {
                         if (msg.includes("trùng")) {
@@ -275,6 +276,7 @@ body{
                         } else {
                             thongbaotot(msg);
                         }
+                        console.log(msg);
                         xemDsDatSan(getCurrentFormattedDate());
                     },
                     error: function() {
@@ -287,6 +289,7 @@ body{
                 // insert into database
                 var ma_kh = $("#datsan_kh").val();
                 var ma_san = $("#datsan_tensan").attr("ma_san");
+                var ten_san = $("#datsan_tensan").text();
                 var don_gia =parseInt($("#datsan_dongia").text());
                 var ngay_dat = $(".datsan_ngaydat").text();
                 var bat_dau_gio = $("#datsan_batdau_gio").val();
@@ -298,7 +301,7 @@ body{
                 if (don_gia == "") {
                     $("#datsan_dongia").val("0");
                 }
-                taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia);
+                taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san);
                 $("#formDatSan").css("display","none");
                 $("#grayscreen").css("display","none");
             });

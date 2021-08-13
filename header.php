@@ -43,7 +43,7 @@
 </section>
 <br />
 <br />
-<script>
+<!-- <script>
 $(document).ready(function() {
 	if (window.location.pathname == "/quanlysanbong/index.php") {
 		$("#navHome").css("color", "#d81b60");
@@ -58,4 +58,4 @@ $(document).ready(function() {
 		$("#navSB").css("color", "#d81b60");
 	}
 });
-</script>
+</script> -->

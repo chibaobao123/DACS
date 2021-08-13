@@ -37,8 +37,8 @@
 			$nTo = 'Khách hàng đặt sân'; //Ten nguoi nhan
 			$mTo =  "$email";   //dia chi nhan mail
 			$mail             = new PHPMailer();
-			$body             = "<h1>Xác nhận đặt sân thành công</h1> <br/> Xin chào $name_user, <br/> Bạn đã đặt sân: <br/> Mã sân: $ma_san <br/> Tên sân: $ten_san <br/> Thời gian bắt đầu: $bat_dau <br/> Thời gian kết thúc: $ket_thuc <br/> Nêu bạn muốn hủy sân, đặt lại sân bạn có thể truy cập <a href='http://localhost/quanlysanbong/forUser/userPage.php'>tại đây</a> <br/> Bên mình chỉ có thể giữ sân 15p <br/> hotline: 0708469531 <br/> Chân thành cảm ơn. ";   // Noi dung email
-			$title = 'Cấp lại mật khẩu mới Hệ thống quản lý công văn, văn bản';   //Tieu de gui mail
+			$body             = "<h1>Xác nhận đặt sân thành công</h1> <br/> Xin chào $name_user, <br/> Bạn đã đặt sân: <br/> Mã sân: $ma_san <br/> Tên sân: $ten_san <br/> Thời gian bắt đầu: $bat_dau <br/> Thời gian kết thúc: $ket_thuc <br/> Nêu bạn muốn hủy sân, đặt lại sân bạn có thể truy cập <a href='http://localhost/quanlysanbong/forUser/login.php'>tại đây</a> <br/> Bên mình chỉ có thể giữ sân 15p <br/> hotline: 0708469531 <br/> Chân thành cảm ơn. ";   // Noi dung email
+			$title = 'Hệ thống xác nhận của Sân bóng mini';   //Tieu de gui mail
 			$mail->IsSMTP();             
 			$mail->CharSet  = "utf-8";
 			$mail->SMTPDebug  = 0;   // enables SMTP debug information (for testing)
