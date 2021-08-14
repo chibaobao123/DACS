@@ -35,7 +35,40 @@
 			$nTo = 'Khách hàng đặt sân'; //Ten nguoi nhan
 			$mTo =  "$email";   //dia chi nhan mail
 			$mail             = new PHPMailer();
-			$body             = "<h1>Xác nhận đặt sân thành công</h1> <br/> Xin chào $name_user, <br/> Bạn đã đặt sân: <br/> Mã sân: $ma_san <br/> Tên sân: $ten_san <br/> Thời gian bắt đầu: $bat_dau <br/> Thời gian kết thúc: $ket_thuc <br/> Nêu bạn muốn hủy sân, đặt lại sân bạn có thể truy cập <a href='http://localhost/quanlysanbong/forUser/login.php'>tại đây</a> <br/> Bên mình chỉ có thể giữ sân 15p <br/> hotline: 0708469531 <br/> Chân thành cảm ơn. ";   // Noi dung email
+			$body             = "
+			<table style='text-align:justify;'> 
+				<tbody >
+				<tr>
+					<th scope='row' style='padding-right:10px' >Tên Khách hàng:</th>
+					<td>$name_user</td>
+				</tr>
+				<tr>
+					<th scope='row' style='padding-right:10px'>Mã sân:</th>
+					<td>$ma_san</td>
+				</tr>
+				<tr>
+					<th scope='row' style='padding-right:10px'>Tên sân:</th>
+					<td>$ten_san</td>
+				</tr>
+				<tr>
+					<th scope='row' style='padding-right:10px' >Thời gian bắt đầu:</th>
+					<td>$bat_dau</td>
+				</tr>
+				<tr>
+					<th scope='row' style='padding-right:10px' >Thời gian kết thúc:</th>
+					<td>$ket_thuc</td>
+				</tr>
+				<tr>
+					<th scope='row' style='padding-right:10px'>Hotline</th>
+					<td>0708469531</td>
+				</tr>
+				</tbody>
+		  	</table>
+		  	<div>
+        		<button style='background-color: #28a745; border-color: #28a745; border:none; padding:10px; border-radius:10px; '>
+          			<a href=''http://localhost/quanlysanbong/forUser/login.php'' style='text-decoration: none; color:white; border:none'>Nếu bạn muốn đặt lại, hủy sân</a>
+        		</button>
+    		</div>"; // Noi dung email
 			$title = 'Hệ thống xác nhận của Sân bóng mini';   //Tieu de gui mail
 			$mail->IsSMTP();             
 			$mail->CharSet  = "utf-8";

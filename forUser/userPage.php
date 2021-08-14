@@ -132,26 +132,6 @@
                     <td>Khách hàng:</td>
                     <td><select id='datsan_kh' class='chosen'></select></td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" id='chbThemKhach' /> Thêm khách mới?</td>
-                    <td>
-                        <div id='datsan_themkhach' class='disabled'>
-                            <table>
-                                <tr>
-                                    <td>Tên</td>
-                                    <td><input type='text' id='datsan_them_ten' /></td>
-                                </tr>
-                                <tr>
-                                    <td>Số điện thoại</td>
-                                    <td><input type='text' id='datsan_them_sdt' /></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td><button id='datsan_btnthemkh'>Thêm</button></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -332,47 +312,7 @@
                 $("#datsan_them_ten").val("");
                 $("#datsan_them_sdt").val("");
             });
-
-            $("#datsan_btnthemkh").click(function() {
-                var ten = $("#datsan_them_ten").val();
-                var sdt = $("#datsan_them_sdt").val();
-                if (kiemtraten(ten) && kiemtrasdt(sdt)) {
-                    themKhachHang(ten, sdt);
-                }
-            });
-            
-            $("#chbThemKhach").change(function() {
-                if($(this).is(":checked")) {
-                    $("#datsan_themkhach").removeClass("disabled");
-                } else {
-                    $("#datsan_themkhach").addClass("disabled");
-                }
-            });
-            
-            function themKhachHang(ten, sdt) {
-            $.ajax({
-                url: "/quanlysanbong/api/dskhachhang.php",
-                type: "POST",
-                cache: false,
-                data: {
-                    action: "add",
-                    ten : ten,
-                    sdt : sdt
-                },
-                success: function(msg) {
-                    if (msg.includes("đã tồn tại")) {
-                        thongbaoloi(msg);
-                    } else {
-                        $("#datsan_them_ten").val("");
-                        $("#datsan_them_sdt").val("");
-                        getDsKhachHang();
-                    }
-                },
-                error: function() {
-                    alert("Khong the them khach hang moi!!!");
-                }
-            });
-            }
+           
         });
     </script>
   </body>
