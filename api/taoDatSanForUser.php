@@ -39,39 +39,45 @@
 			$mail             = new PHPMailer();
 
 			$body             = "
-			<table style='text-align:justify;'> 
-				<tbody >
-				<tr>
-					<th scope='row' style='padding-right:10px' >Tên Khách hàng:</th>
-					<td>$name_user</td>
-				</tr>
-				<tr>
-					<th scope='row' style='padding-right:10px'>Mã sân:</th>
-					<td>$ma_san</td>
-				</tr>
-				<tr>
-					<th scope='row' style='padding-right:10px'>Tên sân:</th>
-					<td>$ten_san</td>
-				</tr>
-				<tr>
-					<th scope='row' style='padding-right:10px' >Thời gian bắt đầu:</th>
-					<td>$bat_dau</td>
-				</tr>
-				<tr>
-					<th scope='row' style='padding-right:10px' >Thời gian kết thúc:</th>
-					<td>$ket_thuc</td>
-				</tr>
-				<tr>
-					<th scope='row' style='padding-right:10px'>Hotline</th>
-					<td>0708469531</td>
-				</tr>
-				</tbody>
-		  	</table>
-		  	<div>
-        		<button style='background-color: #28a745; border-color: #28a745; border:none; padding:10px; border-radius:10px; '>
-          			<a href=''http://localhost/quanlysanbong/forUser/login.php'' style='text-decoration: none; color:white; border:none'>Nếu bạn muốn đặt lại, hủy sân</a>
-        		</button>
-    		</div>"; // Noi dung email
+			<h1>Sân bóng đá mini, kính chào.</h1>
+			<p>Đây là thông tin đặt sân của bạn.</p>
+			<table style='text-align:justify;border: 1px solid black;border-collapse: collapse;margin-bottom:20px'>
+			  <tbody>
+			  <tr style='border: 1px solid black;'>
+				<th scope='row' style='padding:10px;border: 1px solid black;' >Tên Khách hàng:</th>
+				<td style='border: 1px solid black;padding:10px;'>$name_user</td>
+			  </tr>
+			  <tr style='border: 1px solid black;'>
+				<th scope='row' style='padding:10px;'>Mã sân:</th>
+				<td style='border: 1px solid black;padding:10px;'>$ma_san</td>
+			  </tr>
+			  <tr style='border: 1px solid black;'>
+				<th scope='row' style='padding:10px;'>Tên sân:</th>
+				<td style='border: 1px solid black;padding:10px;'>$ten_san</td>
+			  </tr>
+			  <tr style='border: 1px solid black;'>
+				<th scope='row' style='padding:10px' >Thời gian bắt đầu:</th>
+				<td style='border: 1px solid black;padding:10px'>$bat_dau</td>
+			  </tr>
+			  <tr style='border: 1px solid black;'>
+				<th scope='row' style='padding:10px' >Thời gian kết thúc:</th>
+				<td style='border: 1px solid black;padding:10px'>$ket_thuc</td>
+			  </tr>
+			  <tr style='border: 1px solid black;'>
+				<th scope='row' style='padding:10px'>Hotline</th>
+				<td style='border: 1px solid black;padding:10px'>0708469531</td>
+			  </tr>
+			  <tr style='border: 1px solid black;'>
+				<th scope='row' style='padding:10px'>Địa chỉ</th>
+				<td style='border: 1px solid black;padding:10px'> 221 Lý Thường Kiệt, Phường 9, Quận 11, Thành phố Hồ Chí Minh</td>
+			  </tr>
+			  </tbody>
+			  </table>
+			  <div>
+				  <button style='background-color: #28a745; border-color: #28a745; border:none; padding:10px; border-radius:10px; '>
+					  <a href=''http://localhost/quanlysanbong/login.php'' style='text-decoration: none; color:white; border:none'>Nếu bạn muốn đặt lại, hủy sân</a>
+				  </button>
+			  </div>; // Noi dung email
 
 			$title = 'Hệ thống xác nhận của Sân bóng mini';   //Tieu de gui mail
 			$mail->IsSMTP();             
