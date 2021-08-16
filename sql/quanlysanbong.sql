@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 12, 2021 lúc 11:16 AM
+-- Thời gian đã tạo: Th8 15, 2021 lúc 09:07 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.2.26
 
@@ -228,26 +228,27 @@ INSERT INTO `dat_san` (`id`, `ma_kh`, `ma_san`, `bat_dau`, `ket_thuc`, `da_thanh
 CREATE TABLE `khach_hang` (
   `id` int(11) NOT NULL,
   `ten` varchar(40) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `sdt` varchar(11) COLLATE utf8mb4_vietnamese_ci NOT NULL
+  `sdt` varchar(11) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `khach_hang`
 --
 
-INSERT INTO `khach_hang` (`id`, `ten`, `sdt`) VALUES
-(26, 'Huỳnh Trịnh Thái Long', '0123456789'),
-(34, 'Nguyen Duy Tuong', '0962563712'),
-(35, 'Hieu Hieu', '0953341728'),
-(36, 'Nguyen Gia Hai', '0973718312'),
-(37, 'Bao Bao Chi', '0703934583'),
-(38, 'Tran Bao Anh', '0908076877'),
-(40, 'pham tien hau', '0900631999'),
-(41, 'Tran My Nghi', '0909458624'),
-(42, 'Nguyen Van An', '0708988888'),
-(43, 'nguyen van A', '0909789238'),
-(44, 'baochi', '0909789237'),
-(45, 'bao chi', '0909789236');
+INSERT INTO `khach_hang` (`id`, `ten`, `sdt`, `email`) VALUES
+(26, 'Huỳnh Trịnh Thái Long', '0123456789', 'thailong2015py@gmail.com'),
+(34, 'Nguyen Duy Tuong', '0962563712', ''),
+(35, 'Hieu Hieu', '0953341728', ''),
+(36, 'Nguyen Gia Hai', '0973718312', ''),
+(37, 'Bao Bao Chi', '0703934583', 'baobaochi631999@gmail.com'),
+(38, 'Tran Bao Anh', '0908076877', 'baobaochi999@gmail.com'),
+(40, 'pham tien hau', '0900631999', ''),
+(41, 'Tran My Nghi', '0909458624', ''),
+(42, 'Nguyen Van An', '0708988888', ''),
+(43, 'nguyen van A', '0909789238', ''),
+(44, 'baochi', '0909789237', 'huychi63199@gmail.com'),
+(45, 'bao chi', '0909789236', 'baobao631999@gmail.com');
 
 -- --------------------------------------------------------
 

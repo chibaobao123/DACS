@@ -12,7 +12,7 @@ const MSG_SDT_0 = "Số điện thoại phải bắt đầu với số '0'.";
 
 function getDsKhachHang() {
 	$.ajax({
-		url: "/quanlysanbong/api/dskhachhang.php",
+		url: "/quanlysanbong/api/dskhachhangForUser.php",
 		type: "GET",
 		cache: false,
 		data: {
@@ -20,12 +20,10 @@ function getDsKhachHang() {
 		},
 		success: function(json) {
 			var data = $.parseJSON(json);
-			$("#datsan_kh").html("");
+			$("#datsan_kh_foruser").html("");
 			for (var i = 0; i < data.length; i++) {
-				$("#datsan_kh").append(new Option(data[i].ten + " (" + data[i].sdt + ")", data[i].id));
+				$("#datsan_kh_foruser").append(new Option(data[i].username + " (" + data[i].email + ")", data[i].id));
 			}
-			$("#datsan_kh").chosen();
-			$("#datsan_kh").trigger('chosen:updated');
 		},
 		error: function() {
 			alert("Khong the lay danh sach khach hang!!!");
@@ -267,9 +265,9 @@ function veTableDatSan(data) {
 		html += "<td>" + mins + "</td>";
 		html += "<td>" + formatMoney(don_gia) + "</td>";
 		if (thanh_toan == "1") {
-			html += "<td style='font-weight:bold;color:green;'>" + formatMoney(money) + "đ</td>";
+			html += "<td style='font-weight:bold;color:green;'>" + formatMoney(money) + "</td>";
 		} else {
-			html += "<td style='font-weight:bold;color:red;'>" + formatMoney(money) + "đ</td>";
+			html += "<td style='font-weight:bold;color:red;'>" + formatMoney(money) + "</td>";
 		}
 		html += "<td><center>" + status + "</center></td>";
 		
@@ -277,9 +275,6 @@ function veTableDatSan(data) {
 		html += "<td><center><button class='btnXoaDatSan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-times text-danger'></i></button></center></td>";
 		html += "</tr>";
 	}
-	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Đã thanh toán</b></td><td style='font-weight:bold;color:green;'>" + formatMoney(da_thanh_toan) + "đ</td><td></td><td></td></tr>";
-	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Chưa thanh toán</b></td><td style='font-weight:bold;color:red;'>" + formatMoney(chua_thanh_toan) + "đ</td><td></td><td></td></tr>";
-	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Tổng tiền</b></td><td style='font-weight:bold;color:blue;'>" + formatMoney(tong_tien) + "đ</td><td></td><td></td></tr>";
 	html += "</table>";
 	$(".ds_datsan").html(html);
 	

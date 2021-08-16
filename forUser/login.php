@@ -24,7 +24,7 @@
 <script src="lib/common.js"></script>
 <style>
 	body{
-		background-image: url("./picture/bg-login.jpg");
+		background-image: url("../picture/bg-login.jpg");
 		background-repeat: no-repeat;
 		background-size: cover;
 	}

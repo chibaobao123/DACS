@@ -66,9 +66,9 @@
 		  	</table>
 		  	<div>
         		<button style='background-color: #28a745; border-color: #28a745; border:none; padding:10px; border-radius:10px; '>
-          			<a href=''http://localhost/quanlysanbong/forUser/login.php'' style='text-decoration: none; color:white; border:none'>Nếu bạn muốn đặt lại, hủy sân</a>
+          			<a href='http://localhost/quanlysanbong/forUser/login.php' style='text-decoration: none; color:white; border:none'>Nếu bạn muốn đặt lại, hủy sân</a>
         		</button>
-    		</div>"; // Noi dung email
+    		</div>";   // Noi dung email
 			$title = 'Hệ thống xác nhận của Sân bóng mini';   //Tieu de gui mail
 			$mail->IsSMTP();             
 			$mail->CharSet  = "utf-8";

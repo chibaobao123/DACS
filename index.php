@@ -11,7 +11,7 @@
         </div>
 
         <div >
-            <b>DANH SÁCH ĐẶT SÂN NGÀY <span class='tieudeds'></span></b>	
+            <b>DANH SÁCH ĐẶT SÂN NGÀY <span class='tieudedsIndex'></span></b>	
         </div>
 	
         <br />
@@ -21,7 +21,7 @@
         <br />
         <br />
 
-        <b>TÌNH TRẠNG ĐẶT SÂN NGÀY <span class='tieudetime'></span></b><br /><br />
+        <b>TÌNH TRẠNG ĐẶT SÂN NGÀY <span class='tieudetimeIndex'></span></b><br /><br />
 
         <div class="time_table" style="background-color:white;"></div> <br />
 </section>
@@ -245,7 +245,7 @@ body{
 	<script>
         $(document).ready(function() {
             
-            xemDsDatSan(getToday());
+            xemDsDatSanIndex(getToday());
 
             $('.datsan_ngaydat').daterangepicker({
                 singleDatePicker: true,
@@ -253,7 +253,7 @@ body{
                 minYear: 2019,
                 maxYear: parseInt(moment().format('YYYY'), 10)
             }, function(start, end, label) {
-                xemDsDatSan(start.format("YYYY-MM-DD"));
+                xemDsDatSanIndex(start.format("YYYY-MM-DD"));
             });
             
             
@@ -277,7 +277,7 @@ body{
                             thongbaotot(msg);
                         }
                         console.log(msg);
-                        xemDsDatSan(getCurrentFormattedDate());
+                        xemDsDatSanIndex(getCurrentFormattedDate());
                     },
                     error: function() {
                         thongbaoloi("Lỗi hệ thống!!");

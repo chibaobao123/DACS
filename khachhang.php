@@ -56,11 +56,11 @@ body {
 					let data = $.parseJSON(json);
 					let html = "";
 					html += "<h1>Danh sách khách hàng</h1>"
-					html += "<table class='mytable' style='width: 70%;text-align: center;background-color:white;'>";
-					html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Công cụ</th></tr></thead>";
+					html += "<table class='mytable' style='width: 80%;text-align: center;background-color:white;'>";
+					html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Email</th><th>Công cụ</th></tr></thead>";
 					for (let i = 0; i < data.length; i++) {
 						html += "<tr>";
-						html += "<td>"+(i+1)+"</td><td>" + data[i].ten + "</td><td>" + data[i].sdt + 
+						html += "<td>"+(i+1)+"</td><td>" + data[i].ten + "</td><td>" + data[i].sdt + "</td><td>" + data[i].email + 
 						"</td><td><center><button class='btn-edit btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+
 						"<button class='btn-del btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-trash-alt'></i></button></center></td>";
 						html += "</tr>";
@@ -84,27 +84,35 @@ body {
 				
 						var ten = $(row).find("td")[1];
 						var ten_value = $(ten).text();
-						$(ten).html("<input style='background:yellow;' id='ten-" + order + "' type='text' value='" + ten_value + "' /><br /><span class='thongbao'>" + THONG_BAO + "</span>");
+						$(ten).html("<input style='background:yellow;width:100%' id='ten-" + order + "' type='text' value='" + ten_value + "' /><br /><span class='thongbao'>" + THONG_BAO + "</span>");
 						$("#ten-" + order).focus();
 
 						var sdt = $(row).find("td")[2];
 						var sdt_value = $(sdt).text();
-						$(sdt).html("<input style='background:yellow;' id='sdt-" + order + "' type='text' value='" + sdt_value + "' />");
+						$(sdt).html("<input style='background:yellow;width:100%' id='sdt-" + order + "' type='text' value='" + sdt_value + "' />");
 
-						$("#ten-" + order + ", #sdt-" + order).keyup(function(e) {
+						var email = $(row).find("td")[3];
+						var email_value = $(email).text();
+						$(email).html("<input style='background:yellow;width:100%' id='email-" + order + "' type='text' value='" + email_value + "' />");
+
+
+						$("#ten-" + order + ", #sdt-" + order + ", #email-" + order).keyup(function(e) {
 							if (e.keyCode == 27) {	// ESC
 								$(ten).find(".thongbao").remove();
 								$(ten).html(ten_value);
 								$(sdt).html(sdt_value);
+								$(email).html(email_value);
 								$($(".btn-edit")[order - 1]).removeAttr("disabled");
 							}
 							if (e.keyCode == 13) {	// ENTER
 								var ten_moi = $("#ten-" + order).val();
 								var sdt_moi = $("#sdt-" + order).val();
-								if ((ten_moi != ten_value || sdt_moi != sdt_value) && kiemtraten(ten_moi) && kiemtrasdt(sdt_moi)) {
-									suaKhachHang(ma_kh, ten_moi, sdt_moi);
+								var email_moi = $("#email-" + order).val();
+								if ((ten_moi != ten_value || sdt_moi != sdt_value || email_moi != email_value) && kiemtraten(ten_moi) && kiemtrasdt(sdt_moi) && kiemtraten(email_moi)) {
+									suaKhachHang(ma_kh, ten_moi, sdt_moi, email_moi);
 									$(ten).html(ten_moi);
 									$(sdt).html(sdt_moi);
+									$(email).html(email_moi);
 									$(ten).find(".thongbao").remove();
 									$($(".btn-edit")[order - 1]).removeAttr("disabled");
 								}
@@ -186,7 +194,7 @@ body {
 		});
 		}
 
-		function suaKhachHang(ma_kh, ten_moi, sdt_moi) {
+		function suaKhachHang(ma_kh, ten_moi, sdt_moi, email_moi) {
 			$.ajax({
 				url: "/quanlysanbong/api/dskhachhang.php",
 				type: "POST",
@@ -195,7 +203,8 @@ body {
 					action: "edit",
 					ma_kh: ma_kh,
 					ten_moi : ten_moi,
-					sdt_moi : sdt_moi
+					sdt_moi : sdt_moi,
+					email_moi : email_moi,
 				},
 				success: function(msg) {
 					if (msg.includes("đã tồn tại")) {

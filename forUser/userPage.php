@@ -130,7 +130,7 @@
                 </tr>
                 <tr>
                     <td>Khách hàng:</td>
-                    <td><select id='datsan_kh' class='chosen'></select></td>
+                    <td><span id='datsan_kh_foruser'></span></td>
                 </tr>
                 </tr>
                 <tr>
@@ -287,7 +287,7 @@
             
             $("#datsan_ok").click(function() {
                 // insert into database
-                var ma_kh = $("#datsan_kh").val();
+                var ma_kh = $("#datsan_kh_foruser").val();
                 var ma_san = $("#datsan_tensan").attr("ma_san");
                 var ten_san = $("#datsan_tensan").text();
                 var don_gia =parseInt($("#datsan_dongia").text());

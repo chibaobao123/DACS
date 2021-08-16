@@ -3,7 +3,6 @@
 	include '../PHPMailer/class.smtp.php';
 	include '../PHPMailer/class.phpmailer.php'; 
 	
-	$ma_kh = $_POST['ma_kh'];
 	$ma_san = $_POST['ma_san'];
 	$bat_dau = $_POST['bat_dau'];
 	$ket_thuc = $_POST['ket_thuc'];
@@ -14,6 +13,7 @@
 	$sql_emails = mysqli_query($db,"SELECT * FROM tai_khoan WHERE username = '$name_user'");
 	$row = $sql_emails->fetch_assoc();
 	
+	$ma_kh = $row['id'];
 	
 	$sql_checkDuplicate = "SELECT * FROM dat_san WHERE dat_san.ma_san=$ma_san AND (('$bat_dau' <= dat_san.bat_dau AND '$ket_thuc' >= dat_san.bat_dau) OR ('$bat_dau' >= dat_san.bat_dau AND '$bat_dau' <= dat_san.ket_thuc))";
 	$rs = mysqli_query($db, $sql_checkDuplicate);
