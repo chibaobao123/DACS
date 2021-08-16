@@ -61,6 +61,10 @@
 				<td style='border: 1px solid black;padding:10px'>$ket_thuc</td>
 			  </tr>
 			  <tr style='border: 1px solid black;'>
+				<th scope='row' style='padding:10px' >Trạng thái:</th>
+				<td style='border: 1px solid black;padding:10px;color:red;'>Đã hủy</td>
+			  </tr>
+			  <tr style='border: 1px solid black;'>
 				<th scope='row' style='padding:10px'>Hotline</th>
 				<td style='border: 1px solid black;padding:10px'>0708469531</td>
 			  </tr>

@@ -64,6 +64,10 @@
 				<td style='border: 1px solid black;padding:10px'>$ket_thuc</td>
 			  </tr>
 			  <tr style='border: 1px solid black;'>
+				<th scope='row' style='padding:10px' >Trạng thái:</th>
+				<td style='border: 1px solid black;padding:10px; color:green;'>Đã đặt</td>
+			  </tr>
+			  <tr style='border: 1px solid black;'>
 				<th scope='row' style='padding:10px'>Hotline</th>
 				<td style='border: 1px solid black;padding:10px'>0708469531</td>
 			  </tr>
@@ -77,7 +81,7 @@
 				  <button style='background-color: #28a745; border-color: #28a745; border:none; padding:10px; border-radius:10px; '>
 					  <a href=''http://localhost/quanlysanbong/login.php'' style='text-decoration: none; color:white; border:none'>Nếu bạn muốn đặt lại, hủy sân</a>
 				  </button>
-			  </div>; // Noi dung email
+			  </div>"; // Noi dung email
 
 			$title = 'Hệ thống xác nhận của Sân bóng mini';   //Tieu de gui mail
 			$mail->IsSMTP();             
