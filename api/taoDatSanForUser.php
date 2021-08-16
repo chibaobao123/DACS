@@ -10,7 +10,7 @@
 	$ten_san = $_POST['ten_san'];
 
 	$name_user = $_SESSION['login_user'];
-	$sql_emails = mysqli_query($db,"SELECT * FROM tai_khoan WHERE username = '$name_user'");
+	$sql_emails = mysqli_query($db,"SELECT * FROM khach_hang WHERE username = '$name_user'");
 	$row = $sql_emails->fetch_assoc();
 	
 	$ma_kh = $row['id'];

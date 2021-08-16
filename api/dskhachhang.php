@@ -11,6 +11,7 @@
 			$r['ten'] = $row['1'];
 			$r['sdt'] = $row['2'];
 			$r['email'] = $row['3'];
+			$r['username'] = $row['4'];
 			array_push($json_response, $r);
 		}
 		
@@ -20,6 +21,7 @@
 	if (isset($_POST['action']) && $_POST['action'] == 'edit') {
 		
 		$ma_kh = $_POST['ma_kh'];
+		// $username_moi = $_POST['username_moi'];
 		$ten_moi = trim($_POST['ten_moi']);
 		$sdt_moi = trim($_POST['sdt_moi']);
 		$email_moi = trim($_POST['email_moi']);
@@ -31,6 +33,13 @@
 			echo "Khách hàng <b>'".$ten_moi."'</b> đã tồn tại!!!";
 		}
 		
+		// $rs = mysqli_query($db, "SELECT * FROM khach_hang WHERE LOWER(ten)=LOWER('$username_moi') AND id != $ma_kh");
+		// $trungusername = false;
+		// if (mysqli_num_rows($rs) == 1) {
+		// 	$trungusername = true;
+		// 	echo "Khách hàng <b>'".$username_moi."'</b> đã tồn tại!!!";
+		// }
+
 		$rs = mysqli_query($db, "SELECT * FROM khach_hang WHERE sdt='$sdt_moi' AND id != $ma_kh");
 		$trungsdt = false;
 		if (mysqli_num_rows($rs) == 1) {
