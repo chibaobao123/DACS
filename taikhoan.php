@@ -53,7 +53,7 @@ body {
     ?>
 </section>
 <!-- Optional JavaScript -->
-<script src="./lib/jquery-3.4.1.js"></script>
+	<script src="./lib/jquery-3.4.1.js"></script>
     <script src="./lib/time_table/createjs.min.js"></script>
     <script src="./lib/time_table/TimeTable.js"></script>
     <script src="./lib/date_picker/moment.min.js"></script>

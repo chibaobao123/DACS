@@ -60,7 +60,7 @@ body {
 					html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Username</th><th>Số điện thoại</th><th>Email</th><th>Công cụ</th></tr></thead>";
 					for (let i = 0; i < data.length; i++) {
 						html += "<tr>";
-						html += "<td>"+(i+1)+"</td><td>" + data[i].ten + "</td><td>" + data[i].username + "</td><td>" + data[i].sdt + "</td><td>" + data[i].email + 
+						html += "<td>"+(i+1)+"</td><td>" + data[i].ten + "</td><td class='username'>" + data[i].username + "</td><td>" + data[i].sdt + "</td><td>" + data[i].email + 
 						"</td><td><center><button class='btn-edit btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+
 						"<button class='btn-del btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-trash-alt'></i></button></center></td>";
 						html += "</tr>";
@@ -69,9 +69,10 @@ body {
 					$("#tblKhachHang").html(html);
 					$(".btn-del").click(function(){
 						var ma_kh = $(this).attr("ma_kh");
+						var username = $('.username').text();
 						var xac_nhan = confirm("Bạn có chắc muốn xóa không?");
 							if (xac_nhan) {
-								xoaKh(ma_kh);
+								xoaKh(ma_kh, username);
 							}
 					});
 					
@@ -185,7 +186,7 @@ body {
 			
 		}
 
-		function xoaKh(ma_kh){
+		function xoaKh(ma_kh,username){
 			$.ajax({
 			url: "/quanlysanbong/api/dskhachhang.php",
 			type: "POST",
@@ -193,6 +194,7 @@ body {
 			data: {
 				action: "del",
 				ma_kh: ma_kh,
+				username : username,
 			},
 			success: function(msg) {
 				thongbaotot(msg);

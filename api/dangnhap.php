@@ -7,7 +7,7 @@
 			$username = $_POST['username'];
 			$password = $_POST['password'];
 			
-			$sql = "SELECT id FROM tai_khoan WHERE username='$username' AND password='$password'";
+			$sql = "SELECT id FROM tai_khoan WHERE username='$username' AND password_id='$password'";
 			$rs = mysqli_query($db, $sql);
 			$count = mysqli_num_rows($rs);
 			

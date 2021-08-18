@@ -61,6 +61,21 @@
 	}
 </style>
 
+<section class="header">
+         <!-- Just an image -->
+        <nav class="navbar navbar-dark bg-dark">
+			<div class="">
+			</div>
+			<form class="form-inline my-2 my-lg-0">
+				<a class="navbar-brand d-flex" href="../dangky.php" >
+					<span class="text-left text-white px-3">Tới trang đăng ký người dùng</span>
+					<i class="fas fa-arrow-circle-right" style="margin-right:10px; font-size:35px;" ></i>
+				</a>
+    		</form>
+
+        </nav>
+     </section> 
+
 <div id="loginForm">
 	<form>
 		<h2 style="text-align:center;">QUẢN LÝ SÂN BÓNG ĐÁ</h2>

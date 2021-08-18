@@ -91,7 +91,7 @@
             </a>
             <form class="form-inline my-2 my-lg-0">
 				<a class='nav-link text-light'  href='taiKhoanUser.php'><i class="fas fa-user" style="margin-right:10px"></i><?php echo $_SESSION['login_user']; ?></a>
-				<button class="btn btn-danger p-0"><a class="nav-link text-dark p-1"  href='./logout.php'>Đăng xuất</a></button>
+				<button class="btn btn-danger p-0"><a class="nav-link text-dark p-1"  href='../logout.php'>Đăng xuất</a></button>
 			</form>
         </nav>
     </header>

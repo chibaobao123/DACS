@@ -17,6 +17,8 @@
 ?>
 <title>Đăng nhập</title>
 <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/93ec6d166b.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 <script src="lib/jquery-3.4.1.js"></script>
 <link rel="stylesheet" type="text/css" href="lib/toast/jquery.toast.min.css" />
@@ -36,7 +38,7 @@
 		bottom: 0;
 		left: 0;
 		width: 500px;
-		height: 340px;
+		height: 400px;
 		padding: 10px;
 		border: 1px solid #000;
 		border-radius: 5px;
@@ -60,13 +62,26 @@
 		height:50px;
 	}
 </style>
+<section class="header">
+         <!-- Just an image -->
+        <nav class="navbar navbar-dark bg-dark">
+			<div class="">
+			</div>
+			<form class="form-inline my-2 my-lg-0">
+				<a class="navbar-brand d-flex" href="./dangky.php" >
+					<span class="text-left text-white px-3">Tới trang đăng ký người dùng</span>
+					<i class="fas fa-arrow-circle-right" style="margin-right:10px; font-size:35px;" ></i>
+				</a>
+    		</form>
 
+        </nav>
+     </section> 
 <div id="loginForm">
 	<form>
-		<h2 style="text-align:center;">QUẢN LÝ SÂN BÓNG ĐÁ</h2>
+		<h2 class="my-3" style="text-align:center;">QUẢN LÝ SÂN BÓNG ĐÁ</h2>
 		<label for="ten" >
 			<span style="font-size:25px; ">
-				<b>Tài khoản:</b>
+				<b>Tài khoản hoặc Địa chỉ email:</b>
 			</span>
 		</label>
 		<input type="text" id="ten" name="ten" placeholder="Nhập tên tài khoản"/>
@@ -86,7 +101,7 @@
 
 <script>
 $(document).ready(function() {
-	checkInputs();
+	
 	$("#btnLogin").click(function() {
 		
 		var u = $("#ten").val().trim();
