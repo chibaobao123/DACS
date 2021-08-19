@@ -62,7 +62,7 @@
 			  </tr>
 			  <tr style='border: 1px solid black;'>
 				<th scope='row' style='padding:10px' >Trạng thái:</th>
-				<td style='border: 1px solid black;padding:10px;color:red;'>Đã hủy</td>
+				<td style='border: 1px solid black;padding:10px;color:green;'>Đã đặt</td>
 			  </tr>
 			  <tr style='border: 1px solid black;'>
 				<th scope='row' style='padding:10px'>Hotline</th>

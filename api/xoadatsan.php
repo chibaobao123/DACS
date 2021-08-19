@@ -1,21 +1,30 @@
 <?php
 	include("../session.php");
-	include '../PHPMailer/class.smtp.php';
-	include '../PHPMailer/class.phpmailer.php';
+	include ('../PHPMailer/class.smtp.php');
+	include ('../PHPMailer/class.phpmailer.php');
 	
 	$datsan_id = $_POST['datsan_id'];
-	$sdt_kh = $_POST['sdt_kh'];
+
+	$name_user = $_POST['ten_kh'];
+	$sdt = $_POST['sdt'];
+	
+	$ten_san = $_POST['ten_san'];
+	$bat_dau = $_POST['bat_dau'];
+	$ket_thuc = $_POST['ket_thuc'];
 
 	$sql = "DELETE FROM dat_san WHERE id=$datsan_id";
 	$del_bill = mysqli_query($db, $sql);
 
+
+
 	if ($del_bill)
 	{
-		$sql_user = "SELECT * FROM khach_hang WHERE sdt=$sdt_kh";
+		$sql_user = "SELECT * FROM khach_hang WHERE sdt=$sdt";
 		$result = mysqli_query($db, $sql_user);
 		$row = $result->fetch_assoc();
 
 		$email = $row['email'];
+
 
 		$nFrom = "Sân bóng đá mini";    //mail duoc gui tu dau, thuong de ten cong ty ban
 			$mFrom = 'baobao631999@gmail.com';  //dia chi email cua ban 
@@ -33,10 +42,6 @@
 				<td style='border: 1px solid black;padding:10px;'>$name_user</td>
 			  </tr>
 			  <tr style='border: 1px solid black;'>
-				<th scope='row' style='padding:10px;'>Mã sân:</th>
-				<td style='border: 1px solid black;padding:10px;'>$ma_san</td>
-			  </tr>
-			  <tr style='border: 1px solid black;'>
 				<th scope='row' style='padding:10px;'>Tên sân:</th>
 				<td style='border: 1px solid black;padding:10px;'>$ten_san</td>
 			  </tr>
@@ -47,6 +52,10 @@
 			  <tr style='border: 1px solid black;'>
 				<th scope='row' style='padding:10px' >Thời gian kết thúc:</th>
 				<td style='border: 1px solid black;padding:10px'>$ket_thuc</td>
+			  </tr>
+			  <tr style='border: 1px solid black;'>
+				<th scope='row' style='padding:10px' >Trạng thái:</th>
+				<td style='border: 1px solid black;padding:10px; color:red;'>Đã hủy</td>
 			  </tr>
 			  <tr style='border: 1px solid black;'>
 				<th scope='row' style='padding:10px'>Hotline</th>

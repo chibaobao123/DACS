@@ -22,9 +22,11 @@ body {
 #tblKhachHang table td{vertical-align:top;}
 </style>
 <div class="addCusBar" style="margin:0px 0 25px 0;">
-	Tên: <input type='text' id='ten-moi' placeholder="Họ và tên"/> 
+	<!-- Tên: <input type='text' id='ten-moi' placeholder="Họ và tên"/> 
 	Số điện thoại: <input id='sdt-moi' type='text' placeholder="Số điện thoại "/> 
-	<button id='btn-add' class="btn btn-light border border-dark text-center p-0 mb-1" style='height: 25px; width: 70px'>Thêm</button> 
+	: <input id='sdt-moi' type='text' placeholder="Số điện thoại "/> 
+	Số điện thoại: <input id='sdt-moi' type='text' placeholder="Số điện thoại "/> 
+	<button id='btn-add' class="btn btn-light border border-dark text-center p-0 mb-1" style='height: 25px; width: 70px'>Thêm</button>  -->
 	<div class="searchBar" style="float:right">
 		<input style=' width:250px; height: 30px;' type="text" placeholder="Tìm kiếm...." name="val_search" value=""/>
 		<button id='btn-search' class="btn btn-light border border-dark mb-1"  name='submit' value= 'Tìm kiếm' style='height: 30px; width: 70px'><i class="fas fa-search"></i></button>
@@ -126,9 +128,9 @@ body {
 								}
 							}
 						});
-						checkInputs();
+						
 					});
-					checkInputs();
+					
 				},
 				error: function() {
 					thongbaoloi("Khong the lay danh sach khach hang!!!");
@@ -170,14 +172,14 @@ body {
 		function searchTableItem(data){
 			
 				let html = "";
-				html += "<h1>Kết quả tìm kiếm</h1>";
-				html += "<table class='mytable' style='width: 100%;text-align: center;background-color:white;'>";
-				html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Số điện thoại</th><th>Sửa</th><th>Xóa</th></tr></thead>";
-				$.each( data, function( key, value ) {
+				html += "<h1>Danh sách khách hàng</h1>"
+					html += "<table class='mytable' style='width: 100%;text-align: center;background-color:white;'>";
+					html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Username</th><th>Số điện thoại</th><th>Email</th><th>Công cụ</th></tr></thead>";
+					$.each( data, function( key, value ) {
 					html += "<tr>";
-					html += "<td>"+(key+1)+"</td><td>" + value.ten + "</td><td>" + value.sdt + 
-					"</td><td><center><button class='btn-edit' ma_kh='" + value.id +"' order='" + (key + 1) + "'>Sửa</button></center></td>"+
-					"</td><td><center><button class='btn-del' ma_kh='" + value.id +"' order='" + (key + 1) + "'>Xóa</button></center></td>";
+					html += "<td>"+(key+1)+"</td><td>" + value.ten + "</td><td>" + value.username +  "</td><td>" + value.sdt + "</td><td>" + value.email + 
+					"</td><td><center><button class='btn-edit btn' ma_kh='" + value.id +"' order='" + (key + 1) + "'><i class='fas fa-edit'></i></button>"+
+					"<button class='btn-del btn' ma_kh='" + value.id +"' order='" + (key + 1) + "'><i class='fas fa-trash-alt'></i></button></center></td>";
 					html += "</tr>";
 				})
 				html += "</table>";

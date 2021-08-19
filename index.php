@@ -5,7 +5,7 @@
 	include("header.php");
 ?>
 <section class="datSan">
-        <div class="datePicker" style="margin:45px 0 20px 0;display: flex;">
+        <div class="datePicker" style="margin:0px 0 20px 0;display: flex;">
             <h2 style="margin-right:10px;">Ngày được chọn:</h2>
             <input type="text" class="datsan_ngaydat" style="text-align:center;align-self:center;height:30px;"/><br/>
         </div>

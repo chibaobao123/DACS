@@ -243,12 +243,12 @@ function veTableDatSan(data) {
 			var status = "<img src='../images/failed.png' />";
 		}
 		html += "<tr>";
-		html += "<td>" + (i + 1) + "</td>";
-		html += "<td>" + data[i].ten_kh + "</td>";
-		html += "<td>" + data[i].sdt + "</td>";
-		html += "<td>" + data[i].ten_san + "</td>";
-		html += "<td>" + data[i].bat_dau + "</td>";
-		html += "<td>" + data[i].ket_thuc + "</td>";
+		html += "<td >" + (i + 1) + "</td>";
+		html += "<td class='ten_kh'>" + data[i].ten_kh + "</td>";
+		html += "<td class='sdt'>" + data[i].sdt + "</td>";
+		html += "<td class='ten_san'>" + data[i].ten_san + "</td>";
+		html += "<td class='bat_dau'>" + data[i].bat_dau + "</td>";
+		html += "<td class='ket_thuc'>" + data[i].ket_thuc + "</td>";
 		
 		var don_gia = data[i].don_gia;
 		var start = toDateTime(data[i].bat_dau);
@@ -280,19 +280,18 @@ function veTableDatSan(data) {
 	
 	
 	$(".btnXoaDatSan").click(function() {
-		var noteCancle = "Khách hàng yêu cầu hủy đặt sân";
-		xoaDatSan($(this).attr("datsan_id"), noteCancle);
+		
+		xoaDatSan($(this).attr("datsan_id"));
 	});
 }
 
-function xoaDatSan(datsan_id, noteCancle) {
+function xoaDatSan(datsan_id) {
 	$.ajax({
 		url: "/quanlysanbong/api/xoaDatSanForUser.php",
 		type: "POST",
 		cache: false,
 		data: {
 			datsan_id : datsan_id,
-			noteCancle : noteCancle
 		},
 		success: function(msg) {
 			alert("Yêu cầu hủy đặt sân của bạn đang chờ xác nhận")
