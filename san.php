@@ -39,8 +39,8 @@ $(document).ready(function() {
 				html += "<td>" + (i + 1) + "</td>";
 				html += "<td>" + data[i].ten_san + "</td>";
 				html += "<td>" + data[i].gia + "</td>"
-				html += "<td><button class='btnDoiten' ma_san='" + data[i].ma_san + "' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>";
-				html += "<button class='btnXoa' ma_san='" + data[i].ma_san + "' order='" + (i + 1) + "'><i class='fas fa-trash-alt'></i></button></td>";
+				html += "<td><button class='btnDoiten btn' ma_san='" + data[i].ma_san + "' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>";
+				html += "<button class='btnXoa btn' ma_san='" + data[i].ma_san + "' order='" + (i + 1) + "'><i class='fas fa-trash-alt'></i></button></td>";
 				html += "</tr>";
 			}
 			html += "</table>";

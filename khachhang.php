@@ -64,14 +64,15 @@ body {
 						html += "<tr>";
 						html += "<td>"+(i+1)+"</td><td>" + data[i].ten + "</td><td class='username'>" + data[i].username + "</td><td>" + data[i].sdt + "</td><td>" + data[i].email + 
 						"</td><td><center><button class='btn-edit btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+
-						"<button class='btn-del btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-trash-alt'></i></button></center></td>";
+						"<button class='btn-del btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'username='" + data[i].username + "' ><i class='fas fa-trash-alt'></i></button></center></td>";
 						html += "</tr>";
 					}
 					html += "</table>";
 					$("#tblKhachHang").html(html);
 					$(".btn-del").click(function(){
 						var ma_kh = $(this).attr("ma_kh");
-						var username = $('.username').text();
+						var username = $(this).attr("username");
+						console.log(username);
 						var xac_nhan = confirm("Bạn có chắc muốn xóa không?");
 							if (xac_nhan) {
 								xoaKh(ma_kh, username);
@@ -201,6 +202,7 @@ body {
 			success: function(msg) {
 				thongbaotot(msg);
 				tailaitrang();
+				console.log(msg);
 			}
 		});
 		}

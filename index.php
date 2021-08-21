@@ -289,8 +289,8 @@ body{
                 // insert into database
                 var ma_kh = $("#datsan_kh").val();
                 var ma_san = $("#datsan_tensan").attr("ma_san");
-                var ten_san = $("#datsan_tensan").text();
-                var don_gia =parseInt($("#datsan_dongia").text());
+                var ten_san = $("#datsan_tensan").val();
+                var don_gia = parseInt($("#datsan_dongia").text());
                 var ngay_dat = $(".datsan_ngaydat").text();
                 var bat_dau_gio = $("#datsan_batdau_gio").val();
                 var bat_dau_phut = $("#datsan_batdau_phut").val();
@@ -298,10 +298,36 @@ body{
                 var ket_thuc_phut = $("#datsan_ketthuc_phut").val();
                 var bat_dau = ngay_dat + " " + bat_dau_gio + ":" + bat_dau_phut + ":" + "00";
                 var ket_thuc = ngay_dat + " " + ket_thuc_gio + ":" + ket_thuc_phut + ":" + "00";
+                
+                var date = new Date();
+                var hoursNow = date.getHours();
+                var checkHours = bat_dau_gio - hoursNow;
+
+                var ngayPresent = date.getDate();
+                var thangPresent = date.getMonth();
+                var namPresent = date.getFullYear();
+
+                var ngay = $(".datsan_ngaydat").val().split("/");
+	            
+
+                var checkNgay = ngay[1] - ngayPresent;
+                var checkThang = parseInt(ngay[0]) - 1 - thangPresent;
+                var checkNam = ngay[2] - namPresent;
+
                 if (don_gia == "") {
                     $("#datsan_dongia").val("0");
                 }
-                taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san);
+                
+                if( checkNgay < 0 || checkThang < 0 || checkNam < 0) {
+                    thongbaoloi("Đã quá thời gian đặt sân!!! ");
+                } else if (checkHours <= 0 ) {
+                    thongbaoloi("Đã quá thời gian đặt sân!!!")
+                } else if(checkHours <=2) {
+                    thongbaoloi("Bạn phải đặt sân cách giờ đặt 2 tiếng !!!");
+                } else {
+                    taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san);
+                }
+
                 $("#formDatSan").css("display","none");
                 $("#grayscreen").css("display","none");
             });

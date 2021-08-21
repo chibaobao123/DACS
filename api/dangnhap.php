@@ -2,8 +2,7 @@
 	include("../config/config.php");
 	session_start();
 	
-	if (isset($_POST['action'])) {
-		if ($_POST['action'] == 'dangnhap') {
+		if (isset($_POST['action']) && $_POST['action'] == 'dangnhap') {
 			$username = $_POST['username'];
 			$password = $_POST['password'];
 			
@@ -30,5 +29,5 @@
 				echo "Tên đăng nhập hoặc mật khẩu không đúng!";
 			}
 		}
-	}
+	
 ?>

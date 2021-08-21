@@ -15,7 +15,7 @@
 		}
 	}
 ?>
-<title>Đăng nhập</title>
+<title>Quên Mật Khẩu</title>
 <link rel="shortcut icon" type="image/png" href="favicon.png"/>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/93ec6d166b.js" crossorigin="anonymous"></script>
@@ -147,34 +147,27 @@
         </nav>
      </section> 
 <div id="loginForm" >
-	<form class="form_dangnhap">
-		<h2 class="my-3" style="text-align:center;">QUẢN LÝ SÂN BÓNG ĐÁ</h2>
-		<label for="ten" >
+	<form class="quen_mk">
+		<h2 class="my-3" style="text-align:center;">Cấp lại mật khẩu</h2>
+		<label for="email_cap_mk" >
 			<span style="font-size:25px; ">
 				<b> Địa chỉ email:</b>
 			</span>
 		</label>
-		<input type="text" id="ten" name="ten" placeholder="Nhập tên tài khoản"/>
-
-		<label for="matkhau">
-			<span style="font-size:25px;">
-				<b>Mật khẩu:</b>
-			</span>
-		</label>
-		<input type="password" id="matkhau" name="matkhau" placeholder="Nhập mật khẩu"/>	
+		<input type="text" id="email_cap_mk" name="email_cap_mk" placeholder="Nhập tài khoản email"/>
 	</form>
 
 
 	<div class="loginBtn">
-		<button id="btnForget"  class=" lightButton ">
-			<a href = "./quenMatKhau.php">Quên mật khẩu</a>
+		<button id='btnSend' class="lightButton" >
+			Gửi mail
 			<span></span>
 			<span></span>
 			<span></span>
 			<span></span>
 		</button>
-		<button id='btnLogin' class="lightButton " >
-			Đăng nhập
+		<button id='btnLogin_back' class="lightButton" >
+			<a href="./login.php" >Quay lại đăng nhập<a>
 			<span></span>
 			<span></span>
 			<span></span>
@@ -186,39 +179,30 @@
 
 <script>
 $(document).ready(function() {
-	
-	$("#btnLogin").click(function() {
-		
-		var u = $("#ten").val().trim();
-		var p =  $("#matkhau").val().trim();
-		
-		if (u == "" || p == "") {
-			thongbaoloi("Tên đăng nhập/Mật khẩu không được bỏ trống!!!");
-			return;
-		}
-		
-		$.ajax({
-			url: "/quanlysanbong/api/dangnhap.php",
-			type: "POST",
-			cache: false,
-			data: {
-				action: "dangnhap",
-				username: u,
-				password: p
-			},
-			success: function(msg) {
-				console.log(msg)
-				if (msg == "1") {
-					location.href = './index.php';
+	$("#btnSend").click(function(){
+		var mail_id = $('#email_cap_mk').val();
+
+		if(kiemtraemail(mail_id)){
+				$.ajax({
+				url: "/quanlysanbong/api/dangnhap.php",
+				type: "POST",
+				cache: false,
+				data: {
+					action: "sendPass",
+					mail_id: mail_id,
+				},
+				success: function(msg) {
 					console.log(msg);
-				} else if (msg == "0") {
-					location.href = './forUser/userPage.php';
-				} else {
-					thongbaoloi(msg);
+					if(msg == "Mail xác nhận đã được gửi cho bạn !!!"){
+						thongbaotot(msg,"Kiểm tra mail và đăng nhập lại bạn nhé !!!");
+					} else if (msg == 'Mail gửi không thành công !!!') {
+						thongbaoloi(msg,"Có thể là do lỗi hệ thống bạn hãy thủ lại nhé !!!");
+					} else {
+						thongbaoloi('Gmail không tồn tại !!!');
+					} 
 				}
-				
-			}
-		});
+			})
+		}
 	});
 })	
 </script>

@@ -231,7 +231,7 @@ function xemDoanhThu(start, end) {
 function veTableDatSan(data) {
 	var html = "";
 	html += "<table class='mytable' style='width:100%; text-align: center;'>";
-	html += "<thead><tr><th>#</th><th>Tên KH</th><th>SĐT</th><th>Sân</th><th>Bắt đầu</th><th>Kết thúc</th><th>Phút</th><th>Đơn giá (/phút)</th><th>Tiền</th><th>Đã thanh toán</th><th>Hủy đặt sân</th></tr></thead>";
+	html += "<thead><tr><th>#</th><th>Tên KH</th><th>SĐT</th><th>Sân</th><th>Bắt đầu</th><th>Kết thúc</th><th>Phút</th><th>Đơn giá (đồng/phút)</th><th>Tiền</th><th>Đã thanh toán</th><th>Hủy đặt sân</th></tr></thead>";
 	var tong_tien = 0;
 	var da_thanh_toan = 0;
 	var chua_thanh_toan = 0;
