@@ -59,11 +59,17 @@ body {
 					let html = "";
 					html += "<h1>Danh sách khách hàng</h1>"
 					html += "<table class='mytable' style='width: 100%;text-align: center;background-color:white;'>";
-					html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Username</th><th>Số điện thoại</th><th>Email</th><th>Công cụ</th></tr></thead>";
+					html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Username</th><th>Số điện thoại</th><th>Email</th><th>Admin(*)</th><th>Công cụ</th></tr></thead>";
 					for (let i = 0; i < data.length; i++) {
 						html += "<tr>";
-						html += "<td>"+(i+1)+"</td><td>" + data[i].ten + "</td><td class='username'>" + data[i].username + "</td><td>" + data[i].sdt + "</td><td>" + data[i].email + 
-						"</td><td><center><button class='btn-edit btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+
+						html += "<td>"+(i+1)+"</td><td>" + data[i].ten + "</td><td class='username'>" + data[i].username + "</td><td>" + data[i].sdt + "</td><td>" + data[i].email + "</td>";
+						if(data[i].admin_number == 1){
+							html += "<td> Amin </td>"  
+						} else {
+							html += "<td> User </td>"
+						}
+						
+						html += "<td><center><button class='btn-change btn' admin_number = '" + data[i].admin_number + "' username = '" + data[i].username + "' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-people-arrows'></i></button><button class='btn-edit btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+ 
 						"<button class='btn-del btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'username='" + data[i].username + "' ><i class='fas fa-trash-alt'></i></button></center></td>";
 						html += "</tr>";
 					}
@@ -78,6 +84,23 @@ body {
 								xoaKh(ma_kh, username);
 							}
 					});
+
+					$('.btn-change').click(function(){
+						var admin_number = $(this).attr("admin_number");
+						var ma_kh = $(this).attr("ma_kh");
+						var username = $(this).attr("username");
+						var num 
+						
+						if (admin_number == 1) {
+							num = 0;
+						} else {
+							num = 1; 
+						}
+
+						console.log(admin_number, num, username);
+
+						changeAdminNumber(num, ma_kh, username);
+					})
 					
 
 					$(".btn-edit").click(function() {
@@ -238,30 +261,35 @@ body {
 				
 			});
 		}
-		
-		function themKhachHang(ten, sdt) {
+
+		function changeAdminNumber(num, ma_kh, username) {
 			$.ajax({
-				url: "/quanlysanbong/api/dskhachhang.php",
+				url: "./api/changeAdminNumber.php",
 				type: "POST",
 				cache: false,
 				data: {
-					action: "add",
-					ten : ten,
-					sdt : sdt
+					action: "changeAdminNumber",
+					num: num,
+					ma_kh : ma_kh,
+					username : username,
 				},
 				success: function(msg) {
-					if (msg.includes("đã tồn tại")) {
-						thongbaoloi(msg);
-					} else {
+					console.log(msg);
+					if (msg == "Cập nhật thành công!!!") {
 						thongbaotot(msg);
+						tailaitrang();
+					} else {
+						thongbaoloi(msg);
 						tailaitrang();
 					}
 				},
 				error: function() {
-					alert("Khong the them khach hang moi!!!");
+					alert("Khong the cap nhat khach hang " + ma_kh + "!!!");
 				}
+				
 			});
 		}
+		
 		
 		$("#btn-add").click(function() {
 			var ten_moi = $("#ten-moi").val();

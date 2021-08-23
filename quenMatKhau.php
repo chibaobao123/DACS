@@ -136,8 +136,13 @@
          <!-- Just an image -->
         <nav class="navbar navbar-dark bg-dark">
 			<div class="">
+				<a class="navbar-brand d-flex" href="./login.php" >
+                	<i class="fas fa-arrow-circle-left" style="margin-right:10px; font-size:35px;" ></i>
+					<span class="text-left text-white px-3">Quay về trang đăng nhập</span>
+				</a>
 			</div>
 			<form class="form-inline my-2 my-lg-0">
+
 				<a class="navbar-brand d-flex" href="./dangky.php" >
 					<span class="text-left text-white px-3">Tới trang đăng ký người dùng</span>
 					<i class="fas fa-arrow-circle-right" style="margin-right:10px; font-size:35px;" ></i>

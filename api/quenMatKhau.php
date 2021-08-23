@@ -25,7 +25,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'sendPass'){
 	
 				$body             = "
 				<h1>Sân bóng đá mini, kính chào.</h1>
-				<p>Đây là thông tin đặt sân của bạn.</p>
+				<p>Cảm ơn quý khách đã sử dụng dịch vụ của Sân bóng đá mini, dưới đây là thông tin của bạn.</p>
 				<table style='text-align:justify;border: 1px solid black;border-collapse: collapse;margin-bottom:20px'>
 				  <tbody>
 				  <tr style='border: 1px solid black;'>

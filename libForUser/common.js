@@ -272,18 +272,53 @@ function veTableDatSan(data) {
 		html += "<td><center>" + status + "</center></td>";
 		
 		
-		html += "<td><center><button class='btnXoaDatSan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-times text-danger'></i></button></center></td>";
+		html += "<td><center><button class='btnXoaDatSan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "' ><i class='fas fa-times text-danger'></i></button></center></td>";
 		html += "</tr>";
 	}
 	html += "</table>";
 	$(".ds_datsan").html(html);
-	
-	
+
 	$(".btnXoaDatSan").click(function() {
+		var date = new Date();
+		var hoursNow = date.getHours();
+
+		var ngayPresent = date.getDate();
+		var thangPresent = date.getMonth();
+		var namPresent = date.getFullYear();
 		
-		xoaDatSan($(this).attr("datsan_id"));
+		var datsan_id = $(this).attr("datsan_id");
+		var bat_dau = $(this).attr("bat_dau");
+
+		var dateBatDau = bat_dau.split(" ");
+		var ngayThangNam = dateBatDau[0].split("-");
+		var giobatdau = dateBatDau[1].split(":");
+
+		var gio = giobatdau[0];
+		var ngay = ngayThangNam[2];
+		var thang = ngayThangNam[1];
+		var nam = ngayThangNam[0];
+
+		var checkHours = gio - hoursNow;
+
+		var checkNgay = ngay - ngayPresent;
+		var checkThang = parseInt(thang) - 1 - thangPresent;
+		var checkNam = nam - namPresent;
+
+		if( checkNgay < 0 || checkThang < 0 || checkNam < 0) {
+			thongbaoloi("Đã quá thời gian hủy đặt sân!!! ");
+		} else if (checkHours <= 0 ) {
+			thongbaoloi("Đã quá thời gian hủy đặt sân!!!")
+		} else if(checkHours <=2) {
+			thongbaoloi("Bạn chỉ được hủy đặt sân cách giờ đặt 2 tiếng !!!");
+		} else {
+			
+				xoaDatSan(datsan_id);
+
+		}
+		
+		console.log(checkNgay, checkThang, checkNam, checkHours )
 	});
-}
+}	
 
 function xoaDatSan(datsan_id) {
 	$.ajax({
@@ -294,10 +329,10 @@ function xoaDatSan(datsan_id) {
 			datsan_id : datsan_id,
 		},
 		success: function(msg) {
-			alert("Yêu cầu hủy đặt sân của bạn đang chờ xác nhận")
+			thongbaotot("Yêu cầu hủy đặt sân của bạn đang chờ xác nhận");
 		},
 		error: function() {
-			alert("Khong the xoa dat san!!!");
+			thongbaoloi("Khong the xoa dat san!!!");
 		}
 	});
 }
