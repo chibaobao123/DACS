@@ -186,10 +186,11 @@
 $(document).ready(function() {
 	$("#btnSend").click(function(){
 		var mail_id = $('#email_cap_mk').val();
+		console.log(mail_id);
 
 		if(kiemtraemail(mail_id)){
 				$.ajax({
-				url: "/quanlysanbong/api/dangnhap.php",
+				url: "/quanlysanbong/api/quenMatKhau.php",
 				type: "POST",
 				cache: false,
 				data: {
@@ -198,13 +199,20 @@ $(document).ready(function() {
 				},
 				success: function(msg) {
 					console.log(msg);
-					if(msg == "Mail xác nhận đã được gửi cho bạn !!!"){
-						thongbaotot(msg,"Kiểm tra mail và đăng nhập lại bạn nhé !!!");
-					} else if (msg == 'Mail gửi không thành công !!!') {
-						thongbaoloi(msg,"Có thể là do lỗi hệ thống bạn hãy thủ lại nhé !!!");
-					} else {
-						thongbaoloi('Gmail không tồn tại !!!');
+					if(msg == 1)
+					{
+						thongbaotot("Kiểm tra mail và đăng nhập lại bạn nhé !!!");
 					} 
+					else if (msg == 2) 
+					{
+						thongbaoloi("Mail gửi không thành công !!! Có thể là do lỗi hệ thống bạn hãy thử lại nhé !!!");
+					} 
+					else if (msg == 3) 
+					{
+						thongbaoloi('Gmail không tồn tại !!!');
+					} else {
+						thongbaoloi('Lỗi hệ thống')
+					}
 				}
 			})
 		}

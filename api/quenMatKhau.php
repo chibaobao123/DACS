@@ -3,15 +3,16 @@ include("../config/config.php");
 include '../PHPMailer/class.smtp.php';
 include '../PHPMailer/class.phpmailer.php'; 
 
-if(isset($_POST['action']) && $_POST['action'] == 'sendPass'){
+		if(isset($_POST['action']) && $_POST['action'] == 'sendPass'){
 			$email = $_POST['mail_id'];
 
-			$sql = "SELECT password_id FROM tai_khoan WHERE email='$email'";
+			$sql = "SELECT * FROM tai_khoan WHERE email='$email'";
 			$rs = mysqli_query($db, $sql);
 			$count = mysqli_num_rows($rs);
 
 
-			if($count == 1){
+			if($count > 0)
+			{
 
 				$rss = $rs->fetch_assoc();
 				$pass = $rss['password_id']; 
@@ -64,14 +65,13 @@ if(isset($_POST['action']) && $_POST['action'] == 'sendPass'){
 	
 				// thuc thi lenh gui mail 
 				if($mail->Send()) {
-					echo "Mail xác nhận đã được gửi cho bạn !!!";
-						
+					echo "1";
 				} else {
-						
-					echo "Mail gửi không thành công !!!";
+					echo "2";
 				}
+
+			} else {
+				echo "3" ;
 			}
-		} else {
-			echo "Gmail không tồn tại !!!";
-		}
+		}			
 ?>        
