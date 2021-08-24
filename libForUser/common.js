@@ -272,7 +272,7 @@ function veTableDatSan(data) {
 		html += "<td><center>" + status + "</center></td>";
 		
 		
-		html += "<td><center><button class='btnXoaDatSan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "' ><i class='fas fa-times text-danger'></i></button></center></td>";
+		html += "<td><center><button class='btnXoaDatSan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "' bat_dau='" + data[i].bat_dau + "'><i class='fas fa-times text-danger'></i></button></center></td>";
 		html += "</tr>";
 	}
 	html += "</table>";

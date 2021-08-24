@@ -48,7 +48,7 @@ body {
 		taoDsKhachHang();
 		function taoDsKhachHang() {
 			$.ajax({
-				url: "/quanlysanbong/api/dskhachhang.php",
+				url: "../api/dskhachhang.php",
 				type: "GET",
 				cache: false,
 				data: {
@@ -69,7 +69,7 @@ body {
 							html += "<td> User </td>"
 						}
 						
-						html += "<td><center><button class='btn-change btn' admin_number = '" + data[i].admin_number + "' username = '" + data[i].username + "' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-people-arrows'></i></button><button class='btn-edit btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+ 
+						html += "<td><center><button class='btn-edit btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+ 
 						"<button class='btn-del btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'username='" + data[i].username + "' ><i class='fas fa-trash-alt'></i></button></center></td>";
 						html += "</tr>";
 					}
@@ -169,7 +169,7 @@ body {
 
 			$.ajax({
 				type:'get',
-				url:'./api/search.php?search='+val_search,
+				url:'../api/search.php?search='+val_search,
 				data: {search:val_search},
 				dataType: "json",
 				success: function(response) {
@@ -214,7 +214,7 @@ body {
 
 		function xoaKh(ma_kh,username){
 			$.ajax({
-			url: "/quanlysanbong/api/dskhachhang.php",
+			url: "../api/dskhachhang.php",
 			type: "POST",
 			cache: false,
 			data: {
@@ -232,7 +232,7 @@ body {
 
 		function suaKhachHang(ma_kh, ten_moi, sdt_moi, email_moi) {
 			$.ajax({
-				url: "/quanlysanbong/api/dskhachhang.php",
+				url: "../api/dskhachhang.php",
 				type: "POST",
 				cache: false,
 				data: {
@@ -264,7 +264,7 @@ body {
 
 		function changeAdminNumber(num, ma_kh, username) {
 			$.ajax({
-				url: "./api/changeAdminNumber.php",
+				url: "../api/changeAdminNumber.php",
 				type: "POST",
 				cache: false,
 				data: {

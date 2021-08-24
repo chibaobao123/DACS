@@ -33,30 +33,8 @@ body {
         </nav>
     </header>
 <br />
-<section class="changePassword conteainer-fluid p-5 m-5">
-    <div class="container">
-        <table class='mytable ' style="background-color:white;">
-            <thead>
-                <tr>
-                    <th colspan='2'>Quản lý tài khoản: 
-                        <span style='color:#e91e63;font-size: 25px;' id='tendangnhap'><?php echo $_SESSION['login_user'];?></span>
-                    </th>
-                </tr>
-            </thead>
-            <tr>
-                <td>Mật khẩu mới:</td>
-                <td><input id='matkhaumoi1' type='password' /></td>
-            </tr>
-            <tr>
-                <td>Nhập lại khẩu mới:</td>
-                <td><input id='matkhaumoi2' type='password' /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><button id='btnDoimatkhau'>Thay đổi mật khẩu</button></td>
-            </tr>
-        </table>
-    </div>
+<section class="thongTinKhachHang container">
+    
 </section>
 
 <section class="footer mt-5 mb-0 pb-0">
@@ -77,56 +55,94 @@ body {
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script>
 $(document).ready(function() {
-	$("#btnDoimatkhau").click(function() {
-		var mk1 = $("#matkhaumoi1").val().trim();
-		var mk2 = $("#matkhaumoi2").val().trim();
-		var u = $("#tendangnhap").text();
-		
-		if (mk1 != mk2) {
-			thongbaoloi("Hai mật khẩu bạn nhập không giống nhau!!!");
-			return;
-		} 
-		
-		if (kiemtramatkhau(mk1)) {
-			$.ajax({
-				url: "/quanlysanbong/api/matkhau.php",
-				type: "POST",
+	thongTinKhachHang();
+	function thongTinKhachHang(){
+		$.ajax({
+				url: "../api/thongTinKhachHang.php",
+				type: "GET",
 				cache: false,
 				data: {
-					action: "sosanhmatkhau",
-					username: u,
-					password: mk1
+					action: "view",
 				},
-				success: function(msg) {
-					//alert(msg);
-					if (msg == "Mật khẩu giống nhau!!!") {
-						thongbaoloi("Mật khẩu mới phải khác mật khẩu cũ!!!");
-					} else {
-						doimatkhau(u, mk1);
+				success: function(json) {
+					let data = $.parseJSON(json);
+					
+					let html = "";
+					html += "<h2 class='py-3'>Thông tin khách hàng</h2>";
+					for (let i = 0; i < data.length; i++) {
+						html += "<div class='row'>";
+						html += "<div class='col-6 form-group'><label><b>Tên khách hàng</b></label><input id='ten' type='text' name='tai_khoan' class='form-control' value='" + data[i].ten + "' /></div>"
+						html += "<div class='col-6 form-group'><label><b>Tài khoản</b></label><input id='username' type='text' name='tai_khoan' class='form-control' value='" + data[i].username + "' /></div></div>"
+						html += "<div class='row'>";
+						html += "<div class='col-6 form-group'><label><b>Số điện thoại</b></label><input id='sdt' type='text' name='tai_khoan' class='form-control' value='" + data[i].sdt + "' /></div>";
+						html += "<div class='col-6 form-group'><label><b>Email</b></label><input id='gmail' type='text' name='tai_khoan' class='form-control' value='" + data[i].email + "' /></div></div>"
+						html += "<div class='row'><div class='col-6 form-group'><label><b>Mật Khẩu mới</b></label><input id='matkhaumoi1' type='password' name='tai_khoan' class='form-control'/></div><div class='col-6 form-group'><label><b>Xác nhận mật khẩu mới</b></label><input id='matkhaumoi2' type='password' name='tai_khoan' class='form-control'/></div></div><div class='row'><div class='col-12 text-right'><button id='btnDoimatkhau' class='btn btn-success'>Cập nhật thông tin</button></div></div>"
+					}
+					$(".thongTinKhachHang").html(html);
+					$("#btnDoimatkhau").click(function() {
+						var ten = $('#ten').val();
+						var username = $('#username').val();
+						var sdt = $('#sdt').val();
+						var gmail = $('#gmail').val();
+						var mk1 = $("#matkhaumoi1").val().trim();
+						var mk2 = $("#matkhaumoi2").val().trim();
+
+						console.log(mk1, mk2, ten, username, sdt, gmail);
+						
+						if (mk1 != mk2) {
+							thongbaoloi("Hai mật khẩu bạn nhập không giống nhau!!!");
+							return;
+						} 
+						
+						if (kiemtramatkhau(mk1) && kiemtrausername(username) && kiemtraemail(gmail) && kiemtrasdt(sdt) && kiemtraten(ten)) {
+							$.ajax({
+								url: "../api/thongTinKhachHang.php",
+								type: "POST",
+								cache: false,
+								data: {
+									action: "sosanhmatkhau",
+									username: username,
+									ten : ten,
+									sdt : sdt,
+									gmail : gmail,
+									password: mk1,
+								},
+								success: function(msg) {
+									//alert(msg);
+									if (msg == "Mật khẩu giống nhau!!!") {
+										thongbaoloi("Mật khẩu mới phải khác mật khẩu cũ!!!");
+									} else {
+										doimatkhau(username, ten, sdt, gmail, mk1);
+									}
+								}
+							});
+
+						}
+					});
+					
+					function doimatkhau(username, ten, sdt, gmail, mk1) {
+						$.ajax({
+							url: "../api/matkhau.php",
+							type: "POST",
+							cache: false,
+							data: {
+								action: "doimatkhau",
+								username: username,
+								ten : ten,
+								sdt : sdt,
+								gmail : gmail,
+								password: mk1,
+							},
+							success: function(msg) {
+								//alert(msg);
+								if (msg.includes("thành công")) {
+									location.href ='../logout.php';
+								}
+							}
+						});
 					}
 				}
-			});
-
-		}
-	});
-	
-	function doimatkhau(username, password) {
-		$.ajax({
-			url: "/quanlysanbong/api/matkhau.php",
-			type: "POST",
-			cache: false,
-			data: {
-				action: "doimatkhau",
-				username: username,
-				password: password
-			},
-			success: function(msg) {
-				//alert(msg);
-				if (msg.includes("thành công")) {
-					location.href ='../logout.php';
-				}
-			}
-		});
+		})			
 	}
 });
 </script>

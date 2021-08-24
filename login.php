@@ -5,9 +5,12 @@
 		// Ngược lại nếu đã đăng nhập
 		$admin_number = $_SESSION['admin_number'];
 		// Kiểm tra quyền của người đó có phải là admin hay không
-		if ($admin_number == "1") {
+		if ($admin_number == "2") {
 			// Nếu không phải admin thì xuất thông báo
 			header("location:index.php");
+			die();
+		 } else if ($admin_number == "1") {
+			header("location:./forAdmin_1/index.php");
 			die();
 		 } else {
 			header("location:./forUser/userPage.php");
@@ -208,13 +211,15 @@ $(document).ready(function() {
 			},
 			success: function(msg) {
 				console.log(msg)
-				if (msg == "1") {
+				if (msg == "2") {
 					location.href = './index.php';
 					console.log(msg);
 				} else if (msg == "0") {
 					location.href = './forUser/userPage.php';
+				}else if (msg == "1") {
+					location.href = './forAdmin_1/index.php';
 				} else {
-					thongbaoloi(msg);
+					thongbaoloi("Đăng nhập thất bại!!!");
 				}
 				
 			}
