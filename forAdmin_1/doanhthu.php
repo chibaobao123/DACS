@@ -13,6 +13,12 @@
 	<h2 style="margin-right:10px;">Chọn khoảng thời gian :</h2>
 	<input type="text" id="datepicker" style="text-align:center;align-self:center;height:30px;"/><br/>
 </div>
+
+<!-- <div id="datepicker	" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 20%">
+    <i class="fa fa-calendar"></i>&nbsp;
+    <span></span> <i class="fa fa-caret-down"></i>
+</div> -->
+
 <br />
 <span id='tieude'></span><br />
 <br />
@@ -23,14 +29,42 @@
 <script>
 $(document).ready(function() {
 	
-	$('#datepicker').daterangepicker({
+	var start = moment().subtract(29, 'days');
+    var end = moment();
+
+	function cb(start, end) {
 	
-	}, 
-	function(start, end, label) {
-		g_bat_dau = start.format("YYYY-MM-DD");
-		g_ket_thuc = end.format("YYYY-MM-DD");
-		$("#tieude").html("<b>Doanh thu từ ngày " + g_bat_dau + " đến " + g_ket_thuc + "</b>");
-		xemDoanhThu(g_bat_dau, g_ket_thuc);
-	});
+		var bat_dau =  start._d.getFullYear() + "-" + start._d.getMonth() + "-" + start._d.getDate();
+
+		var ket_thuc = end._d.getFullYear() + "-" + end._d.getMonth() + "-" + end._d.getDate();
+
+		$("#tieude").html("<b>Doanh thu từ ngày <span class='start'>" + bat_dau + "</span> đến " + ket_thuc + "</b>");
+
+		console.log( bat_dau, ket_thuc, start, end);
+
+		xemDoanhThu(bat_dau, ket_thuc);
+    }
+
+	$('#datepicker').daterangepicker({
+		startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+	}, cb);
+
+	cb(start,end);
+
+	// function(start, end, label) {
+	// 	g_bat_dau = start.format("YYYY-MM-DD");
+	// 	g_ket_thuc = end.format("YYYY-MM-DD");
+	// 	$("#tieude").html("<b>Doanh thu từ ngày " + g_bat_dau + " đến " + g_ket_thuc + "</b>");
+	// 	xemDoanhThu(g_bat_dau, g_ket_thuc);
+	// });
 });
 </script>
