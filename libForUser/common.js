@@ -329,7 +329,12 @@ function xoaDatSan(datsan_id) {
 			datsan_id : datsan_id,
 		},
 		success: function(msg) {
-			thongbaotot("Yêu cầu hủy đặt sân của bạn đang chờ xác nhận");
+			console.log(msg);
+			if(msg == '1'){
+				thongbaotot("Yêu cầu hủy đặt sân của bạn đang chờ xác nhận");
+			} else {
+				thongbaoloi(msg + ' bạn vui lòng liên hệ với Admin để mở lại cho bạn nhé !!! ' );
+			}
 		},
 		error: function() {
 			thongbaoloi("Khong the xoa dat san!!!");

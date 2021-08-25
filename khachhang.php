@@ -59,7 +59,7 @@ body {
 					let html = "";
 					html += "<h1>Danh sách khách hàng</h1>"
 					html += "<table class='mytable' style='width: 100%;text-align: center;background-color:white;'>";
-					html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Username</th><th>Số điện thoại</th><th>Email</th><th>Admin(*)</th><th>Công cụ</th></tr></thead>";
+					html += "<thead><tr><th>STT</th><th>Tên khách hàng</th><th>Username</th><th>Số điện thoại</th><th>Email</th><th>Admin(*)</th><th>Trạng thái</th><th>Công cụ</th></tr></thead>";
 					for (let i = 0; i < data.length; i++) {
 						html += "<tr>";
 						html += "<td>"+(i+1)+"</td><td>" + data[i].ten + "</td><td class='username'>" + data[i].username + "</td><td>" + data[i].sdt + "</td><td>" + data[i].email + "</td>";
@@ -68,13 +68,44 @@ body {
 						} else {
 							html += "<td> User </td>"
 						}
-						
-						html += "<td><center><button class='btn-change btn' admin_number = '" + data[i].admin_number + "' username = '" + data[i].username + "' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-people-arrows'></i></button><button class='btn-edit btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+ 
+						if(data[i].soLanHuySan < 5){
+							html += "<td> <i class='fas fa-smile text-success'></i> </td>"  
+						} else {
+							html += "<td> <i class='fas fa-angry text-danger'></i> </td>"
+						}
+						html += "<td><center><button class='btn-changing btn' username='" + data[i].username +"' ><i class='fas fa-exchange-alt'></i></button><button class='btn-edit btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+ 
 						"<button class='btn-del btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'username='" + data[i].username + "' ><i class='fas fa-trash-alt'></i></button></center></td>";
 						html += "</tr>";
 					}
 					html += "</table>";
 					$("#tblKhachHang").html(html);
+
+					$('.btn-changing').click(function(){
+						var u = $(this).attr("username");
+						var num = 0;
+						$.ajax({
+							url:'../api/thayDoiTrangThai.php',
+							type: "POST",
+							cache: false,
+							data: {
+								action: "change",
+								u : u,
+								num : num,
+							},
+							success: function(msg) {
+								if(msg == 'Thành công'){
+									thongbaotot(msg);
+									tailaitrang();
+								} else {
+									thongbaoloi(msg);
+								}
+							},
+							error: function(result) {
+								console.log('ERROR');
+								console.log(result);
+							}
+						})
+					})
 					$(".btn-del").click(function(){
 						var ma_kh = $(this).attr("ma_kh");
 						var username = $(this).attr("username");

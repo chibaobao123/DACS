@@ -13,6 +13,7 @@
 			$r['email'] = $row['3'];
 			$r['username'] = $row['4'];
 			$r['admin_number'] = $row['5'];
+			$r['soLanHuySan'] = $row['6'];
 			array_push($json_response, $r);
 		}
 		
