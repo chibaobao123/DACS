@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 18, 2021 lúc 09:21 AM
+-- Thời gian đã tạo: Th8 26, 2021 lúc 08:00 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.2.26
 
@@ -44,8 +44,13 @@ CREATE TABLE `dat_san` (
 --
 
 INSERT INTO `dat_san` (`id`, `ma_kh`, `ma_san`, `bat_dau`, `ket_thuc`, `da_thanh_toan`, `don_gia`, `note`) VALUES
-(3, 44, 20, '2021-08-16 05:00:00', '2021-08-16 05:15:00', 0, 4000, ''),
-(4, 44, 20, '2021-08-18 05:00:00', '2021-08-18 05:15:00', 0, 4000, '');
+(22, 37, 22, '2021-08-20 18:00:00', '2021-08-20 20:15:00', 0, 2000, ''),
+(23, 37, 23, '2021-08-20 18:00:00', '2021-08-20 20:15:00', 0, 5000, ''),
+(33, 59, 20, '2021-08-25 20:00:00', '2021-08-25 20:15:00', 0, 4000, 'baochi đã yêu cầu hủy sân'),
+(34, 37, 20, '2021-08-26 14:00:00', '2021-08-26 16:15:00', 0, 4000, ''),
+(35, 59, 21, '2021-08-26 18:00:00', '2021-08-26 20:30:00', 0, 3000, ''),
+(36, 61, 22, '2021-08-26 16:00:00', '2021-08-26 19:00:00', 0, 2000, ''),
+(37, 58, 23, '2021-08-26 15:00:00', '2021-08-26 17:15:00', 0, 5000, '');
 
 -- --------------------------------------------------------
 
@@ -58,21 +63,20 @@ CREATE TABLE `khach_hang` (
   `ten` varchar(40) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `sdt` varchar(11) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `username` varchar(40) COLLATE utf8mb4_vietnamese_ci NOT NULL
+  `username` varchar(40) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `admin_number` int(1) NOT NULL,
+  `soLanHuySan` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `khach_hang`
 --
 
-INSERT INTO `khach_hang` (`id`, `ten`, `sdt`, `email`, `username`) VALUES
-(26, 'Huỳnh Trịnh Thái Long', '0123456789', 'thailong2015py@gmail.com', 'thailong'),
-(37, 'Bao Bao Chi', '0703934583', 'baobaochi631999@gmail.com', 'baobaochi'),
-(38, 'Tran Bao Anh', '0908076877', 'baobaochi999@gmail.com', 'baobao'),
-(44, 'baochi', '0909789237', 'huybao631999@gmail.com', 'baochi'),
-(52, 'Chi Huy Bao', '0703934762', 'baobaochi123@gmail.com', 'baobaochi123@gmail.com'),
-(53, 'Huynh Trinh Thai Long', '0703934543', 'baobaochi@gmail.com', 'baobaochi@gmail.com'),
-(54, 'baobao2546456', '0703934566', 'adfafs@gmail.com', 'adfafs@gmail.com');
+INSERT INTO `khach_hang` (`id`, `ten`, `sdt`, `email`, `username`, `admin_number`, `soLanHuySan`) VALUES
+(37, 'Bao Bao Chi', '0703934369', 'baobaochi631999@gmail.com', 'baobaochi', 2, 0),
+(58, 'Huỳnh Trịnh Thái Long', '0123456789', 'thailong2015py@gmail.com', 'thailong', 1, 0),
+(59, 'baochi', '0909789237', 'huybao631999@gmail.com', 'baochi', 0, 0),
+(61, 'Chí Huy Bảo', '0703934582', 'baobaochi123@gmail.com', 'baobaochi123', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -121,13 +125,10 @@ CREATE TABLE `tai_khoan` (
 --
 
 INSERT INTO `tai_khoan` (`id`, `username`, `password_id`, `admin_number`, `email`, `sdt`) VALUES
-(1, 'baobaochi', '123456', 1, 'baobaochi631999@gmail.com', '0703934583'),
-(3, 'thailong', '123456', 0, 'thailong2015py@gmail.com', '0780548215'),
-(4, 'baobao', '123456', 1, '', '0703934583'),
+(3, 'thailong', '123456', 1, 'thailong2015py@gmail.com', '0780548215'),
 (5, 'baochi', '123456', 0, 'huybao631999@gmail.com', '0254875332'),
-(508, 'baobaochi123@gmail.com', '123123', 1, 'baobaochi123@gmail.com', '0703934762'),
-(509, 'baobaochi@gmail.com', '123456', 1, 'baobaochi@gmail.com', '0703934543'),
-(510, 'adfafs@gmail.com', '123456789', 0, 'adfafs@gmail.com', '0703934566');
+(513, 'baobaochi', '123456', 2, 'baobaochi631999@gmail.com', '0703934583'),
+(515, 'baobaochi123', '123456', 0, 'baobaochi123@gmail.com', '0703934582');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -167,13 +168,13 @@ ALTER TABLE `tai_khoan`
 -- AUTO_INCREMENT cho bảng `dat_san`
 --
 ALTER TABLE `dat_san`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT cho bảng `khach_hang`
 --
 ALTER TABLE `khach_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT cho bảng `san_bong`
@@ -185,7 +186,7 @@ ALTER TABLE `san_bong`
 -- AUTO_INCREMENT cho bảng `tai_khoan`
 --
 ALTER TABLE `tai_khoan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=511;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=516;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

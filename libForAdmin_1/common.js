@@ -318,9 +318,46 @@ function veTableDatSanIndex(data) {
 	});
 	
 	$(".btnXoaDatSanIndex").click(function() {
+			var ten_kh = $(this).attr("ten_kh");
+			var sdt = $(this).attr("sdt");
+			var ten_san = $(this).attr("ten_san");
+			var bat_dau = $(this).attr("bat_dau");
+			var ket_thuc = $(this).attr("ket_thuc");
 			
+			var date = new Date();
+			var hoursNow = date.getHours();
+	
+			var ngayPresent = date.getDate();
+			var thangPresent = date.getMonth();
+			var namPresent = date.getFullYear();
+			
+			var datsan_id = $(this).attr("datsan_id");
+			var bat_dau = $(this).attr("bat_dau");
+	
+			var dateBatDau = bat_dau.split(" ");
+			var ngayThangNam = dateBatDau[0].split("-");
+			var giobatdau = dateBatDau[1].split(":");
+	
+			var gio = giobatdau[0];
+			var ngay = ngayThangNam[2];
+			var thang = ngayThangNam[1];
+			var nam = ngayThangNam[0];
+	
+			var checkHours = gio - hoursNow;
+	
+			var checkNgay = ngay - ngayPresent;
+			var checkThang = parseInt(thang) - 1 - thangPresent;
+			var checkNam = nam - namPresent;
+	
+			if( checkNgay < 0 || checkThang < 0 || checkNam < 0) {
+				thongbaoloi("Đã quá thời gian hủy đặt sân!!! ");
+			} else if (checkHours <= 0 ) {
+				thongbaoloi("Đã quá thời gian hủy đặt sân!!!")
+			} else if(checkHours <=2) {
+				thongbaoloi("Bạn chỉ được hủy đặt sân cách giờ đặt 2 tiếng !!!");
+			} else {
 				xoaDatSanIndex($(this).attr("datsan_id"), ten_kh, sdt, ten_san, bat_dau, ket_thuc);
-			
+			}
 		
 	});
 }
@@ -392,9 +429,46 @@ function veTableDatSan(data) {
 	
 	$(".btnXoaDatSan").click(function() {
 		
+			var ten_kh = $(this).attr("ten_kh");
+			var sdt = $(this).attr("sdt");
+			var ten_san = $(this).attr("ten_san");
+			var bat_dau = $(this).attr("bat_dau");
+			var ket_thuc = $(this).attr("ket_thuc");
 			
+			var date = new Date();
+			var hoursNow = date.getHours();
+	
+			var ngayPresent = date.getDate();
+			var thangPresent = date.getMonth();
+			var namPresent = date.getFullYear();
+			
+			var datsan_id = $(this).attr("datsan_id");
+			var bat_dau = $(this).attr("bat_dau");
+	
+			var dateBatDau = bat_dau.split(" ");
+			var ngayThangNam = dateBatDau[0].split("-");
+			var giobatdau = dateBatDau[1].split(":");
+	
+			var gio = giobatdau[0];
+			var ngay = ngayThangNam[2];
+			var thang = ngayThangNam[1];
+			var nam = ngayThangNam[0];
+	
+			var checkHours = gio - hoursNow;
+	
+			var checkNgay = ngay - ngayPresent;
+			var checkThang = parseInt(thang) - 1 - thangPresent;
+			var checkNam = nam - namPresent;
+	
+			if( checkNgay < 0 || checkThang < 0 || checkNam < 0) {
+				thongbaoloi("Đã quá thời gian hủy đặt sân!!! ");
+			} else if (checkHours <= 0 ) {
+				thongbaoloi("Đã quá thời gian hủy đặt sân!!!")
+			} else if(checkHours <=2) {
+				thongbaoloi("Bạn chỉ được hủy đặt sân cách giờ đặt 2 tiếng !!!");
+			} else {
 				xoaDatSan($(this).attr("datsan_id"), ten_kh, sdt, ten_san, bat_dau, ket_thuc);
-			
+			}
 		
 		
 	});

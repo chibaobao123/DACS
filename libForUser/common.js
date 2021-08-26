@@ -186,7 +186,7 @@ function xemDsDatSan(day) {
 	//console.log("day=" + day);
 	resetTables();
 	$.ajax({
-		url: "/quanlysanbong/api/xemdatsan.php",
+		url: "/quanlysanbong/api/xemDatSanForUser.php",
 		type: "GET",
 		cache: false,
 		data: {
@@ -194,10 +194,34 @@ function xemDsDatSan(day) {
 			day: day
 		},
 		success: function(json) {
+			console.log(json);
 			var data = $.parseJSON(json);
 			$(".tieudeds").html(getCurrentFormattedDate());
-			$(".tieudetime").html(getCurrentFormattedDate());
+			
 			veTableDatSan(data);
+			checkInputs();
+			
+		},
+		error: function() {
+			alert("Khong the lay du lieu dat san!!!");
+		}
+	});
+}
+
+function xemDsDatSan_2(day) {
+	//console.log("day=" + day);
+	resetTables();
+	$.ajax({
+		url: "/quanlysanbong/api/xemDatSanForUser.php",
+		type: "GET",
+		cache: false,
+		data: {
+			action: "xemdatsan_2",
+			day: day
+		},
+		success: function(json) {
+			console.log(json);
+			$(".tieudetime").html(getCurrentFormattedDate());
 			checkInputs();
 			veTimeTable(json);
 		},

@@ -1,16 +1,16 @@
-<script src="../lib/jquery-3.4.1.js"></script>
+<script src="../libForAdmin_1/jquery-3.4.1.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/common.css" />
-<link rel="stylesheet" type="text/css" href="../lib/time_table/TimeTable.css" />
-<script src="../lib/time_table/createjs.min.js"></script>
-<script src="../lib/time_table/TimeTable.js"></script>
-<link rel="stylesheet" type="text/css" href="../lib/date_picker/daterangepicker.css" />
-<script src="../lib/date_picker/moment.min.js"></script>
-<script src="../lib/date_picker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../lib/toast/jquery.toast.min.css" />
-<script src="../lib/toast/jquery.toast.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../lib/chosen/chosen.css" />
-<script src="../lib/chosen/chosen.jquery.js"></script>
-<script src="../lib/common.js"></script>
+<link rel="stylesheet" type="text/css" href="../libForAdmin_1/time_table/TimeTable.css" />
+<script src="../libForAdmin_1/time_table/createjs.min.js"></script>
+<script src="../libForAdmin_1/time_table/TimeTable.js"></script>
+<link rel="stylesheet" type="text/css" href="../libForAdmin_1/date_picker/daterangepicker.css" />
+<script src="../libForAdmin_1/date_picker/moment.min.js"></script>
+<script src="../libForAdmin_1/date_picker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../libForAdmin_1/toast/jquery.toast.min.css" />
+<script src="../libForAdmin_1/toast/jquery.toast.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../libForAdmin_1/chosen/chosen.css" />
+<script src="../libForAdmin_1/chosen/chosen.jquery.js"></script>
+<script src="../libForAdmin_1/common.js"></script>
 <link rel="shortcut icon" type="image/png" href="favicon.png"/>
 <script src="https://kit.fontawesome.com/93ec6d166b.js" crossorigin="anonymous"></script>
 <!-- Bootstrap CSS -->

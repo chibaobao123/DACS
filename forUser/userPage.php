@@ -246,6 +246,7 @@
         $(document).ready(function() {
             
             xemDsDatSan(getToday());
+            xemDsDatSan_2(getToday())
 
             $('.datsan_ngaydat').daterangepicker({
                 singleDatePicker: true,
