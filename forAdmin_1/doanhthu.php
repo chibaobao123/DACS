@@ -34,13 +34,13 @@ $(document).ready(function() {
 
 	function cb(start, end) {
 	
-		var bat_dau =  start._d.getFullYear() + "-" + start._d.getMonth() + "-" + start._d.getDate();
+		var bat_dau =  start._d.getFullYear() + "-" + (parseInt(start._d.getMonth())+1) + "-" + start._d.getDate();
 
-		var ket_thuc = end._d.getFullYear() + "-" + end._d.getMonth() + "-" + end._d.getDate();
+		var ket_thuc = end._d.getFullYear() + "-" + (parseInt(end._d.getMonth()) + 1) + "-" + end._d.getDate();
 
 		$("#tieude").html("<b>Doanh thu từ ngày <span class='start'>" + bat_dau + "</span> đến " + ket_thuc + "</b>");
 
-		console.log( bat_dau, ket_thuc, start, end);
+		console.log( bat_dau, ket_thuc);
 
 		xemDoanhThu(bat_dau, ket_thuc);
     }

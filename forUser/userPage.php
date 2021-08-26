@@ -278,7 +278,7 @@
                             thongbaotot(msg);
                         }
                         console.log(msg);
-                        xemDsDatSan(getCurrentFormattedDate());
+                        xemDsDatSan_2(getCurrentFormattedDate());xemDsDatSan(getCurrentFormattedDate());
                     },
                     error: function() {
                         thongbaoloi("Lỗi hệ thống!!");

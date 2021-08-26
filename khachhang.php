@@ -73,7 +73,7 @@ body {
 						} else {
 							html += "<td> <i class='fas fa-angry text-danger'></i> </td>"
 						}
-						html += "<td><center><button class='btn-changing btn' username='" + data[i].username +"' ><i class='fas fa-exchange-alt'></i></button><button class='btn-edit btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+ 
+						html += "<td><center><button class='btn-change btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'username='" + data[i].username + "'admin_number='" + data[i].admin_number + "'><i class='fas fa-people-arrows'></i></button><button class='btn-changing btn' username='" + data[i].username +"' ><i class='fas fa-exchange-alt'></i></button><button class='btn-edit btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'><i class='fas fa-edit'></i></button>"+ 
 						"<button class='btn-del btn' ma_kh='" + data[i].id +"' order='" + (i + 1) + "'username='" + data[i].username + "' ><i class='fas fa-trash-alt'></i></button></center></td>";
 						html += "</tr>";
 					}
