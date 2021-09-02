@@ -333,7 +333,10 @@ body{
                 var checkThang = parseInt(ngay[0]) - 1 - thangPresent;
                 var checkNam = ngay[2] - namPresent;
 
-                var checkThoiGianDat = parseInt(ket_thuc_gio) - parseInt(bat_dau_gio);
+                var checkThoiGianDatGio = parseInt(ket_thuc_gio) - parseInt(bat_dau_gio);
+                var checkThoiGianDatPhut = parseInt(ket_thuc_phut) - parseInt(bat_dau_phut);
+
+                
 
                 if (don_gia == "") {
                     $("#datsan_dongia").val("0");
@@ -341,49 +344,49 @@ body{
                 
                 if( checkNgay < 0 && checkThang < 0 && checkNam < 0) {
 
-thongbaoloi("Đã quá thời gian đặt sân!!! ");
+                    thongbaoloi("Đã quá thời gian đặt sân!!! ");
 
-} else if ( checkThang > 0 && checkNam >= 0  || checkNam > 0) {
+                } else if ( checkThang > 0 && checkNam >= 0  || checkNam > 0) {
 
-if(checkThoiGianDat > 0){
-    taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san);
-    $("#formDatSan").css("display","none");
-    $("#grayscreen").css("display","none");
-} else {
-    thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
-}
+                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 ){
+                        taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san);
+                        $("#formDatSan").css("display","none");
+                        $("#grayscreen").css("display","none");
+                    } else {
+                        thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
+                    }
 
-} else if (checkNgay >= 1 && checkThang == 0 && checkNam == 0) {
+                } else if (checkNgay >= 1 && checkThang == 0 && checkNam == 0) {
 
-if(checkThoiGianDat > 0){
-    taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
-    $("#formDatSan").css("display","none");
-    $("#grayscreen").css("display","none");
-} else {
-    thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
-}
+                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 ){
+                        taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
+                        $("#formDatSan").css("display","none");
+                        $("#grayscreen").css("display","none");
+                    } else {
+                        thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
+                    }
 
-} else if (checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours < 0 ) {
+                } else if (checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours < 0 ) {
 
-thongbaoloi("Đã quá thời gian đặt sân!!!")
+                    thongbaoloi("Đã quá thời gian đặt sân!!!")
 
-}else if (checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours == 0  && checkMinutes > 30) {
+                }else if (checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours == 0  && checkMinutes > 30) {
 
-thongbaoloi("Đã quá thời gian đặt sân!!!")
+                    thongbaoloi("Đã quá thời gian đặt sân!!!")
 
-} else if(checkHours >= 0 || checkHours == 0 && checkMinutes <= 30) {
+                } else if(checkHours >= 0 || checkHours == 0 && checkMinutes <= 30) {
 
-if(checkThoiGianDat > 0){
-    taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
-    $("#formDatSan").css("display","none");
-    $("#grayscreen").css("display","none");
-} else {
-    thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
-}
+                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 ){
+                        taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
+                        $("#formDatSan").css("display","none");
+                        $("#grayscreen").css("display","none");
+                    } else {
+                        thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
+                    }
 
-}else{
-thongbaoloi("Thời gian không hợp lệ!!!");
-}
+                }else{
+                    thongbaoloi("Thời gian không hợp lệ!!!");
+                }
 
             });
             

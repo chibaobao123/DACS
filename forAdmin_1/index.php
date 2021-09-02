@@ -330,9 +330,8 @@ body{
                 var checkThang = parseInt(ngay[0]) - 1 - thangPresent;
                 var checkNam = parseInt(ngay[2]) - namPresent;
 
-                var checkThoiGianDat = parseInt(ket_thuc_gio) - parseInt(bat_dau_gio);
-
-                console.log(typeof(ngay[1]),typeof(ngayPresent),checkNgay,checkThang,checkNam,checkThoiGianDat);
+                var checkThoiGianDatGio = parseInt(ket_thuc_gio) - parseInt(bat_dau_gio);
+                var checkThoiGianDatPhut = parseInt(ket_thuc_phut) - parseInt(bat_dau_phut);
 
                 if (don_gia == "") {
                     $("#datsan_dongia").val("0");
@@ -344,7 +343,7 @@ body{
 
                 } else if ( checkThang > 0 && checkNam >= 0  || checkNam > 0) {
 
-                    if(checkThoiGianDat > 0){
+                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 ){
                         taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san);
                         $("#formDatSan").css("display","none");
                         $("#grayscreen").css("display","none");
@@ -354,7 +353,7 @@ body{
 
                 } else if (checkNgay >= 1 && checkThang == 0 && checkNam == 0) {
 
-                    if(checkThoiGianDat > 0){
+                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 ){
                         taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
                         $("#formDatSan").css("display","none");
                         $("#grayscreen").css("display","none");
@@ -372,7 +371,7 @@ body{
 
                 } else if(checkHours >= 0 || checkHours == 0 && checkMinutes <= 30) {
 
-                    if(checkThoiGianDat > 0){
+                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 ){
                         taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
                         $("#formDatSan").css("display","none");
                         $("#grayscreen").css("display","none");
