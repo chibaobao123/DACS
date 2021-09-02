@@ -210,7 +210,32 @@ function xemDsDatSan(day) {
 	});
 }
 
+
+
 function xemDsDatSanIndex(day) {
+	//console.log("day=" + day);
+	resetTables();
+	$.ajax({
+		url: "/quanlysanbong/api/xemdatsan.php",
+		type: "GET",
+		cache: false,
+		data: {
+			action: "xemdatsan_1",
+			day: day
+		},
+		success: function(json) {
+			console.log(json);
+			$(".tieudetimeIndex").html(getCurrentFormattedDate());
+			checkInputs();
+			veTimeTable(json);
+		},
+		error: function() {
+			alert("Khong the lay du lieu dat san!!!");
+		}
+	});
+}
+
+function xemDsDatSanIndex_1(day) {
 	//console.log("day=" + day);
 	resetTables();
 	$.ajax({
@@ -225,10 +250,52 @@ function xemDsDatSanIndex(day) {
 			console.log(json);
 			var data = $.parseJSON(json);
 			$(".tieudedsIndex").html(getCurrentFormattedDate());
-			$(".tieudetimeIndex").html(getCurrentFormattedDate());
 			veTableDatSanIndex(data);
 			checkInputs();
-			veTimeTable(json);
+		},
+		error: function() {
+			alert("Khong the lay du lieu dat san!!!");
+		}
+	});
+}
+
+function xemDsHuySan(day) {
+	//console.log("day=" + day);
+	resetTables();
+	$.ajax({
+		url: "/quanlysanbong/api/xemdatsan.php",
+		type: "GET",
+		cache: false,
+		data: {
+			action: "xemhuysan",
+			day: day
+		},
+		success: function(json) {
+			console.log(json);
+			var data = $.parseJSON(json);
+			veTableDatSanDanhSachHuy(data);
+		},
+		error: function() {
+			alert("Khong the lay du lieu dat san!!!");
+		}
+	});
+}
+
+function xemDsThanhToan(day) {
+	//console.log("day=" + day);
+	resetTables();
+	$.ajax({
+		url: "/quanlysanbong/api/xemdatsan.php",
+		type: "GET",
+		cache: false,
+		data: {
+			action: "xemthanhtoan",
+			day: day
+		},
+		success: function(json) {
+			console.log(json);
+			var data = $.parseJSON(json);
+			veTableDatSanDanhSachThanhToan(data);
 		},
 		error: function() {
 			alert("Khong the lay du lieu dat san!!!");
@@ -257,10 +324,11 @@ function xemDoanhThu(start, end) {
 	});
 }
 
-function veTableDatSanIndex(data) {
+function veTableDatSanDanhSachThanhToan(data) {
 	var html = "";
-	html += "<table class='mytable' style='width:100%; text-align: center;'>";
-	html += "<thead><tr><th>#</th><th>Tên KH</th><th>SĐT</th><th>Sân</th><th>Bắt đầu</th><th>Kết thúc</th><th>Phút</th><th>Đơn giá (đồng/phút)</th><th>Tiền</th><th>Thanh toán</th><th>Yêu cầu hủy đặt sân</th><th>Chọn nhiều</th></thead>";
+	html_content = "<div style='background-color: #d1dcde'><b>DANH SÁCH ĐÃ THANH TOÁN <span class='text-success'>(" + data.length + ")</span></b><button class='btn btn-show-thanhtoan'><i class='fas fa-caret-square-down'></i></button><button class='btn btn-hide-thanhtoan d-none'><i class='fas fa-caret-square-up'></i></button></div>"
+	html += "<table class='mytable mytable_thanhtoan ' style='width:100%; text-align: center' >";
+	html += "<thead><tr><th>#</th><th>Tên KH</th><th>SĐT</th><th>Sân</th><th>Bắt đầu</th><th>Kết thúc</th><th>Phút</th><th>Đơn giá (đồng/phút)</th><th>Tiền</th><th>Thanh toán</th></thead>";
 	var tong_tien = 0;
 	var da_thanh_toan = 0;
 	var chua_thanh_toan = 0;
@@ -304,81 +372,279 @@ function veTableDatSanIndex(data) {
 			html += "<td><center><button disabled class='btnThanhToan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-check text-success'></i></button>";
 		}
 		
-		html += "<button class='btnXoaDatSanIndex btn btn-light border border-dark' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-times text-danger'></i></button></center></td>";
+		if (thanh_toan == "0"){
+			html += "<button class='btnXoaDatSanDanhSachThanhToan btn btn-light border border-dark' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-times text-danger'></i></button></center></td>";
+		} else {
+		html += "<button class='disabled btnXoaDatSanDanhSachThanhToan btn btn-light border border-dark' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-times text-danger'></i></button></center></td>";
+
+		}
+		// html += "<td><center><span><input type='checkbox' class='choose' name='choose' value='choose' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'></span></center></td>";
+		html += "</tr>";
+	}
+
+	html += "</table>";
+	$(".ds_datsanDanhSachThanhToan").html(html);
+	$(".content_thanhtoan").html(html_content);
+
+	$('.btn-show-thanhtoan').click(function(){
+		$('.content_datsan').removeClass('border-bottom border-dark mx-3');
+		$('.content_huysan').removeClass('border-bottom border-dark mx-3');
+		$('.content_thanhtoan').addClass('border-bottom border-dark mx-3');
+
+		Dropdown(event, 'thanhtoan')
+	})
+
+
+	// $('.btnAllDelete').click(function () {
+	// 	$('.choose').each(function () {
+	// 		if ($(this).prop("checked") == true) {
+	// 			let ten_kh = $(this).attr("ten_kh");
+	// 			let sdt = $(this).attr("sdt");
+	// 			let ten_san = $(this).attr("ten_san");
+	// 			let bat_dau = $(this).attr("bat_dau");
+	// 			let ket_thuc = $(this).attr("ket_thuc");
+	// 			let datsan_id = $(this).attr("datsan_id");
+	// 			xoaDatSanIndex(datsan_id, ten_kh, sdt, ten_san, bat_dau, ket_thuc);
+	// 		}
+
+	// 	})
+	// })
+
+	$(".btnXoaDatSanDanhSachThanhToan").click(function () {
+		let ten_kh = $(this).attr("ten_kh");
+		let sdt = $(this).attr("sdt");
+		let ten_san = $(this).attr("ten_san");
+		let bat_dau = $(this).attr("bat_dau");
+		let ket_thuc = $(this).attr("ket_thuc");
+		let datsan_id = $(this).attr("datsan_id");
+		xoaDatSanIndex(datsan_id, ten_kh, sdt, ten_san, bat_dau, ket_thuc);
+
+
+	});
+}
+
+function veTableDatSanDanhSachHuy(data) {
+	var html = "";
+	html_content = "<div style='background-color: #d1dcde'><b>DANH SÁCH ĐANG YÊU CẦU HỦY SÂN <span class='text-danger'>(" + data.length + ")</span></b><button class='btn btn-show-huysan' ><i class='fas fa-caret-square-down'></i></button><button class='btn btn-hide-huysan d-none'><i class='fas fa-caret-square-up'></i></button></div>"
+	html += "<table class='mytable mytable_huysan' style='width:100%; text-align: center' >";
+	html += "<thead><tr><th>#</th><th>Tên KH</th><th>SĐT</th><th>Sân</th><th>Bắt đầu</th><th>Kết thúc</th><th>Phút</th><th>Đơn giá (đồng/phút)</th><th>Tiền</th><th>Thanh toán</th><th>Yêu cầu hủy đặt sân</th><th><center><button class='btn btn-light border border-dark btnAllDelete'><i class='fas fa-times text-danger'></i></button></center></th></thead>";
+	var tong_tien = 0;
+	var da_thanh_toan = 0;
+	var chua_thanh_toan = 0;
+	for (var i = 0; i < data.length; i++) {
+		var thanh_toan = data[i].da_thanh_toan;
+		if (thanh_toan == "1") {
+			var status = "<img src='images/passed.png' />";
+		} else {
+			var status = "<img src='images/failed.png' />";
+		}
+		html += "<tr>";
+		html += "<td >" + (i + 1) + "</td>";
+		html += "<td class='ten_kh'>" + data[i].ten_kh + "</td>";
+		html += "<td class='sdt'>" + data[i].sdt + "</td>";
+		html += "<td class='ten_san'>" + data[i].ten_san + "</td>";
+		html += "<td class='bat_dau'>" + data[i].bat_dau + "</td>";
+		html += "<td class='ket_thuc'>" + data[i].ket_thuc + "</td>";
+		
+		var don_gia = data[i].don_gia;
+		var start = toDateTime(data[i].bat_dau);
+		var end = toDateTime(data[i].ket_thuc);
+		var mins = (Math.abs(end - start)/1000)/60;
+		var money = mins * don_gia;
+		
+		if (thanh_toan == "1") {
+			da_thanh_toan += money;
+		} else {
+			chua_thanh_toan += money;
+		}
+		tong_tien += money;
+		html += "<td>" + mins + "</td>";
+		html += "<td>" + formatMoney(don_gia) + "</td>";
+		if (thanh_toan == "1") {
+			html += "<td style='font-weight:bold;color:green;'>" + formatMoney(money) + "</td>";
+		} else {
+			html += "<td style='font-weight:bold;color:red;'>" + formatMoney(money) + "</td>";
+		}
+		if (thanh_toan == "0") {
+			html += "<td><center><button class='btnThanhToan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-check text-success'></i></button>";
+		} else {
+			html += "<td><center><button disabled class='btnThanhToan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-check text-success'></i></button>";
+		}
+		
+		html += "<button class='btnXoaDatSanDanhSachHuy btn btn-light border border-dark' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-times text-danger'></i></button></center></td>";
 		html += "<td><center><span>" + data[i].note + "</span></center></td>";
 		html += "<td><center><span><input type='checkbox' class='choose' name='choose' value='choose' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'></span></center></td>";
 		html += "</tr>";
 	}
-	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><center><button class='btn btn-light border border-dark btnAllThanhToan'><i class='fas fa-check text-success'></i></button><button class='btn btn-light border border-dark btnAllDelete'><i class='fas fa-times text-danger'></i></button></center></td></tr>";
 
 	html += "</table>";
-	$(".ds_datsanIndex").html(html);
+	$(".ds_datsanDanhSachHuy").html(html);
+	$(".content_huysan").html(html_content);
 
-	$('.btnAllDelete').click(function() {
-		$('.choose').each(function() {
-			if($(this). prop("checked") == true){
-				var ten_kh = $(this).attr("ten_kh");
-				var sdt = $(this).attr("sdt");
-				var ten_san = $(this).attr("ten_san");
-				var bat_dau = $(this).attr("bat_dau");
-				var ket_thuc = $(this).attr("ket_thuc");
-				
-				var date = new Date();
-				var hoursNow = date.getHours();
-		
-				var ngayPresent = date.getDate();
-				var thangPresent = date.getMonth();
-				var namPresent = date.getFullYear();
-				
-				var datsan_id = $(this).attr("datsan_id");
-				var bat_dau = $(this).attr("bat_dau");
-		
-				var dateBatDau = bat_dau.split(" ");
-				var ngayThangNam = dateBatDau[0].split("-");
-				var giobatdau = dateBatDau[1].split(":");
-		
-				var gio = giobatdau[0];
-				var ngay = ngayThangNam[2];
-				var thang = ngayThangNam[1];
-				var nam = ngayThangNam[0];
-		
-				var checkHours = gio - hoursNow;
-		
-				var checkNgay = ngay - ngayPresent;
-				var checkThang = parseInt(thang) - 1 - thangPresent;
-				var checkNam = nam - namPresent;
-		
-				if( checkNgay < 0 || checkThang < 0 || checkNam < 0) {
-					thongbaoloi("Đã quá thời gian hủy đặt sân!!! ");
-				} else if (checkHours <= 0 ) {
-					thongbaoloi("Đã quá thời gian hủy đặt sân!!!")
-				} else if(checkHours <=2) {
-					thongbaoloi("Bạn chỉ được hủy đặt sân cách giờ đặt 2 tiếng !!!");
-				} else {
-					xoaDatSanIndex(datsan_id, ten_kh, sdt, ten_san, bat_dau, ket_thuc);
-				}
+	$('.btn-show-huysan').click(function(){
+		$('.content_datsan').removeClass('border-bottom border-dark mx-3');
+		$('.content_huysan').addClass('border-bottom border-dark mx-3');
+		$('.content_thanhtoan').removeClass('border-bottom border-dark mx-3');
+		Dropdown(event, 'huysan')
+	})
+
+
+	$('.btnAllDelete').click(function () {
+		$('.choose').each(function () {
+			if ($(this).prop("checked") == true) {
+				let ten_kh = $(this).attr("ten_kh");
+				let sdt = $(this).attr("sdt");
+				let ten_san = $(this).attr("ten_san");
+				let bat_dau = $(this).attr("bat_dau");
+				let ket_thuc = $(this).attr("ket_thuc");
+				let datsan_id = $(this).attr("datsan_id");
+				xoaDatSanIndex(datsan_id, ten_kh, sdt, ten_san, bat_dau, ket_thuc);
 			}
 
 		})
 	})
 
-	$('.btnAllThanhToan').click(function() {
-		var xac_nhan = confirm("Thanh toán đặt sân?");
-		if (xac_nhan) {
-			$('.choose').each(function() {
-				if($(this). prop("checked") == true){
-					var datsan_id = $(this).attr("datsan_id");
-					thanhToanDatSan(datsan_id,);
-				}
-			})
+	$(".btnXoaDatSanDanhSachHuy").click(function () {
+		let ten_kh = $(this).attr("ten_kh");
+		let sdt = $(this).attr("sdt");
+		let ten_san = $(this).attr("ten_san");
+		let bat_dau = $(this).attr("bat_dau");
+		let ket_thuc = $(this).attr("ket_thuc");
+		let datsan_id = $(this).attr("datsan_id");
+		xoaDatSanIndex(datsan_id, ten_kh, sdt, ten_san, bat_dau, ket_thuc);
+
+
+	});
+}
+
+function veTableDatSanIndex(data) {
+	var html = "";
+	html_content = "<div style='background-color: #d1dcde'><b>DANH SÁCH ĐẶT SÂN <span class='text-info'>(" + data.length + ")</span></b><button class='btn btn-show-index' ><i class='fas fa-caret-square-down'></i></button><button class='btn btn-hide-index d-none'><i class='fas fa-caret-square-up'></i></button></div>";
+	html += "<table class='mytable mytable_index' style='width:100%; text-align: center' >";
+	html += "<thead><tr><th>#</th><th>Tên KH</th><th>SĐT</th><th>Sân</th><th>Bắt đầu</th><th>Kết thúc</th><th>Phút</th><th>Đơn giá (đồng/phút)</th><th>Tiền</th><th>Thanh toán</th></thead>";
+	var tong_tien = 0;
+	var da_thanh_toan = 0;
+	var chua_thanh_toan = 0;
+	for (var i = 0; i < data.length; i++) {
+		var thanh_toan = data[i].da_thanh_toan;
+		if (thanh_toan == "1") {
+			var status = "<img src='images/passed.png' />";
+		} else {
+			var status = "<img src='images/failed.png' />";
 		}
-	})
+		html += "<tr>";
+		html += "<td >" + (i + 1) + "</td>";
+		html += "<td class='ten_kh'>" + data[i].ten_kh + "</td>";
+		html += "<td class='sdt'>" + data[i].sdt + "</td>";
+		html += "<td class='ten_san'>" + data[i].ten_san + "</td>";
+		html += "<td class='bat_dau'>" + data[i].bat_dau + "</td>";
+		html += "<td class='ket_thuc'>" + data[i].ket_thuc + "</td>";
+		
+		var don_gia = data[i].don_gia;
+		var start = toDateTime(data[i].bat_dau);
+		var end = toDateTime(data[i].ket_thuc);
+		var mins = (Math.abs(end - start)/1000)/60;
+		var money = mins * don_gia;
+		
+		if (thanh_toan == "1") {
+			da_thanh_toan += money;
+		} else {
+			chua_thanh_toan += money;
+		}
+		tong_tien += money;
+		html += "<td>" + mins + "</td>";
+		html += "<td>" + formatMoney(don_gia) + "</td>";
+		if (thanh_toan == "1") {
+			html += "<td style='font-weight:bold;color:green;'>" + formatMoney(money) + "</td>";
+		} else {
+			html += "<td style='font-weight:bold;color:red;'>" + formatMoney(money) + "</td>";
+		}
+		if (thanh_toan == "0") {
+			html += "<td><center><button class='btnThanhToan_index btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-check text-success'></i></button>";
+		} else {
+			html += "<td><center><button disabled class='btnThanhToan_index btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-check text-success'></i></button>";
+		}
+		
+		html += "<button class='btnXoaDatSanDanhSachHuy btn btn-light border border-dark' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-times text-danger'></i></button></center></td>";
+		// html += "<td><center><span><input type='checkbox' class='choose' name='choose' value='choose' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'></span></center></td>";
+		html += "</tr>";
+	}
 	
-	$(".btnThanhToan").click(function() {
+
+	html += "</table>";
+	$(".ds_datsanIndex").html(html);
+	$(".content_datsan").html(html_content);
+
+	$('.btn-show-index').click(function(){
+		$('.content_datsan').addClass('border-bottom border-dark mx-3');
+		$('.content_huysan').removeClass('border-bottom border-dark mx-3');
+		$('.content_thanhtoan').removeClass('border-bottom border-dark mx-3');
+
+		Dropdown(event, 'datsan')
+	})
+
+
+	// $('.btnAllDelete_index').click(function() {
+	// 	$('.choose').each(function() {
+	// 		var ten_kh = $(this).attr("ten_kh");
+	// 			var sdt = $(this).attr("sdt");
+	// 			var ten_san = $(this).attr("ten_san");
+	// 			var bat_dau = $(this).attr("bat_dau");
+	// 			var ket_thuc = $(this).attr("ket_thuc");
+				
+	// 			var date = new Date();
+	// 			var hoursNow = date.getHours();
+		
+	// 			var ngayPresent = date.getDate();
+	// 			var thangPresent = date.getMonth();
+	// 			var namPresent = date.getFullYear();
+				
+	// 			var datsan_id = $(this).attr("datsan_id");
+	// 			var bat_dau = $(this).attr("bat_dau");
+		
+	// 			var dateBatDau = bat_dau.split(" ");
+	// 			var ngayThangNam = dateBatDau[0].split("-");
+	// 			var giobatdau = dateBatDau[1].split(":");
+		
+	// 			var gio = giobatdau[0];
+	// 			var ngay = ngayThangNam[2];
+	// 			var thang = ngayThangNam[1];
+	// 			var nam = ngayThangNam[0];
+		
+	// 			var checkHours = gio - hoursNow;
+		
+	// 			var checkNgay = ngay - ngayPresent;
+	// 			var checkThang = parseInt(thang) - 1 - thangPresent;
+	// 			var checkNam = nam - namPresent;
+
+	// 			console.log(checkHours )
+			
+		
+	// 			if( checkNgay < 0 || checkThang < 0 || checkNam < 0) {
+	// 				thongbaoloi("Đã quá thời gian hủy đặt sân!!! ");
+	// 				$('.btnAllDelete_index').stop();
+	// 			} else if (checkHours <= 0 ) {
+	// 				thongbaoloi("Đã quá thời gian hủy đặt sân!!!");
+	// 				$('.btnAllDelete_index').stop();
+	// 			} else if(checkHours < 2) {
+	// 				thongbaoloi("Bạn chỉ được hủy đặt sân cách giờ đặt 2 tiếng !!!");
+	// 				$('.btnAllDelete_index').stop();
+	// 			} else if (checkHours >= 2){
+	// 				// if($(this). prop("checked") == true){
+	// 				// 	console.log(checkHours )
+	// 				// 	xoaDatSanIndex(datsan_id, ten_kh, sdt, ten_san, bat_dau, ket_thuc);
+	// 				// }
+	// 				console.log("thành công")
+	// 			}
+
+	// 	})
+	// })
+	
+	$(".btnThanhToan_index").click(function() {
 		var xac_nhan = confirm("Thanh toán đặt sân?");
 		if (xac_nhan) {
 			var datsan_id = $(this).attr("datsan_id");
-			thanhToanDatSan(datsan_id,);
+			thanhToanDatSan_index(datsan_id,);
 		}
 	});
 	
@@ -430,19 +696,19 @@ function veTableDatSanIndex(data) {
 function veTableDatSan(data) {
 	var html = "";
 	html += "<table class='mytable' style='width:100%; text-align: center;'>";
-	html += "<thead><tr><th>#</th><th>Tên KH</th><th>SĐT</th><th>Sân</th><th>Bắt đầu</th><th>Kết thúc</th><th>Phút</th><th>Đơn giá (đồng/phút)</th><th>Tiền</th><<th>Thanh toán</th><th>Yêu cầu hủy đặt sân</th><th>chọn nhiều</th></tr></thead>";
+	html += "<thead><tr><th>#</th><th>Tên KH</th><th>SĐT</th><th>Sân</th><th>Bắt đầu</th><th>Kết thúc</th><th>Phút</th><th>Tiền</th><th>trạng thái</th><th>Thanh toán</th><th>Yêu cầu hủy đặt sân</th></tr></thead>";
 	var tong_tien = 0;
 	var da_thanh_toan = 0;
 	var chua_thanh_toan = 0;
 	for (var i = 0; i < data.length; i++) {
 		var thanh_toan = data[i].da_thanh_toan;
 		if (thanh_toan == "1") {
-			var status = "<img src='images/passed.png' />";
+			var status = "<img src='../images/passed.png' />";
 		} else {
-			var status = "<img src='images/failed.png' />";
+			var status = "<img src='../images/failed.png' />";
 		}
 		html += "<tr>";
-		html += "<td >" + (i + 1) + "</td>";
+		html += "<td>" + (i + 1) + "</td>";
 		html += "<td class='ten_kh'>" + data[i].ten_kh + "</td>";
 		html += "<td class='sdt'>" + data[i].sdt + "</td>";
 		html += "<td class='ten_san'>" + data[i].ten_san + "</td>";
@@ -462,24 +728,33 @@ function veTableDatSan(data) {
 		}
 		tong_tien += money;
 		html += "<td>" + mins + "</td>";
-		html += "<td>" + formatMoney(don_gia) + "</td>";
+		
 		if (thanh_toan == "1") {
 			html += "<td style='font-weight:bold;color:green;'>" + formatMoney(money) + "</td>";
 		} else {
 			html += "<td style='font-weight:bold;color:red;'>" + formatMoney(money) + "</td>";
 		}
+
+		html += "<td>" + status + "</td>" ;
+
 		if (thanh_toan == "0") {
-			html += "<td><center><button class='btnThanhToan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-check text-success'></i></button>";
+			html += "<td><center><button class='btnThanhToan_1 btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-check text-success'></i></button>";
 		} else {
-			html += "<td><center><button disabled class='btnThanhToan btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-check text-success'></i></button>";
+			html += "<td><center><button disabled class='btnThanhToan_1 btn btn-light border border-dark' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-check text-success'></i></button>";
 		}
 		
-		html += "<button class='btnXoaDatSan btn btn-light border border-dark' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-times text-danger'></i></button></center></td>";
+		if (thanh_toan == "0"){
+			html += "<button class='btnXoaDatSan  btn btn-light border border-dark' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-times text-danger'></i></button></center></td>";
+		} else {
+		html += "<button class='disabled btnXoaDatSan  btn btn-light border border-dark' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'><i class='fas fa-times text-danger'></i></button></center></td>";
+
+		}
+		
 		html += "<td><center><span>" + data[i].note + "</span></center></td>";
-		html += "<td><center><span><input type='checkbox' class='choose' name='choose' value='choose' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'></span></center></td>";
+		// html += "<td><center><span><input type='checkbox' class='choose' name='choose' value='choose' bat_dau='" + data[i].bat_dau + "' ket_thuc='" + data[i].ket_thuc + "'sdt='" + data[i].sdt + "' ten_kh='" + data[i].ten_kh + "' ten_san='" + data[i].ten_san + "' datsan_id='" + data[i].datsan_id + "'></span></center></td>";
 		html += "</tr>";
 	}
-	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><center><button class='btn btn-light border border-dark btnAllThanhToan'><i class='fas fa-check text-success'></i></button><button class='btn btn-light border border-dark btnAllDelete'><i class='fas fa-times text-danger'></i></button></center></td></tr>";
+
 
 	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Đã thanh toán</b></td><td style='font-weight:bold;color:green;'>" + formatMoney(da_thanh_toan) + "</td><td></td><td></td><td></td></tr>";
 	html += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Chưa thanh toán</b></td><td style='font-weight:bold;color:red;'>" + formatMoney(chua_thanh_toan) + "</td><td></td><td></td><td></td></tr>";
@@ -487,71 +762,70 @@ function veTableDatSan(data) {
 	html += "</table>";
 	$(".ds_datsan").html(html);
 
-	$('.btnAllDelete').click(function() {
-		$('.choose').each(function() {
-			if($(this). prop("checked") == true){
-				var ten_kh = $(this).attr("ten_kh");
-				var sdt = $(this).attr("sdt");
-				var ten_san = $(this).attr("ten_san");
-				var bat_dau = $(this).attr("bat_dau");
-				var ket_thuc = $(this).attr("ket_thuc");
+	// $('.btnAllDelete').click(function() {
+	// 	$('.choose').each(function() {
+	// 		var ten_kh = $(this).attr("ten_kh");
+	// 			var sdt = $(this).attr("sdt");
+	// 			var ten_san = $(this).attr("ten_san");
+	// 			var bat_dau = $(this).attr("bat_dau");
+	// 			var ket_thuc = $(this).attr("ket_thuc");
 				
-				var date = new Date();
-				var hoursNow = date.getHours();
+	// 			var date = new Date();
+	// 			var hoursNow = date.getHours();
 		
-				var ngayPresent = date.getDate();
-				var thangPresent = date.getMonth();
-				var namPresent = date.getFullYear();
+	// 			var ngayPresent = date.getDate();
+	// 			var thangPresent = date.getMonth();
+	// 			var namPresent = date.getFullYear();
 				
-				var datsan_id = $(this).attr("datsan_id");
-				var bat_dau = $(this).attr("bat_dau");
+	// 			var datsan_id = $(this).attr("datsan_id");
+	// 			var bat_dau = $(this).attr("bat_dau");
 		
-				var dateBatDau = bat_dau.split(" ");
-				var ngayThangNam = dateBatDau[0].split("-");
-				var giobatdau = dateBatDau[1].split(":");
+	// 			var dateBatDau = bat_dau.split(" ");
+	// 			var ngayThangNam = dateBatDau[0].split("-");
+	// 			var giobatdau = dateBatDau[1].split(":");
 		
-				var gio = giobatdau[0];
-				var ngay = ngayThangNam[2];
-				var thang = ngayThangNam[1];
-				var nam = ngayThangNam[0];
+	// 			var gio = giobatdau[0];
+	// 			var ngay = ngayThangNam[2];
+	// 			var thang = ngayThangNam[1];
+	// 			var nam = ngayThangNam[0];
 		
-				var checkHours = gio - hoursNow;
+	// 			var checkHours = gio - hoursNow;
 		
-				var checkNgay = ngay - ngayPresent;
-				var checkThang = parseInt(thang) - 1 - thangPresent;
-				var checkNam = nam - namPresent;
-		
-				if( checkNgay < 0 || checkThang < 0 || checkNam < 0) {
-					thongbaoloi("Đã quá thời gian hủy đặt sân!!! ");
-				} else if (checkHours <= 0 ) {
-					thongbaoloi("Đã quá thời gian hủy đặt sân!!!")
-				} else if(checkHours <=2) {
-					thongbaoloi("Bạn chỉ được hủy đặt sân cách giờ đặt 2 tiếng !!!");
-				} else {
-					xoaDatSanIndex(datsan_id, ten_kh, sdt, ten_san, bat_dau, ket_thuc);
-				}
-			}
+	// 			var checkNgay = ngay - ngayPresent;
+	// 			var checkThang = parseInt(thang) - 1 - thangPresent;
+	// 			var checkNam = nam - namPresent;
 
-		})
-	})
+	// 			console.log(checkHours )
+			
+		
+	// 			if( checkNgay < 0 || checkThang < 0 || checkNam < 0) {
+	// 				thongbaoloi("Đã quá thời gian hủy đặt sân!!! ");
+	// 				stop();
+	// 			} else if (checkHours <= 0 ) {
+	// 				thongbaoloi("Đã quá thời gian hủy đặt sân!!!");
+	// 				stop();
+	// 			} else if(checkHours < 2) {
+	// 				thongbaoloi("Bạn chỉ được hủy đặt sân cách giờ đặt 2 tiếng !!!");
+	// 				stop();
+	// 			} else if (checkHours >= 2){
+	// 				if($(this). prop("checked") == true){
+	// 					console.log(checkHours )
+	// 					xoaDatSanIndex(datsan_id, ten_kh, sdt, ten_san, bat_dau, ket_thuc);
+	// 				}
+					
+	// 			}
 
-	$('.btnAllThanhToan').click(function() {
-		var xac_nhan = confirm("Thanh toán đặt sân?");
-		if (xac_nhan) {
-			$('.choose').each(function() {
-				if($(this). prop("checked") == true){
-					var datsan_id = $(this).attr("datsan_id");
-					thanhToanDatSan(datsan_id,);
-				}
-			})
-		}
-	})
+	// 	})
+	// })
+
 	
-	$(".btnThanhToan").click(function() {
+	$(".btnThanhToan_1").click(function() {
 		var xac_nhan = confirm("Thanh toán đặt sân?");
 		if (xac_nhan) {
 			var datsan_id = $(this).attr("datsan_id");
-			thanhToanDatSan(datsan_id);
+			let g_bat_dau= $('.g_bat_dau').text();
+			let g_ket_thuc= $('.g_ket_thuc').text();
+			thanhToanDatSan_1(datsan_id, g_bat_dau,g_ket_thuc);
 		}
 	});
 	
@@ -602,6 +876,21 @@ function veTableDatSan(data) {
 	});
 }
 
+function Dropdown(evt,data){
+	var i, tabcontent, tablinks;
+	tabcontent = document.getElementsByClassName("tabcontent");
+	for (i = 0; i < tabcontent.length; i++) {
+		tabcontent[i].style.display = "none";
+	}
+	tablinks = document.getElementsByClassName("tablinks");
+	for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace("", "");
+	}
+	document.getElementById(data).style.display = "block";
+	evt.currentTarget.className += " active";
+}
+
+
 function xoaDatSan(datsan_id, ten_kh, sdt, ten_san, bat_dau, ket_thuc) {
 	$.ajax({
 		url: "/quanlysanbong/api/xoadatsan.php",
@@ -619,8 +908,13 @@ function xoaDatSan(datsan_id, ten_kh, sdt, ten_san, bat_dau, ket_thuc) {
 		success: function(msg) {
 			coonsole.log(msg);
 			if (g_bat_dau == "" && g_ket_thuc == "") {
-				xemDsDatSan(getCurrentFormattedDate());
+				var thoiGianthuc = $('.tieudetimeIndex').text();
+				xemDsDatSanIndex(thoiGianthuc);
+                        xemDsDatSanIndex_1(thoiGianthuc);
+                        xemDsHuySan(thoiGianthuc);
+                        xemDsThanhToan(thoiGianthuc);
 				thongbaotot(msg);
+
 			} else {
 				xemDoanhThu(g_bat_dau, g_ket_thuc);
 			}
@@ -647,7 +941,11 @@ function xoaDatSanIndex(datsan_id, ten_kh, sdt, ten_san, bat_dau, ket_thuc) {
 		},
 		success: function(msg) {
 			if (g_bat_dau == "" && g_ket_thuc == "") {
-				xemDsDatSanIndex(getCurrentFormattedDate());
+				var thoiGianthuc = $('.tieudetimeIndex').text();
+				xemDsDatSanIndex(thoiGianthuc);
+                        xemDsDatSanIndex_1(thoiGianthuc);
+                        xemDsHuySan(thoiGianthuc);
+                        xemDsThanhToan(thoiGianthuc);
 				thongbaotot(msg);
 			} else {
 				xemDoanhThu(g_bat_dau, g_ket_thuc);
@@ -668,12 +966,47 @@ function thanhToanDatSan(datsan_id) {
 			datsan_id: datsan_id
 		},
 		success: function(msg) {
-			if (g_bat_dau == "" && g_ket_thuc == "") {
-				xemDsDatSan(getCurrentFormattedDate());
-				tailaitrang();
-			} else {
+			var thoiGianthuc = $('.tieudetimeIndex').text();
+			xemDsDatSanIndex(thoiGianthuc);
+                        xemDsDatSanIndex_1(thoiGianthuc);
+                        xemDsHuySan(thoiGianthuc);
+                        xemDsThanhToan(thoiGianthuc);
+		}
+	});
+}
+
+function thanhToanDatSan_index(datsan_id) {
+	$.ajax({
+		url: "/quanlysanbong/api/thanhtoandatsan.php",
+		type: "POST",
+		cache: false,
+		data: {
+			datsan_id: datsan_id
+		},
+		success: function(msg) {
+			var thoiGianthuc = $('.tieudetimeIndex').text();
+			xemDsDatSanIndex(thoiGianthuc);
+                        xemDsDatSanIndex_1(thoiGianthuc);
+                        xemDsHuySan(thoiGianthuc);
+                        xemDsThanhToan(thoiGianthuc);
+			console.log(thoiGianthuc);
+			
+		}
+	});
+}
+
+function thanhToanDatSan_1(datsan_id,g_bat_dau,g_ket_thuc) {
+	$.ajax({
+		url: "/quanlysanbong/api/thanhtoandatsan.php",
+		type: "POST",
+		cache: false,
+		data: {
+			datsan_id: datsan_id
+		},
+		success: function(msg) {
+			
 				xemDoanhThu(g_bat_dau, g_ket_thuc);
-			}
+			
 		}
 	});
 }

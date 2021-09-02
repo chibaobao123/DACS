@@ -4,9 +4,23 @@
 	if (isset($_GET['action'])) {
 		$sql = "";
 		if ($_GET['action']=='xemdatsan') {
+			$note='';
 			$day = $_GET['day'];
-			$sql = "SELECT khach_hang.ten as 'ten_kh', khach_hang.sdt, san_bong.ten, dat_san.bat_dau, dat_san.ket_thuc, dat_san.id, dat_san.da_thanh_toan, dat_san.don_gia, dat_san.ma_san, dat_san.note FROM dat_san, khach_hang, san_bong WHERE dat_san.ma_kh=khach_hang.id AND dat_san.ma_san=san_bong.id AND (dat_san.bat_dau BETWEEN '$day 00:00:00' AND '$day 23:59:59') ORDER BY san_bong.ten, dat_san.bat_dau";
-		} else if ($_GET['action']=='xemdoanhthu') {
+			$sql = "SELECT khach_hang.ten as 'ten_kh', khach_hang.sdt, san_bong.ten, dat_san.bat_dau, dat_san.ket_thuc, dat_san.id, dat_san.da_thanh_toan, dat_san.don_gia, dat_san.ma_san, dat_san.note FROM dat_san, khach_hang, san_bong WHERE dat_san.da_thanh_toan= '0' AND dat_san.note= '$note' AND dat_san.ma_kh=khach_hang.id AND dat_san.ma_san=san_bong.id AND (dat_san.bat_dau BETWEEN '$day 00:00:00' AND '$day 23:59:59') ORDER BY san_bong.ten, dat_san.bat_dau";
+
+		}else if ($_GET['action']=='xemdatsan_1') {
+			$day = $_GET['day'];
+			$sql = "SELECT khach_hang.ten as 'ten_kh', khach_hang.sdt, san_bong.ten, dat_san.bat_dau, dat_san.ket_thuc, dat_san.id, dat_san.da_thanh_toan, dat_san.don_gia, dat_san.ma_san, dat_san.note FROM dat_san, khach_hang, san_bong WHERE  dat_san.ma_kh=khach_hang.id AND dat_san.ma_san=san_bong.id AND (dat_san.bat_dau BETWEEN '$day 00:00:00' AND '$day 23:59:59') ORDER BY san_bong.ten, dat_san.bat_dau";
+
+		}else if ($_GET['action']=='xemhuysan') {
+			$day = $_GET['day'];
+			$sql = "SELECT khach_hang.ten as 'ten_kh', khach_hang.sdt, san_bong.ten, dat_san.bat_dau, dat_san.ket_thuc, dat_san.id, dat_san.da_thanh_toan, dat_san.don_gia, dat_san.ma_san, dat_san.note FROM dat_san, khach_hang, san_bong WHERE dat_san.note != '' AND dat_san.ma_kh=khach_hang.id AND dat_san.ma_san=san_bong.id AND (dat_san.bat_dau BETWEEN '$day 00:00:00' AND '$day 23:59:59') ORDER BY san_bong.ten, dat_san.bat_dau";
+			
+		}else if ($_GET['action']=='xemthanhtoan') {
+			$day = $_GET['day'];
+			$sql = "SELECT khach_hang.ten as 'ten_kh', khach_hang.sdt, san_bong.ten, dat_san.bat_dau, dat_san.ket_thuc, dat_san.id, dat_san.da_thanh_toan, dat_san.don_gia, dat_san.ma_san, dat_san.note FROM dat_san, khach_hang, san_bong WHERE dat_san.da_thanh_toan= '1' AND  dat_san.note = '' AND dat_san.ma_kh=khach_hang.id AND dat_san.ma_san=san_bong.id AND (dat_san.bat_dau BETWEEN '$day 00:00:00' AND '$day 23:59:59') ORDER BY san_bong.ten, dat_san.bat_dau";
+			
+		}else if ($_GET['action']=='xemdoanhthu') {
 			$bat_dau = $_GET['start'];
 			$ket_thuc = $_GET['end'];
 			$sql = "SELECT khach_hang.ten as 'ten_kh', khach_hang.sdt, san_bong.ten, dat_san.bat_dau, dat_san.ket_thuc, dat_san.id, dat_san.da_thanh_toan, dat_san.don_gia, dat_san.ma_san, dat_san.note FROM dat_san, khach_hang, san_bong WHERE dat_san.ma_kh=khach_hang.id AND dat_san.ma_san=san_bong.id AND (dat_san.bat_dau BETWEEN '$bat_dau 00:00:00' AND '$ket_thuc 23:59:59') ORDER BY dat_san.bat_dau";

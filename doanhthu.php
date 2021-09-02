@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 		var ket_thuc = end._d.getFullYear() + "-" +  (parseInt(end._d.getMonth()) + 1)  + "-" + end._d.getDate();
 
-		$("#tieude").html("<b>Doanh thu từ ngày <span class='start'>" + bat_dau + "</span> đến " + ket_thuc + "</b>");
+		$("#tieude").html("<b>Doanh thu từ ngày <span class='start'>" + bat_dau + "</span> đến <span class='end'>" + ket_thuc + "</span></b>");
 
 		console.log( bat_dau, ket_thuc, start, end);
 

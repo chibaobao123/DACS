@@ -10,25 +10,39 @@
             <input type="text" class="datsan_ngaydat" style="text-align:center;align-self:center;height:30px;"/><br/>
         </div>
 
-        <div >
-            <b>DANH SÁCH ĐẶT SÂN NGÀY <span class='tieudedsIndex'></span></b>	
+        <div class='time_table_body'>
+            <b>TÌNH TRẠNG ĐẶT SÂN NGÀY <span class='tieudetimeIndex'></span></b><br /><br />
+
+            <div class="time_table" style="background-color:white;"></div><br />
+        </div>
+
+        <div class='row'>
+            <div class='col-4 text-center'>
+                <p class="content_datsan border-bottom border-dark mx-3" ><span class='tieudedsIndex'></span></p>	
+            </div>
+            <div class='col-4 text-center'>
+                <p class="content_huysan"></span></p>	
+            </div> 
+            <div class='col-4 text-center'>
+                <p class="content_thanhtoan" ></p>	
+            </div>     
         </div>
 	
         <br />
-        <br />
 
-        <div class='ds_datsanIndex' style="background-color:white;"></div>
-        <br />
-        <br />
+        <div class='ds_datsanIndex tabcontent' id='datsan' style="background-color:white;"></div>
+       
+        
+        <div class='ds_datsanDanhSachHuy tabcontent' id='huysan' style="background-color:white;"></div>
 
-        <b>TÌNH TRẠNG ĐẶT SÂN NGÀY <span class='tieudetimeIndex'></span></b><br /><br />
-
-        <div class="time_table" style="background-color:white;"></div> <br />
+        <div class='ds_datsanDanhSachThanhToan tabcontent' id='thanhtoan' style="background-color:white;"></div>
 </section>
-
-<div id='' style="display: flex;flex-direction: row;justify-content:flex-start">
-	<img src='../picture/sodosanbong.png' style="width: 750px;height: 350px;"/>
-	<div style="margin-left:30px;">
+<br/>
+<br/>
+<br/>
+<div class='border-top border-dark' style="display: flex;flex-direction: row;justify-content:flex-start">
+	<img src='../picture/sodosanbong.png' class='py-5' style="width: 750px;height: 350px;"/>
+	<div style="margin-left:30px;" class='py-5'>
 		<h2 style="padding:0;margin:0;"> Thông tin sân bóng:</h2>
 		<div style="margin-left:30px; text-align:center; padding: 5px 0 10px 0;	">
 			<p><i>sân A:</i> Sân bóng đá cỏ nhân tạo <b>7</b> người.(40m x 70m)</p>
@@ -125,27 +139,7 @@ body{
                     <td>Khách hàng:</td>
                     <td><select id='datsan_kh' class='chosen'></select></td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" id='chbThemKhach' /> Thêm khách mới?</td>
-                    <td>
-                        <div id='datsan_themkhach' class='disabled'>
-                            <table>
-                                <tr>
-                                    <td>Tên</td>
-                                    <td><input type='text' id='datsan_them_ten' /></td>
-                                </tr>
-                                <tr>
-                                    <td>Số điện thoại</td>
-                                    <td><input type='text' id='datsan_them_sdt' /></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td><button id='datsan_btnthemkh'>Thêm</button></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
+                
                 <tr>
                     <td>
                         <b>CHỌN NGÀY: </b>
@@ -246,6 +240,16 @@ body{
         $(document).ready(function() {
             
             xemDsDatSanIndex(getToday());
+            xemDsDatSanIndex_1(getToday());
+            xemDsHuySan(getToday());
+            xemDsThanhToan(getToday());
+
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            document.getElementById("datsan").style.display = "block";
 
             $('.datsan_ngaydat').daterangepicker({
                 singleDatePicker: true,
@@ -254,10 +258,13 @@ body{
                 maxYear: parseInt(moment().format('YYYY'), 10)
             }, function(start, end, label) {
                 xemDsDatSanIndex(start.format("YYYY-MM-DD"));
+                xemDsDatSanIndex_1(start.format("YYYY-MM-DD"));
+                xemDsHuySan(start.format("YYYY-MM-DD"));
+                xemDsThanhToan(start.format("YYYY-MM-DD"));
             });
+ 
             
-            
-            function taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san) {
+            function taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien) {
                 $.ajax({
                     url: "../api/taodatsan.php",
                     type: "POST",
@@ -269,6 +276,7 @@ body{
                         ket_thuc : ket_thuc,
                         don_gia : don_gia,
                         ten_san : ten_san,
+                        tong_tien : tong_tien,
                     },
                     success: function(msg) {
                         if (msg.includes("trùng")) {
@@ -277,7 +285,11 @@ body{
                             thongbaotot(msg);
                         }
                         console.log(msg);
-                        xemDsDatSanIndex(getCurrentFormattedDate());
+                        var thoiGianthuc = $('.tieudetimeIndex').text();
+                        xemDsDatSanIndex(thoiGianthuc);
+                        xemDsDatSanIndex_1(thoiGianthuc);
+                        xemDsHuySan(thoiGianthuc);
+                        xemDsThanhToan(thoiGianthuc);
                     },
                     error: function() {
                         thongbaoloi("Lỗi hệ thống!!");
@@ -289,8 +301,9 @@ body{
                 // insert into database
                 var ma_kh = $("#datsan_kh").val();
                 var ma_san = $("#datsan_tensan").attr("ma_san");
-                var ten_san = $("#datsan_tensan").val();
+                var ten_san = $("#datsan_tensan").text();
                 var don_gia = parseInt($("#datsan_dongia").text());
+                var tong_tien =$("#datsan_tongtien").text();
                 var ngay_dat = $(".datsan_ngaydat").text();
                 var bat_dau_gio = $("#datsan_batdau_gio").val();
                 var bat_dau_phut = $("#datsan_batdau_phut").val();
@@ -300,8 +313,11 @@ body{
                 var ket_thuc = ngay_dat + " " + ket_thuc_gio + ":" + ket_thuc_phut + ":" + "00";
                 
                 var date = new Date();
+
                 var hoursNow = date.getHours();
-                var checkHours = bat_dau_gio - hoursNow;
+                var minutesNow = date.getMinutes();
+                var checkHours = parseInt(bat_dau_gio) - hoursNow;
+                var checkMinutes = parseInt(minutesNow) - parseInt(bat_dau_phut);
 
                 var ngayPresent = date.getDate();
                 var thangPresent = date.getMonth();
@@ -310,26 +326,65 @@ body{
                 var ngay = $(".datsan_ngaydat").val().split("/");
 	            
 
-                var checkNgay = ngay[1] - ngayPresent;
+                var checkNgay = parseInt(ngay[1]) - ngayPresent;
                 var checkThang = parseInt(ngay[0]) - 1 - thangPresent;
-                var checkNam = ngay[2] - namPresent;
+                var checkNam = parseInt(ngay[2]) - namPresent;
+
+                var checkThoiGianDat = parseInt(ket_thuc_gio) - parseInt(bat_dau_gio);
+
+                console.log(typeof(ngay[1]),typeof(ngayPresent),checkNgay,checkThang,checkNam,checkThoiGianDat);
 
                 if (don_gia == "") {
                     $("#datsan_dongia").val("0");
                 }
                 
-                if( checkNgay < 0 || checkThang < 0 || checkNam < 0) {
+                if( checkNgay < 0 && checkThang < 0 && checkNam < 0) {
+
                     thongbaoloi("Đã quá thời gian đặt sân!!! ");
-                } else if (checkHours <= 0 ) {
+
+                } else if ( checkThang > 0 && checkNam >= 0  || checkNam > 0) {
+
+                    if(checkThoiGianDat > 0){
+                        taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san);
+                        $("#formDatSan").css("display","none");
+                        $("#grayscreen").css("display","none");
+                    } else {
+                        thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
+                    }
+
+                } else if (checkNgay >= 1 && checkThang == 0 && checkNam == 0) {
+
+                    if(checkThoiGianDat > 0){
+                        taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
+                        $("#formDatSan").css("display","none");
+                        $("#grayscreen").css("display","none");
+                    } else {
+                        thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
+                    }
+
+                } else if (checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours < 0 ) {
+
                     thongbaoloi("Đã quá thời gian đặt sân!!!")
-                } else if(checkHours <=2) {
-                    thongbaoloi("Bạn phải đặt sân cách giờ đặt 2 tiếng !!!");
-                } else {
-                    taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san);
+
+                }else if (checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours == 0  && checkMinutes > 30) {
+
+                    thongbaoloi("Đã quá thời gian đặt sân!!!")
+
+                } else if(checkHours >= 0 || checkHours == 0 && checkMinutes <= 30) {
+
+                    if(checkThoiGianDat > 0){
+                        taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
+                        $("#formDatSan").css("display","none");
+                        $("#grayscreen").css("display","none");
+                    } else {
+                        thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
+                    }
+
+                }else{
+                    thongbaoloi("Thời gian không hợp lệ!!!");
                 }
 
-                $("#formDatSan").css("display","none");
-                $("#grayscreen").css("display","none");
+
             });
             
             $("#datsan_cancel").click(function() {

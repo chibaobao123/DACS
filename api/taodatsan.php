@@ -9,6 +9,7 @@
 	$ket_thuc = $_POST['ket_thuc'];
 	$don_gia = $_POST['don_gia'];
 	$ten_san = $_POST['ten_san'];
+	$tong_tien = $_POST['tong_tien'];
 
 	$sql_emails = mysqli_query($db,"SELECT * FROM khach_hang WHERE id = '$ma_kh'");
 	$row = $sql_emails->fetch_assoc();
@@ -59,6 +60,10 @@
 			  <tr style='border: 1px solid black;'>
 				<th scope='row' style='padding:10px' >Thời gian kết thúc:</th>
 				<td style='border: 1px solid black;padding:10px'>$ket_thuc</td>
+			  </tr>
+			  <tr style='border: 1px solid black;'>
+				<th scope='row' style='padding:10px' >Tổng tiền:</th>
+				<td style='border: 1px solid black;padding:10px'>$tong_tien</td>
 			  </tr>
 			  <tr style='border: 1px solid black;'>
 				<th scope='row' style='padding:10px' >Trạng thái:</th>

@@ -14,11 +14,6 @@
 	<input type="text" id="datepicker" style="text-align:center;align-self:center;height:30px;"/><br/>
 </div>
 
-<!-- <div id="datepicker	" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 20%">
-    <i class="fa fa-calendar"></i>&nbsp;
-    <span></span> <i class="fa fa-caret-down"></i>
-</div> -->
-
 <br />
 <span id='tieude'></span><br />
 <br />
@@ -34,15 +29,15 @@ $(document).ready(function() {
 
 	function cb(start, end) {
 	
-		var bat_dau =  start._d.getFullYear() + "-" + (parseInt(start._d.getMonth())+1) + "-" + start._d.getDate();
+		var g_bat_dau =  start._d.getFullYear() + "-" + (parseInt(start._d.getMonth())+1) + "-" + start._d.getDate();
 
-		var ket_thuc = end._d.getFullYear() + "-" + (parseInt(end._d.getMonth()) + 1) + "-" + end._d.getDate();
+	var g_ket_thuc = end._d.getFullYear() + "-" + (parseInt(end._d.getMonth()) + 1) + "-" + end._d.getDate();
 
-		$("#tieude").html("<b>Doanh thu từ ngày <span class='start'>" + bat_dau + "</span> đến " + ket_thuc + "</b>");
+		$("#tieude").html("<b>Doanh thu từ ngày <span class='g_bat_dau'>" + g_bat_dau + "</span> đến " +  "<span class='g_ket_thuc'>" + g_ket_thuc + "</span></b>");
 
-		console.log( bat_dau, ket_thuc);
+		console.log( g_bat_dau, g_ket_thuc);
 
-		xemDoanhThu(bat_dau, ket_thuc);
+		xemDoanhThu(g_bat_dau, g_ket_thuc);
     }
 
 	$('#datepicker').daterangepicker({
@@ -58,7 +53,7 @@ $(document).ready(function() {
         }
 	}, cb);
 
-	cb(start,end);
+	cb(start, end);
 
 	// function(start, end, label) {
 	// 	g_bat_dau = start.format("YYYY-MM-DD");

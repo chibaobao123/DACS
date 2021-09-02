@@ -3,7 +3,7 @@
 	
 	$datsan_id = $_POST['datsan_id'];
 	$user = $_SESSION['login_user'];
-	$noteCancle = $user.' đã yêu cầu hủy sân';
+	$noteCancle = $user.' đã yêu cầu hủy đặt sân';
 
 	$sql_khachhang = mysqli_query($db,"SELECT * FROM khach_hang  WHERE username = '$user' ");
 	$row = $sql_khachhang->fetch_assoc();

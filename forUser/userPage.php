@@ -255,10 +255,11 @@
                 maxYear: parseInt(moment().format('YYYY'), 10)
             }, function(start, end, label) {
                 xemDsDatSan(start.format("YYYY-MM-DD"));
+                xemDsDatSan_2(start.format("YYYY-MM-DD"));
             });
             
             
-            function taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san) {
+            function taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien) {
                 $.ajax({
                     url: "/quanlysanbong/api/taoDatSanForUser.php",
                     type: "POST",
@@ -270,6 +271,7 @@
                         ket_thuc : ket_thuc,
                         don_gia : don_gia,
                         ten_san: ten_san,
+                        tong_tien: tong_tien,
                     },
                     success: function(msg) {
                         if (msg.includes("trùng")) {
@@ -278,7 +280,9 @@
                             thongbaotot(msg);
                         }
                         console.log(msg);
-                        xemDsDatSan_2(getCurrentFormattedDate());xemDsDatSan(getCurrentFormattedDate());
+                        var thoiGianthuc = $('.tieudeds').text();
+                        xemDsDatSan_2(thoiGianthuc);
+                        xemDsDatSan(thoiGianthuc);
                     },
                     error: function() {
                         thongbaoloi("Lỗi hệ thống!!");
@@ -290,8 +294,9 @@
                 // insert into database
                 var ma_kh = $("#datsan_kh").val();
                 var ma_san = $("#datsan_tensan").attr("ma_san");
-                var ten_san = $("#datsan_tensan").val();
+                var ten_san = $("#datsan_tensan").text();
                 var don_gia =parseInt($("#datsan_dongia").text());
+                var tong_tien =$("#datsan_tongtien").text();
                 var ngay_dat = $(".datsan_ngaydat").text();
                 var bat_dau_gio = $("#datsan_batdau_gio").val();
                 var bat_dau_phut = $("#datsan_batdau_phut").val();
@@ -302,7 +307,9 @@
                 
                 var date = new Date();
                 var hoursNow = date.getHours();
-                var checkHours = bat_dau_gio - hoursNow;
+                var minutesNow = date.getMinutes();
+                var checkHours = parseInt(bat_dau_gio) - hoursNow;
+                var checkMinutes = parseInt(minutesNow) - parseInt(bat_dau_phut);
 
                 var ngayPresent = date.getDate();
                 var thangPresent = date.getMonth();
@@ -315,23 +322,59 @@
                 var checkThang = parseInt(ngay[0]) - 1 - thangPresent;
                 var checkNam = ngay[2] - namPresent;
 
+                var checkThoiGianDat = ket_thuc_gio - bat_dau_gio;
+
                 if (don_gia == "") {
                     $("#datsan_dongia").val("0");
                 }
                 
-                if( checkNgay < 0 || checkThang < 0 || checkNam < 0) {
-                    thongbaoloi("Đã quá thời gian đặt sân!!! ");
-                } else if (checkHours <= 0 ) {
-                    thongbaoloi("Đã quá thời gian đặt sân!!!")
-                } else if(checkHours <=2) {
-                    thongbaoloi("Bạn phải đặt sân cách giờ đặt 2 tiếng !!!");
-                } else {
-                    taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san);
-                }
+                
+                    if( checkNgay < 0 && checkThang < 0 && checkNam < 0) {
 
-                $("#formDatSan").css("display","none");
-                $("#grayscreen").css("display","none");
-            });
+                        thongbaoloi("Đã quá thời gian đặt sân!!! ");
+
+                    } else if ( checkThang > 0 && checkNam >= 0  || checkNam > 0) {
+
+                        if(checkThoiGianDat > 0){
+                            taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
+                            $("#formDatSan").css("display","none");
+                            $("#grayscreen").css("display","none");
+                        } else {
+                            thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
+                        }
+
+                    } else if (checkNgay >= 1 && checkThang == 0 && checkNam == 0) {
+
+                        if(checkThoiGianDat > 0){
+                            taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
+                            $("#formDatSan").css("display","none");
+                            $("#grayscreen").css("display","none");
+                        } else {
+                            thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
+                        }
+
+                    } else if (checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours < 0 ) {
+
+                        thongbaoloi("Đã quá thời gian đặt sân!!!")
+
+                    }else if (checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours == 0  && checkMinutes > 30) {
+
+                        thongbaoloi("Đã quá thời gian đặt sân!!!")
+
+                    } else if(checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours >= 2  ) {
+
+                        if(checkThoiGianDat > 0){
+                            taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
+                            $("#formDatSan").css("display","none");
+                            $("#grayscreen").css("display","none");
+                        } else {
+                            thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
+                        }
+
+                    }else{
+                        thongbaoloi("Thời gian không hợp lệ!!!");
+                    }
+             });
             
             $("#datsan_cancel").click(function() {
                 $("#formDatSan").css("display","none");
