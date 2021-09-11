@@ -343,7 +343,7 @@ body{
 
                 } else if ( checkThang > 0 && checkNam >= 0  || checkNam > 0) {
 
-                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 ){
+                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 || checkThoiGianDatGio > 1 ){
                         taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san);
                         $("#formDatSan").css("display","none");
                         $("#grayscreen").css("display","none");
@@ -353,7 +353,7 @@ body{
 
                 } else if (checkNgay >= 1 && checkThang == 0 && checkNam == 0) {
 
-                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 ){
+                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 || checkThoiGianDatGio > 1 ){
                         taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
                         $("#formDatSan").css("display","none");
                         $("#grayscreen").css("display","none");
@@ -369,9 +369,9 @@ body{
 
                     thongbaoloi("Đã quá thời gian đặt sân!!!")
 
-                } else if(checkHours >= 0 || checkHours == 0 && checkMinutes <= 30) {
+                } else if(checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours >= 0 || checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours == 0 && checkMinutes <= 30) {
 
-                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 ){
+                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 || checkThoiGianDatGio > 1){
                         taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
                         $("#formDatSan").css("display","none");
                         $("#grayscreen").css("display","none");

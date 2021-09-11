@@ -154,7 +154,7 @@
 		<h2 class="my-3" style="text-align:center;">QUẢN LÝ SÂN BÓNG ĐÁ</h2>
 		<label for="ten" >
 			<span style="font-size:25px; ">
-				<b> Địa chỉ email:</b>
+				<b> Tài khoản hoặc địa chỉ email:</b>
 			</span>
 		</label>
 		<input type="text" id="ten" name="ten" placeholder="Nhập tên tài khoản"/>

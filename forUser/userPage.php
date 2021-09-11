@@ -329,52 +329,48 @@
                     $("#datsan_dongia").val("0");
                 }
                 
-                
-                    if( checkNgay < 0 && checkThang < 0 && checkNam < 0) {
+                if( checkNgay < 0 && checkThang < 0 && checkNam < 0) {
 
-                        thongbaoloi("Đã quá thời gian đặt sân!!! ");
+                    thongbaoloi("Đã quá thời gian đặt sân!!! ");
 
-                    } else if ( checkThang > 0 && checkNam >= 0  || checkNam > 0) {
+                } else if ( checkThang > 0 && checkNam >= 0  || checkNam > 0) {
 
-                        if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 ){
-                            taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
-                            $("#formDatSan").css("display","none");
-                            $("#grayscreen").css("display","none");
-                        } else {
-                            thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
-                        }
-
-                    } else if (checkNgay >= 1 && checkThang == 0 && checkNam == 0) {
-
-                        if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 ){
-                            taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
-                            $("#formDatSan").css("display","none");
-                            $("#grayscreen").css("display","none");
-                        } else {
-                            thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
-                        }
-
-                    } else if (checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours < 0 ) {
-
-                        thongbaoloi("Đã quá thời gian đặt sân!!!")
-
-                    }else if (checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours == 0  && checkMinutes > 30) {
-
-                        thongbaoloi("Đã quá thời gian đặt sân!!!")
-
-                    } else if(checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours >= 2  ) {
-
-                        if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 ){
-                            taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
-                            $("#formDatSan").css("display","none");
-                            $("#grayscreen").css("display","none");
-                        } else {
-                            thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
-                        }
-
-                    }else{
-                        thongbaoloi("Thời gian không hợp lệ!!!");
+                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 || checkThoiGianDatGio > 1 ){
+                        taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san);
+                        $("#formDatSan").css("display","none");
+                        $("#grayscreen").css("display","none");
+                    } else {
+                        thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
                     }
+
+                } else if (checkNgay >= 1 && checkThang == 0 && checkNam == 0) {
+
+                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 || checkThoiGianDatGio > 1 ){
+                        taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
+                        $("#formDatSan").css("display","none");
+                        $("#grayscreen").css("display","none");
+                    } else {
+                        thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
+                    }
+
+                } else if (checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours < 2 ) {
+
+                    thongbaoloi("Đã quá thời gian đặt sân!!! Bạn phải đặt sân trước 2 tiếng!!!")
+
+                } else if(checkHours >= 0 || checkHours == 0 && checkMinutes <= 30) {
+
+                    if(checkThoiGianDatGio >= 1 && checkThoiGianDatPhut >=0 || checkThoiGianDatGio > 1 ){
+                        taoDatSan(ma_kh, ma_san, bat_dau, ket_thuc, don_gia, ten_san, tong_tien);
+                        $("#formDatSan").css("display","none");
+                        $("#grayscreen").css("display","none");
+                    } else {
+                        thongbaoloi("Bạn phải đặt sân nhiều hơn 1 tiếng đồng hồ");
+                    }
+
+                }else{
+                    thongbaoloi("Đã quá thời gian đặt sân!!! ");
+                }
+
              });
             
             $("#datsan_cancel").click(function() {

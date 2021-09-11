@@ -322,19 +322,21 @@ function veTableDatSan(data) {
 		var thang = ngayThangNam[1];
 		var nam = ngayThangNam[0];
 
-		var checkHours = gio - hoursNow;
+		var checkHours = parseInt(gio) - parseInt(hoursNow);
 
-		var checkNgay = ngay - ngayPresent;
-		var checkThang = parseInt(thang) - 1 - thangPresent;
-		var checkNam = nam - namPresent;
+		var checkNgay = parseInt(ngay) - parseInt(ngayPresent);
+		var checkThang = parseInt(thang) - 1 - parseInt(thangPresent);
+		var checkNam = parseInt(nam) - parseInt(namPresent);
 
-		if( checkNgay < 0 || checkThang < 0 || checkNam < 0) {
+		console.log(checkHours,checkNgay,checkThang,checkNam)
+
+		if( checkNgay < 0 && checkThang < 0 && checkNam < 0) {
 			thongbaoloi("Đã quá thời gian hủy đặt sân!!! ");
-		} else if (checkHours <= 0 ) {
+		} else if (checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours <= 0 ) {
 			thongbaoloi("Đã quá thời gian hủy đặt sân!!!")
-		} else if(checkHours <=2) {
+		} else if(checkNgay == 0 && checkThang == 0 && checkNam == 0 &&  checkHours < 2) {
 			thongbaoloi("Bạn chỉ được hủy đặt sân cách giờ đặt 2 tiếng !!!");
-		} else {
+		} else if(checkThang > 0 && checkNam >= 0  || checkNam > 0 || checkNgay > 0 && checkThang == 0 && checkNam == 0 || checkNgay == 0 && checkThang == 0 && checkNam == 0 && checkHours >= 0) {
 			
 				xoaDatSan(datsan_id);
 
